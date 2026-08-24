@@ -18,56 +18,61 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-surface/90 backdrop-blur">
-      <div className="mx-auto flex max-w-[1180px] items-center justify-between gap-4 px-4 py-4">
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Abrir menu"
-          className="flex h-9 w-9 items-center justify-center rounded-[2px] text-text md:hidden"
-        >
-          <span className="text-xl">☰</span>
-        </button>
+    <header className="sticky top-0 z-40 border-b border-border bg-bg/85 backdrop-blur">
+      {/* Wordmark centralizado com nav dividida, no padrão editorial das grandes
+          marcas. No celular vira [hambúrguer · wordmark · sacola]. */}
+      <div className="mx-auto grid max-w-[1240px] grid-cols-[auto_1fr_auto] items-center gap-4 px-5 py-5 md:grid-cols-3">
+        <div className="flex items-center md:justify-self-start">
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-label="Abrir menu"
+            className="flex h-9 w-9 items-center justify-center text-text md:hidden"
+          >
+            <span className="text-xl">☰</span>
+          </button>
+          <nav className="hidden items-center gap-7 md:flex">
+            {NAV.map((n) => (
+              <Link
+                key={n.href}
+                href={n.href}
+                className="text-[0.72rem] uppercase tracking-[0.16em] text-text/75 transition-colors hover:text-wine"
+              >
+                {n.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
 
         <Link
           href="/"
           onClick={() => setOpen(false)}
-          className="font-serif text-2xl tracking-[0.25em] text-text md:text-3xl"
+          className="justify-self-start pl-[0.35em] font-serif text-xl tracking-[0.35em] text-text md:justify-self-center md:text-2xl md:tracking-[0.42em]"
         >
           BAILATTO
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
-          {NAV.map((n) => (
-            <Link
-              key={n.href}
-              href={n.href}
-              className="text-sm uppercase tracking-wide text-text-2 transition-colors hover:text-wine"
-            >
-              {n.label}
-            </Link>
-          ))}
+        <div className="flex items-center justify-end gap-6 md:justify-self-end">
           <a
             href={INSTAGRAM}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm uppercase tracking-wide text-text-2 transition-colors hover:text-wine"
+            className="hidden text-[0.72rem] uppercase tracking-[0.16em] text-text/75 transition-colors hover:text-wine md:inline"
           >
             Instagram
           </a>
-        </nav>
-
-        <Link
-          href="/carrinho"
-          className="relative flex items-center gap-2 text-sm uppercase tracking-wide text-text-2 transition-colors hover:text-wine"
-        >
-          <span>Sacola</span>
-          {count > 0 && (
-            <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-wine px-1 text-xs text-on-wine">
-              {count}
-            </span>
-          )}
-        </Link>
+          <Link
+            href="/carrinho"
+            className="relative flex items-center gap-2 text-[0.72rem] uppercase tracking-[0.16em] text-text/75 transition-colors hover:text-wine"
+          >
+            <span>Sacola</span>
+            {count > 0 && (
+              <span className="flex h-4 min-w-4 items-center justify-center rounded-full bg-wine px-1 text-[0.6rem] text-on-wine">
+                {count}
+              </span>
+            )}
+          </Link>
+        </div>
       </div>
 
       {/* Fita de categorias no celular: quem chega do Instagram cai na home ou

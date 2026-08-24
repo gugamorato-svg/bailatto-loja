@@ -1,47 +1,48 @@
 @import "tailwindcss";
 
 /* ==================== BAILATTO — identidade ==================== */
-/* Tema claro (padrão) */
+/* Tema claro (padrão) — paleta editorial: quase-branco, quase-preto, vinho
+   contido como fio único de identidade (no estilo Ferragamo / Andrea Gomez). */
 :root {
-  --bg: #F6F0E6;
-  --surface: #FCF7EF;
-  --surface-2: #EFE3D4;
-  --border: #E7D9C7;
-  --text: #3B2A28;
-  --text-2: #806661;
-  --rose: #C17A7A;
-  --rose-2: #B06B6B;
-  --on-rose: #3B2A28;
-  --wine: #9E5457;
-  --wine-2: #8C474A;
-  --on-wine: #FBF3EC;
-  --band: #412B29;
-  --band-text: #F6E9E2;
-  --ph-a: #F0DED4;
-  --ph-b: #E4C4BF;
-  --shadow: rgba(59, 42, 40, 0.12);
-  --shadow-2: rgba(59, 42, 40, 0.20);
+  --bg: #FBFAF8;
+  --surface: #FFFFFF;
+  --surface-2: #F4F0EA;
+  --border: #ECE7E0;
+  --text: #1A1613;
+  --text-2: #8C8279;
+  --rose: #C79BA6;
+  --rose-2: #B98A97;
+  --on-rose: #1A1613;
+  --wine: #6E2438;
+  --wine-2: #571C2C;
+  --on-wine: #FBFAF8;
+  --band: #1A1613;
+  --band-text: #F1EBE4;
+  --ph-a: #F4F0EA;
+  --ph-b: #E8E0D6;
+  --shadow: rgba(26, 22, 19, 0.10);
+  --shadow-2: rgba(26, 22, 19, 0.18);
 }
 
 /* Tema escuro (acompanha o sistema) */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #1B1210;
-    --surface: #241815;
-    --surface-2: #2F201C;
-    --border: #412D28;
-    --text: #F6E9E2;
-    --text-2: #CBAAA3;
-    --rose: #D89A9A;
-    --rose-2: #E6B3B0;
-    --on-rose: #1B1210;
-    --wine: #CE7E80;
-    --wine-2: #DC9092;
-    --on-wine: #1B1210;
-    --band: #140C0B;
-    --band-text: #F6E9E2;
-    --ph-a: #2C1A1A;
-    --ph-b: #3A2422;
+    --bg: #141110;
+    --surface: #1D1917;
+    --surface-2: #241E1B;
+    --border: #2A2421;
+    --text: #F1EBE4;
+    --text-2: #9A8F86;
+    --rose: #D98BA0;
+    --rose-2: #E3A2B3;
+    --on-rose: #141110;
+    --wine: #D98BA0;
+    --wine-2: #E3A2B3;
+    --on-wine: #141110;
+    --band: #0F0C0B;
+    --band-text: #F1EBE4;
+    --ph-a: #241E1B;
+    --ph-b: #2E2623;
     --shadow: rgba(0, 0, 0, 0.5);
     --shadow-2: rgba(0, 0, 0, 0.65);
   }

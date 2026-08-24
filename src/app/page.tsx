@@ -74,29 +74,24 @@ export default async function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(negocioJsonLd) }}
       />
       {/* HERO */}
-      <section className="relative overflow-hidden border-b border-border bg-surface">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full opacity-60 blur-3xl"
-          style={{ background: "radial-gradient(closest-side, var(--ph-b), transparent)" }}
-        />
-        <div className="relative mx-auto grid max-w-[1180px] items-center gap-10 px-4 py-16 sm:py-24 md:grid-cols-2">
-          <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-rose">
-              Nova coleção · São Carlos
+      <section className="border-b border-border">
+        <div className="mx-auto grid max-w-[1240px] items-center md:grid-cols-[1.05fr_1fr]">
+          <div className="px-5 py-16 sm:py-20 md:px-14">
+            <p className="text-[0.66rem] uppercase tracking-[0.28em] text-text-2">
+              Nova coleção · Verão 2026
             </p>
-            <h1 className="mt-5 font-serif text-4xl leading-[1.1] text-text sm:text-6xl">
+            <h1 className="mt-6 font-serif text-[2.7rem] leading-[1.04] text-text sm:text-6xl">
               O par certo <span className="italic text-wine">combina</span> com
               você.
             </h1>
-            <p className="mt-5 max-w-md text-base text-text-2 sm:text-lg">
-              Calçados femininos escolhidos com carinho, pra você se sentir linda
-              e confortável — do trabalho à festa. Vem dar uma olhadinha.
+            <p className="mt-6 max-w-md text-text-2">
+              Calçados femininos escolhidos a dedo, do trabalho à festa. Retirada
+              grátis em São Carlos ou entrega para todo o Brasil.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-9 flex flex-wrap items-center gap-7">
               <Link
                 href="/produtos"
-                className="rounded-[2px] bg-wine px-8 py-3.5 text-sm font-medium uppercase tracking-wide text-on-wine transition-colors hover:bg-wine-2"
+                className="border-b border-text pb-1.5 text-[0.72rem] uppercase tracking-[0.2em] text-text transition-colors hover:border-wine hover:text-wine"
               >
                 Ver a coleção
               </Link>
@@ -104,28 +99,28 @@ export default async function Home() {
                 href={WA}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-[2px] border border-wine px-8 py-3.5 text-sm font-medium uppercase tracking-wide text-wine transition-colors hover:bg-wine hover:text-on-wine"
+                className="border-b border-transparent pb-1.5 text-[0.72rem] uppercase tracking-[0.2em] text-text-2 transition-colors hover:border-wine hover:text-wine"
               >
-                Chamar no WhatsApp
+                Falar no WhatsApp
               </a>
             </div>
-            <div className="mt-10 flex gap-8 border-t border-border pt-6 text-sm">
+            <div className="mt-12 flex gap-10 border-t border-border pt-7 text-sm">
               <div>
                 <p className="font-serif text-xl text-wine">5,0★</p>
-                <p className="text-text-2">no Google</p>
+                <p className="text-[0.72rem] uppercase tracking-[0.12em] text-text-2">no Google</p>
               </div>
               <div>
                 <p className="font-serif text-xl text-text">São Carlos</p>
-                <p className="text-text-2">SP</p>
+                <p className="text-[0.72rem] uppercase tracking-[0.12em] text-text-2">loja física</p>
               </div>
               <div>
-                <p className="font-serif text-xl text-text">Loja física</p>
-                <p className="text-text-2">e online</p>
+                <p className="font-serif text-xl text-text">151</p>
+                <p className="text-[0.72rem] uppercase tracking-[0.12em] text-text-2">modelos</p>
               </div>
             </div>
           </div>
 
-          <div className="relative hidden aspect-square overflow-hidden rounded-[2px] ph-gradient md:block">
+          <div className="relative hidden aspect-[4/5] overflow-hidden bg-surface-2 md:block">
             <Image
               src="/hero.jpg"
               alt="Calçados em destaque na loja BAILATTO"
@@ -139,21 +134,26 @@ export default async function Home() {
       </section>
 
       {/* ENCONTRE O SEU ESTILO */}
-      <section className="mx-auto max-w-[1180px] px-4 py-16">
-        <h2 className="mb-8 font-serif text-3xl text-text">
+      <section className="mx-auto max-w-[1240px] px-5 py-20">
+        <p className="text-[0.66rem] uppercase tracking-[0.28em] text-text-2">
+          Categorias
+        </p>
+        <h2 className="mb-10 mt-3 font-serif text-3xl text-text sm:text-4xl">
           Encontre o <span className="italic text-wine">seu</span> estilo
         </h2>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-4 sm:grid-cols-3 lg:grid-cols-5">
           {cats.map((c) => (
             <Link
               key={c.slug}
-              href="/produtos"
-              className="group rounded-[2px] border border-border bg-surface p-6 transition-colors hover:border-wine"
+              href={`/produtos?categoria=${c.slug}`}
+              className="group flex items-center justify-between border-b border-border py-3 transition-colors hover:border-wine"
             >
-              <p className="font-serif text-xl text-text transition-colors group-hover:text-wine">
+              <span className="font-serif text-lg text-text transition-colors group-hover:text-wine">
                 {c.label}
-              </p>
-              <p className="mt-1 text-sm text-text-2">Ver modelos →</p>
+              </span>
+              <span className="text-text-2 transition-transform group-hover:translate-x-1">
+                →
+              </span>
             </Link>
           ))}
         </div>
@@ -161,14 +161,19 @@ export default async function Home() {
 
       {/* OS QUERIDINHOS DA LOJA */}
       <section className="border-y border-border bg-surface">
-        <div className="mx-auto max-w-[1180px] px-4 py-16">
-          <div className="mb-10 flex items-end justify-between gap-4">
-            <h2 className="font-serif text-3xl text-text">
-              Os <span className="italic text-wine">queridinhos</span> da loja
-            </h2>
+        <div className="mx-auto max-w-[1240px] px-5 py-20">
+          <div className="mb-12 flex items-end justify-between gap-4">
+            <div>
+              <p className="text-[0.66rem] uppercase tracking-[0.28em] text-text-2">
+                Seleção
+              </p>
+              <h2 className="mt-3 font-serif text-3xl text-text sm:text-4xl">
+                Os <span className="italic text-wine">queridinhos</span> da loja
+              </h2>
+            </div>
             <Link
               href="/produtos"
-              className="shrink-0 text-sm uppercase tracking-wide text-wine hover:underline"
+              className="shrink-0 border-b border-border pb-1 text-[0.7rem] uppercase tracking-[0.18em] text-text-2 transition-colors hover:border-wine hover:text-wine"
             >
               Ver tudo
             </Link>
