@@ -1,6 +1,8 @@
 import crypto from "node:crypto";
-import { getSupabaseAdmin, BUCKET } from "./supabaseAdmin";
+import { getSupabaseAdmin, BUCKET_PRIVADO } from "./supabaseAdmin";
 
+// Pedidos ficam no bucket PRIVADO — contêm nome, telefone, e-mail e CPF.
+// Já eram lidos/gravados com a service key, que acessa bucket privado igual.
 const ORDERS_PATH = "data/orders.json";
 
 export type OrderStatus =
@@ -81,7 +83,7 @@ export type Order = {
 async function loadOrders(): Promise<Order[]> {
   try {
     const { data, error } = await getSupabaseAdmin()
-      .storage.from(BUCKET)
+      .storage.from(BUCKET_PRIVADO)
       .download(ORDERS_PATH);
     if (error || !data) return [];
     const parsed = JSON.parse(await data.text());
@@ -93,7 +95,7 @@ async function loadOrders(): Promise<Order[]> {
 
 async function saveOrders(list: Order[]): Promise<string | null> {
   const { error } = await getSupabaseAdmin()
-    .storage.from(BUCKET)
+    .storage.from(BUCKET_PRIVADO)
     .upload(ORDERS_PATH, JSON.stringify(list, null, 2), {
       upsert: true,
       contentType: "application/json",

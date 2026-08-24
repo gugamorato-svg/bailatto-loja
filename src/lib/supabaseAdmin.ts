@@ -19,6 +19,11 @@ export function getSupabaseAdmin(): SupabaseClient {
   return client;
 }
 
-// Bucket único (público) para o JSON de produtos e as fotos.
+// Bucket PÚBLICO: catálogo de produtos e fotos. Tudo aqui é servido via CDN
+// e pode ser lido por qualquer um — não coloque dado de cliente aqui.
 export const BUCKET = "bailatto";
 export const DATA_PATH = "data/products.json";
+
+// Bucket PRIVADO: pedidos (nome, telefone, e-mail, CPF, endereço). Só a
+// service key acessa. Não deve ser tornado público em hipótese nenhuma.
+export const BUCKET_PRIVADO = "bailatto-privado";
