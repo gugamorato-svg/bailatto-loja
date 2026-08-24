@@ -59,3 +59,7 @@ tiktok-conteudo.json
 # que scripts/tiktok-planilha.mjs precisa para rodar.
 modelo-tiktok.xlsx
 modelo-salto.xlsx
+
+# arquivos temporários de scripts
+_*.json
+_*.txt
