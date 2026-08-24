@@ -5,6 +5,7 @@
 export type CategorySlug =
   | "scarpins"
   | "sandalias"
+  | "chinelos"
   | "botas"
   | "rasteirinhas"
   | "mocassins"
@@ -17,6 +18,7 @@ export type CategorySlug =
 export const categories: { slug: CategorySlug; label: string }[] = [
   { slug: "scarpins", label: "Scarpins" },
   { slug: "sandalias", label: "Sandálias" },
+  { slug: "chinelos", label: "Chinelos" },
   { slug: "botas", label: "Botas" },
   { slug: "rasteirinhas", label: "Rasteirinhas" },
   { slug: "mocassins", label: "Mocassins" },
