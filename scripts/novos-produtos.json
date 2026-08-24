@@ -1,0 +1,1629 @@
+[
+  {
+    "id": "45398caa-23bd-4c36-8b51-0743d4c40386",
+    "slug": "mocassim-suede-cinza",
+    "name": "Mocassim Suede Cinza",
+    "category": "mocassins",
+    "description": "Mocassim cinza de bico fino — clássico, confortável e coringa. Do escritório ao café da tarde, sempre impecável.",
+    "price": 89.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
+    ],
+    "estoque": {
+      "34": 2,
+      "35": 2,
+      "36": 2,
+      "37": 1,
+      "38": 2,
+      "39": 2
+    },
+    "phibo": "MOCA SUED 01||Cinza",
+    "phiboDesc": "MOCASSIM SUEDE / Cinza",
+    "image": "/produtos/mocassim-suede-cinza.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Mocassim Suede cinza.jpg"
+  },
+  {
+    "id": "954800fa-6b8f-400a-96e4-03c1da1270c0",
+    "slug": "mocassim-suede-marrom",
+    "name": "Mocassim Suede Marrom",
+    "category": "mocassins",
+    "description": "Mocassim marrom de bico fino — clássico, confortável e coringa. Do escritório ao café da tarde, sempre impecável.",
+    "price": 89.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
+    ],
+    "estoque": {
+      "34": 2,
+      "35": 2,
+      "36": 1,
+      "37": 1,
+      "38": 2,
+      "39": 2
+    },
+    "phibo": "MOCA SUED 04||Marrom",
+    "phiboDesc": "MOCASSIM SUEDE / Marrom",
+    "image": "/produtos/mocassim-suede-marrom.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Mocassim Suede marrom.jpg"
+  },
+  {
+    "id": "497814b9-e9be-4562-8d84-57fd3d48a667",
+    "slug": "mocassim-suede-nude",
+    "name": "Mocassim Suede Nude",
+    "category": "mocassins",
+    "description": "Mocassim nude de bico fino — clássico, confortável e coringa. Do escritório ao café da tarde, sempre impecável.",
+    "price": 89.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
+    ],
+    "estoque": {
+      "34": 2,
+      "35": 2,
+      "36": 1,
+      "37": 2,
+      "38": 1,
+      "39": 2
+    },
+    "phibo": "MOCA SUED 02||Nude",
+    "phiboDesc": "MOCASSIM SUEDE / Nude",
+    "image": "/produtos/mocassim-suede-nude.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Mocassim Suede nude.jpg"
+  },
+  {
+    "id": "430089c1-8f48-465f-98e4-f6e026280acd",
+    "slug": "mocassim-suede-verde",
+    "name": "Mocassim Suede Verde",
+    "category": "mocassins",
+    "description": "Mocassim verde de bico fino — clássico, confortável e coringa. Do escritório ao café da tarde, sempre impecável.",
+    "price": 89.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      35,
+      37,
+      38,
+      39
+    ],
+    "estoque": {
+      "34": 2,
+      "35": 2,
+      "37": 2,
+      "38": 2,
+      "39": 2
+    },
+    "phibo": "MOCA SUED 03||Verde",
+    "phiboDesc": "MOCASSIM SUEDE / Verde",
+    "image": "/produtos/mocassim-suede-verde.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Mocassim Suede verde.jpg"
+  },
+  {
+    "id": "d86bc8c0-de95-48f7-a0e8-0d0647439cd1",
+    "slug": "mocassim-napa-azul",
+    "name": "Mocassim Napa Azul",
+    "category": "mocassins",
+    "description": "Mocassim azul de bico fino — clássico, confortável e coringa. Do escritório ao café da tarde, sempre impecável.",
+    "price": 89.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      35,
+      39
+    ],
+    "estoque": {
+      "34": 1,
+      "35": 1,
+      "39": 1
+    },
+    "phibo": "MOCA 01||Azul",
+    "phiboDesc": "MOCASSIM NAPA / Azul",
+    "image": "/produtos/mocassim-napa-azul.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Mocassim napa azul.jpg"
+  },
+  {
+    "id": "b98f3e62-861a-4462-8470-655d435b447f",
+    "slug": "mocassim-napa-branco",
+    "name": "Mocassim Napa Branco",
+    "category": "mocassins",
+    "description": "Mocassim branco de bico fino — clássico, confortável e coringa. Do escritório ao café da tarde, sempre impecável.",
+    "price": 89.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
+    ],
+    "estoque": {
+      "34": 2,
+      "35": 4,
+      "36": 3,
+      "37": 3,
+      "38": 3,
+      "39": 3
+    },
+    "phibo": "MOCA 02||Branco",
+    "phiboDesc": "MOCASSIM NAPA / Branco",
+    "image": "/produtos/mocassim-napa-branco.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Mocassim napa branco.jpg"
+  },
+  {
+    "id": "0cd1c398-f319-42b0-a743-dc48aef89059",
+    "slug": "mocassim-napa-marrom",
+    "name": "Mocassim Napa Marrom",
+    "category": "mocassins",
+    "description": "Mocassim marrom de bico fino — clássico, confortável e coringa. Do escritório ao café da tarde, sempre impecável.",
+    "price": 89.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      35,
+      37,
+      38,
+      39
+    ],
+    "estoque": {
+      "34": 2,
+      "35": 1,
+      "37": 1,
+      "38": 2,
+      "39": 2
+    },
+    "phibo": "MOCA 03||Marrom",
+    "phiboDesc": "MOCASSIM NAPA / Marrom",
+    "image": "/produtos/mocassim-napa-marrom.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Mocassim napa marrom.jpg"
+  },
+  {
+    "id": "4b5d1609-be8d-425e-86df-14f76e1eb160",
+    "slug": "mocassim-napa-nude",
+    "name": "Mocassim Napa Nude",
+    "category": "mocassins",
+    "description": "Mocassim nude de bico fino — clássico, confortável e coringa. Do escritório ao café da tarde, sempre impecável.",
+    "price": 89.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
+    ],
+    "estoque": {
+      "34": 3,
+      "35": 3,
+      "36": 3,
+      "37": 2,
+      "38": 1,
+      "39": 2
+    },
+    "phibo": "MOCA 04||Nude",
+    "phiboDesc": "MOCASSIM NAPA / Nude",
+    "image": "/produtos/mocassim-napa-nude.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Mocassim napa nude.jpg"
+  },
+  {
+    "id": "f4895f3c-e8a1-415f-a43a-7e1e6db06707",
+    "slug": "mocassim-napa-vinho",
+    "name": "Mocassim Napa Vinho",
+    "category": "mocassins",
+    "description": "Mocassim vinho de bico fino — clássico, confortável e coringa. Do escritório ao café da tarde, sempre impecável.",
+    "price": 89.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
+    ],
+    "estoque": {
+      "34": 2,
+      "35": 3,
+      "36": 1,
+      "37": 1,
+      "38": 2,
+      "39": 3
+    },
+    "phibo": "MOCA 06||Vinho",
+    "phiboDesc": "MOCASSIM NAPA / Vinho",
+    "image": "/produtos/mocassim-napa-vinho.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Mocassim napa vinho.jpg"
+  },
+  {
+    "id": "d350bb22-6825-4eb2-9601-2b1531d59fea",
+    "slug": "papete-3-tiras-nude",
+    "name": "Papete 3 Tiras Nude",
+    "category": "papete",
+    "description": "Papete nude de solado macio: o conforto que virou tendência. Perfeita para o verão, do passeio ao fim de tarde.",
+    "price": 99.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      35
+    ],
+    "estoque": {
+      "34": 1,
+      "35": 1
+    },
+    "phibo": "PAPE 02||Nude",
+    "phiboDesc": "PAPETE 3 TIRAS / Nude",
+    "image": "/produtos/papete-3-tiras-nude.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Papete 3 tiras nude.jpg"
+  },
+  {
+    "id": "639055ac-e4f9-41b2-8157-7dccfaa631eb",
+    "slug": "papete-3-tiras-prata",
+    "name": "Papete 3 Tiras Prata",
+    "category": "papete",
+    "description": "Papete prata de solado macio: o conforto que virou tendência. Perfeita para o verão, do passeio ao fim de tarde.",
+    "price": 99.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      36
+    ],
+    "estoque": {
+      "34": 1,
+      "36": 1
+    },
+    "phibo": "PAPE 01||Prata",
+    "phiboDesc": "PAPETE 3 TIRAS / Prata",
+    "image": "/produtos/papete-3-tiras-prata.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Papete 3 tiras prata.jpg"
+  },
+  {
+    "id": "2018e3d0-b76b-436d-9293-90c1b92cc915",
+    "slug": "papete-sandalia-brilho-colorido-nude",
+    "name": "Papete Sandália Brilho Colorido Nude",
+    "category": "papete",
+    "description": "Papete nude de solado macio: o conforto que virou tendência. Perfeita para o verão, do passeio ao fim de tarde.",
+    "price": 99.9,
+    "promoPrice": null,
+    "sizes": [
+      35
+    ],
+    "estoque": {
+      "35": 1
+    },
+    "phibo": "PAPE SAND 03||Nude",
+    "phiboDesc": "SANDÁLIA PAPETE 3 TIRAS BRILHO / Nude",
+    "image": "/produtos/papete-sandalia-brilho-colorido-nude.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Papete sandália brilho colorido nude.jpg"
+  },
+  {
+    "id": "5d2cacc1-9f3b-4d73-9106-40f31816eee5",
+    "slug": "papete-sandalia-preto",
+    "name": "Papete Sandália Preto",
+    "category": "papete",
+    "description": "Papete preto de solado macio: o conforto que virou tendência. Perfeita para o verão, do passeio ao fim de tarde.",
+    "price": 99.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      35
+    ],
+    "estoque": {
+      "34": 1,
+      "35": 1
+    },
+    "phibo": "PAPE SAND 02||Preto",
+    "phiboDesc": "PAPETE SANDALIA 5 TIRAS / Preto",
+    "image": "/produtos/papete-sandalia-preto.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Papete sandália preto.jpg"
+  },
+  {
+    "id": "8dfd84df-fef3-47bd-848e-f60da2efd679",
+    "slug": "sandalia-gisele-vermelho",
+    "name": "Sandália Gisele Vermelho",
+    "category": "sandalias",
+    "description": "Sandália vermelho com acabamento caprichado, escolhida a dedo para a nossa coleção.",
+    "price": 89.9,
+    "promoPrice": null,
+    "sizes": [
+      38,
+      39
+    ],
+    "estoque": {
+      "38": 1,
+      "39": 1
+    },
+    "phibo": "SAND GISE 01||Vermelho",
+    "phiboDesc": "SANDÁLIA GISELE / Vermelho",
+    "image": "/produtos/sandalia-gisele-vermelho.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália Gisele vermelho.jpg"
+  },
+  {
+    "id": "9320bb72-a13d-429f-abbb-0d15b54d083c",
+    "slug": "sandalia-bico-folha-azul",
+    "name": "Sandália Bico Folha Azul",
+    "category": "sandalias",
+    "description": "Sandália azul com acabamento caprichado, escolhida a dedo para a nossa coleção.",
+    "price": 139.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
+    ],
+    "estoque": {
+      "34": 1,
+      "35": 2,
+      "36": 1,
+      "37": 1,
+      "38": 1,
+      "39": 1
+    },
+    "phibo": "SAND FOLHA 01||Azul",
+    "phiboDesc": "SANDÁLIA ALTO BICO FOLHA / Azul",
+    "image": "/produtos/sandalia-bico-folha-azul.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália bico folha azul.jpg"
+  },
+  {
+    "id": "8fd11046-e7ae-4b8a-bdcf-e014ce585d52",
+    "slug": "sandalia-bico-folha-nude",
+    "name": "Sandália Bico Folha Nude",
+    "category": "sandalias",
+    "description": "Sandália nude com acabamento caprichado, escolhida a dedo para a nossa coleção.",
+    "price": 139.9,
+    "promoPrice": null,
+    "sizes": [
+      37
+    ],
+    "estoque": {
+      "37": 1
+    },
+    "phibo": "SAND BI FO 02||Nude",
+    "phiboDesc": "SANDÁLIA BICO FOLHA VERNIZ / Nude",
+    "image": "/produtos/sandalia-bico-folha-nude.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália bico folha nude.jpg"
+  },
+  {
+    "id": "d1d554ff-8f53-47c4-89e7-cfa152514101",
+    "slug": "sandalia-bloco-suede-marrom",
+    "name": "Sandália Bloco Suede Marrom",
+    "category": "sandalias",
+    "description": "Salto bloco em marrom — o equilíbrio entre altura e conforto. Para ficar horas em pé sem abrir mão do estilo.",
+    "price": 109.9,
+    "promoPrice": null,
+    "sizes": [
+      39
+    ],
+    "estoque": {
+      "39": 1
+    },
+    "phibo": "SAND BLO LE 02||Marrom",
+    "phiboDesc": "SANDÁLIA BLOCO LEZAR / Marrom",
+    "image": "/produtos/sandalia-bloco-suede-marrom.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália bloco Suede marrom.jpg"
+  },
+  {
+    "id": "437df150-fbac-4240-bfe5-5d27b763546e",
+    "slug": "sandalia-bloco-suede-rosa",
+    "name": "Sandália Bloco Suede Rosa",
+    "category": "sandalias",
+    "description": "Salto bloco em rosa — o equilíbrio entre altura e conforto. Para ficar horas em pé sem abrir mão do estilo.",
+    "price": 109.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      38,
+      39
+    ],
+    "estoque": {
+      "34": 1,
+      "38": 1,
+      "39": 1
+    },
+    "phibo": "SAND SUED 01||Rosa",
+    "phiboDesc": "SANDÁLIA BLOCO SUEDE / Rosa",
+    "image": "/produtos/sandalia-bloco-suede-rosa.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália bloco Suede rosa.jpg"
+  },
+  {
+    "id": "641ecce9-6a10-4f7e-a479-777839feeca8",
+    "slug": "sandalia-bloco-x-prata",
+    "name": "Sandália Bloco x Prata",
+    "category": "sandalias",
+    "description": "Salto bloco em prata — o equilíbrio entre altura e conforto. Para ficar horas em pé sem abrir mão do estilo.",
+    "price": 89.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      35
+    ],
+    "estoque": {
+      "34": 1,
+      "35": 1
+    },
+    "phibo": "SAND X 01||Prata",
+    "phiboDesc": "SANDÁLIA BLOCO MÉDIO NAPA 2 TIRAS / Prata",
+    "image": "/produtos/sandalia-bloco-x-prata.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália bloco X prata.jpg"
+  },
+  {
+    "id": "2e1df3ca-c675-465e-a9a6-9e3d4196c6c2",
+    "slug": "sandalia-bloco-alto-prata",
+    "name": "Sandália Bloco Alto Prata",
+    "category": "sandalias",
+    "description": "Salto bloco em prata — o equilíbrio entre altura e conforto. Para ficar horas em pé sem abrir mão do estilo.",
+    "price": 109.9,
+    "promoPrice": null,
+    "sizes": [
+      34
+    ],
+    "estoque": {
+      "34": 1
+    },
+    "phibo": "SAND BLOCO NA 01||Prata",
+    "phiboDesc": "SANDÁLIA BLOCO ALTO NAPA / Prata",
+    "image": "/produtos/sandalia-bloco-alto-prata.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália bloco alto prata.jpg"
+  },
+  {
+    "id": "1bc23044-3ad2-45da-b7bb-1e7f428ed596",
+    "slug": "sandalia-croco-azul",
+    "name": "Sandália Croco Azul",
+    "category": "sandalias",
+    "description": "Textura croco em azul para um look com personalidade. Sofisticada e moderna, do jantar à festa.",
+    "price": 89.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      35,
+      36,
+      38,
+      39
+    ],
+    "estoque": {
+      "34": 2,
+      "35": 3,
+      "36": 2,
+      "38": 1,
+      "39": 1
+    },
+    "phibo": "SAND CROCO 02||Azul",
+    "phiboDesc": "SANDÁLIA  CROCO BRILHO / Azul",
+    "image": "/produtos/sandalia-croco-azul.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália croco azul.jpg"
+  },
+  {
+    "id": "24662dee-5a09-4c61-91e4-7a6524b5c9f7",
+    "slug": "sandalia-croco-marrom",
+    "name": "Sandália Croco Marrom",
+    "category": "sandalias",
+    "description": "Textura croco em marrom para um look com personalidade. Sofisticada e moderna, do jantar à festa.",
+    "price": 139.9,
+    "promoPrice": null,
+    "sizes": [
+      34
+    ],
+    "estoque": {
+      "34": 1
+    },
+    "phibo": "SAND BI FO 03||Marrom",
+    "phiboDesc": "SANDALIA BICO FOLHA / Marrom",
+    "image": "/produtos/sandalia-croco-marrom.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália croco marrom.jpg"
+  },
+  {
+    "id": "1f31e649-cd09-4e17-a126-ac53a3ac6520",
+    "slug": "sandalia-croco-preto",
+    "name": "Sandália Croco Preto",
+    "category": "sandalias",
+    "description": "Textura croco em preto para um look com personalidade. Sofisticada e moderna, do jantar à festa.",
+    "price": 89.9,
+    "promoPrice": null,
+    "sizes": [
+      35,
+      36,
+      37,
+      38
+    ],
+    "estoque": {
+      "35": 1,
+      "36": 2,
+      "37": 1,
+      "38": 1
+    },
+    "phibo": "SAND CROCO 01||Preto",
+    "phiboDesc": "SANDÁLIA  CROCO BRILHO / Preto",
+    "image": "/produtos/sandalia-croco-preto.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália croco preto.jpg"
+  },
+  {
+    "id": "3df74399-82f9-41fc-a4f6-a8349a2b5058",
+    "slug": "sandalia-croco-vermelho",
+    "name": "Sandália Croco Vermelho",
+    "category": "sandalias",
+    "description": "Textura croco em vermelho para um look com personalidade. Sofisticada e moderna, do jantar à festa.",
+    "price": 89.9,
+    "promoPrice": null,
+    "sizes": [
+      35
+    ],
+    "estoque": {
+      "35": 2
+    },
+    "phibo": "SAND CROCO 03||Vermelho",
+    "phiboDesc": "SANDÁLIA  CROCO BRILHO / Vermelho",
+    "image": "/produtos/sandalia-croco-vermelho.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália croco vermelho.jpg"
+  },
+  {
+    "id": "d86ca7d0-61eb-4591-9b3d-1f8bf21f570e",
+    "slug": "sandalia-dedo-alto-marrom",
+    "name": "Sandália Dedo Alto Marrom",
+    "category": "sandalias",
+    "description": "Sandália de dedo em caramelo: delicada e confortável, alonga a silhueta e combina com tudo no verão.",
+    "price": 139.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
+    ],
+    "estoque": {
+      "34": 1,
+      "35": 2,
+      "36": 2,
+      "37": 2,
+      "38": 1,
+      "39": 1
+    },
+    "phibo": "SAND AL DEDO 02||Caramelo",
+    "phiboDesc": "SANDÁLIA DEDO ALTO / Caramelo",
+    "image": "/produtos/sandalia-dedo-alto-marrom.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália dedo alto marrom.jpg"
+  },
+  {
+    "id": "0d1bee42-23f1-4257-bd6e-c0f925b670f6",
+    "slug": "sandalia-dedo-alto-off-white",
+    "name": "Sandália Dedo Alto Off White",
+    "category": "sandalias",
+    "description": "Sandália de dedo em branco: delicada e confortável, alonga a silhueta e combina com tudo no verão.",
+    "price": 139.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      35,
+      38,
+      39
+    ],
+    "estoque": {
+      "34": 1,
+      "35": 1,
+      "38": 2,
+      "39": 1
+    },
+    "phibo": "SAND AL DEDO 01||Branco",
+    "phiboDesc": "SANDÁLIA DEDO ALTO / Branco",
+    "image": "/produtos/sandalia-dedo-alto-off-white.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália dedo alto off white.jpg"
+  },
+  {
+    "id": "c07c25d6-8a47-4e87-a0af-592af97b695d",
+    "slug": "sandalia-dedo-alto-preto",
+    "name": "Sandália Dedo Alto Preto",
+    "category": "sandalias",
+    "description": "Sandália de dedo em preto: delicada e confortável, alonga a silhueta e combina com tudo no verão.",
+    "price": 139.9,
+    "promoPrice": null,
+    "sizes": [
+      35,
+      36,
+      38,
+      39
+    ],
+    "estoque": {
+      "35": 2,
+      "36": 4,
+      "38": 2,
+      "39": 1
+    },
+    "phibo": "SAND AL DEDO 03||Preto",
+    "phiboDesc": "SANDÁLIA DEDO ALTO / Preto",
+    "image": "/produtos/sandalia-dedo-alto-preto.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália dedo alto preto.jpg"
+  },
+  {
+    "id": "47dbf0e4-a03e-4a12-b9c5-ba11cec309c7",
+    "slug": "sandalia-dedo-baixo-dourado",
+    "name": "Sandália Dedo Baixo Dourado",
+    "category": "sandalias",
+    "description": "Sandália de dedo em dourado: delicada e confortável, alonga a silhueta e combina com tudo no verão.",
+    "price": 119.9,
+    "promoPrice": null,
+    "sizes": [
+      35,
+      40
+    ],
+    "estoque": {
+      "35": 1,
+      "40": 1
+    },
+    "phibo": "SAND DEDO B 01||Dourado",
+    "phiboDesc": "SANDÁLIA DEDO BAIXA / Dourado",
+    "image": "/produtos/sandalia-dedo-baixo-dourado.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália dedo baixo dourado.jpg"
+  },
+  {
+    "id": "224b8e39-c727-442b-a3c5-9b3716460cea",
+    "slug": "sandalia-lezzar-preto",
+    "name": "Sandália Lezzar Preto",
+    "category": "sandalias",
+    "description": "Sandália preto com acabamento caprichado, escolhida a dedo para a nossa coleção.",
+    "price": 99.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      35,
+      37,
+      38
+    ],
+    "estoque": {
+      "34": 1,
+      "35": 1,
+      "37": 1,
+      "38": 1
+    },
+    "phibo": "SAND BLO LE 01||Preto",
+    "phiboDesc": "SANDÁLIA BLOCO LEZAR / Preto",
+    "image": "/produtos/sandalia-lezzar-preto.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália lezzar preto.jpg"
+  },
+  {
+    "id": "2f97aee3-b3c8-49d0-91c6-9aee971b30c2",
+    "slug": "sandalia-rasteira-moeda-dourado",
+    "name": "Sandália Rasteira Moeda Dourado",
+    "category": "rasteirinhas",
+    "description": "Rasteira dourado leve e confortável, com acabamento caprichado. O básico elegante para os dias quentes.",
+    "price": 99.9,
+    "promoPrice": null,
+    "sizes": [
+      33,
+      35,
+      38,
+      40
+    ],
+    "estoque": {
+      "33": 2,
+      "35": 1,
+      "38": 1,
+      "40": 2
+    },
+    "phibo": "SAND RAST MO 01||Dourado",
+    "phiboDesc": "SANDÁLIA RASTEIRA MOEDA / Dourado",
+    "image": "/produtos/sandalia-rasteira-moeda-dourado.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália rasteira moeda dourado.jpg"
+  },
+  {
+    "id": "cda71a0f-0b3b-40c5-b297-a342a2b06a77",
+    "slug": "sandalia-rasteira-v-branco",
+    "name": "Sandália Rasteira v Branco",
+    "category": "rasteirinhas",
+    "description": "Rasteira branco leve e confortável, com acabamento caprichado. O básico elegante para os dias quentes.",
+    "price": 99.9,
+    "promoPrice": null,
+    "sizes": [
+      33,
+      34,
+      40
+    ],
+    "estoque": {
+      "33": 2,
+      "34": 1,
+      "40": 2
+    },
+    "phibo": "SAND RAST 3 TIRAS||Branco",
+    "phiboDesc": "SANDÁLIA RASTEIRA V BRILHO / Branco",
+    "image": "/produtos/sandalia-rasteira-v-branco.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália rasteira v branco.jpg"
+  },
+  {
+    "id": "bea41d8f-2266-4331-8998-1a336b52149b",
+    "slug": "sandalia-salto-bloco-suede-branco",
+    "name": "Sandália Salto Bloco Suede Branco",
+    "category": "sandalias",
+    "description": "Salto bloco em branco — o equilíbrio entre altura e conforto. Para ficar horas em pé sem abrir mão do estilo.",
+    "price": 109.9,
+    "promoPrice": null,
+    "sizes": [
+      38,
+      39
+    ],
+    "estoque": {
+      "38": 1,
+      "39": 1
+    },
+    "phibo": "SAND SUED 03||Branco",
+    "phiboDesc": "SANDÁLIA BLOCO SUEDE / Branco",
+    "image": "/produtos/sandalia-salto-bloco-suede-branco.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália salto bloco Suede branco.jpg"
+  },
+  {
+    "id": "1768261d-0130-487f-87eb-f65e03efb708",
+    "slug": "sandalia-salto-bloco-suede-nude",
+    "name": "Sandália Salto Bloco Suede Nude",
+    "category": "sandalias",
+    "description": "Salto bloco em nude — o equilíbrio entre altura e conforto. Para ficar horas em pé sem abrir mão do estilo.",
+    "price": 109.9,
+    "promoPrice": null,
+    "sizes": [
+      38,
+      39
+    ],
+    "estoque": {
+      "38": 1,
+      "39": 1
+    },
+    "phibo": "SAND SUED 05||Nude",
+    "phiboDesc": "SANDÁLIA BLOCO SUEDE / Nude",
+    "image": "/produtos/sandalia-salto-bloco-suede-nude.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália salto bloco Suede nude.jpg"
+  },
+  {
+    "id": "25397367-8d84-4cd3-b019-f435f3137254",
+    "slug": "sandalia-salto-bloco-alto-laranja-colorido",
+    "name": "Sandália Salto Bloco Alto Laranja Colorido",
+    "category": "sandalias",
+    "description": "Salto bloco em laranja — o equilíbrio entre altura e conforto. Para ficar horas em pé sem abrir mão do estilo.",
+    "price": 109.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      38,
+      39
+    ],
+    "estoque": {
+      "34": 1,
+      "38": 1,
+      "39": 1
+    },
+    "phibo": "SAND BLOCO AL 01||Laranja",
+    "phiboDesc": "SANDÁLIA BLOCO ALTO COLORIDO / Laranja",
+    "image": "/produtos/sandalia-salto-bloco-alto-laranja-colorido.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália salto bloco alto laranja colorido.jpg"
+  },
+  {
+    "id": "a5862841-ead4-4ed4-a008-eae36c50da96",
+    "slug": "sandalia-salto-bloco-baixo-x-dourado",
+    "name": "Sandália Salto Bloco Baixo x Dourado",
+    "category": "sandalias",
+    "description": "Salto bloco em dourado — o equilíbrio entre altura e conforto. Para ficar horas em pé sem abrir mão do estilo.",
+    "price": 89.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      35
+    ],
+    "estoque": {
+      "34": 2,
+      "35": 4
+    },
+    "phibo": "SAND X 02||Dourado",
+    "phiboDesc": "SANDÁLIA BLOCO MÉDIO NAPA 2 TIRAS / Dourado",
+    "image": "/produtos/sandalia-salto-bloco-baixo-x-dourado.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália salto bloco baixo X dourado.jpg"
+  },
+  {
+    "id": "12b3d8a9-6862-42aa-81cc-591dabdcda24",
+    "slug": "sandalia-salto-bloco-brilho-cobre",
+    "name": "Sandália Salto Bloco Brilho Cobre",
+    "category": "sandalias",
+    "description": "Brilho na medida certa em caramelo: a sandália que ilumina o look e transforma a noite em ocasião especial.",
+    "price": 109.9,
+    "promoPrice": null,
+    "sizes": [
+      37,
+      38
+    ],
+    "estoque": {
+      "37": 2,
+      "38": 1
+    },
+    "phibo": "SAND BLO BRI 02||Caramelo",
+    "phiboDesc": "SANDÁLIA SALTO BLOCO BRILHO COBRE / Caramelo",
+    "image": "/produtos/sandalia-salto-bloco-brilho-cobre.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália salto bloco brilho cobre.jpg"
+  },
+  {
+    "id": "4b062a4e-d11d-4dd9-8dd4-ab798b90e59d",
+    "slug": "sandalia-salto-bloco-brilho-preto",
+    "name": "Sandália Salto Bloco Brilho Preto",
+    "category": "sandalias",
+    "description": "Brilho na medida certa em preto: a sandália que ilumina o look e transforma a noite em ocasião especial.",
+    "price": 109.9,
+    "promoPrice": null,
+    "sizes": [
+      37,
+      38
+    ],
+    "estoque": {
+      "37": 1,
+      "38": 2
+    },
+    "phibo": "SAND BLO BRI 03||Preto",
+    "phiboDesc": "SANDÁLIA SALTO BLOCO BRILHO PRATA / Preto",
+    "image": "/produtos/sandalia-salto-bloco-brilho-preto.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália salto bloco brilho preto.jpg"
+  },
+  {
+    "id": "1ecd92b7-8e1d-4731-809f-9ac59e1db4ea",
+    "slug": "sandalia-salto-bloco-glitter-dourado",
+    "name": "Sandália Salto Bloco Glitter Dourado",
+    "category": "sandalias",
+    "description": "Brilho na medida certa em dourado: a sandália que ilumina o look e transforma a noite em ocasião especial.",
+    "price": 109.9,
+    "promoPrice": null,
+    "sizes": [
+      35,
+      37,
+      38,
+      39
+    ],
+    "estoque": {
+      "35": 1,
+      "37": 1,
+      "38": 2,
+      "39": 1
+    },
+    "phibo": "SAND BLO BRI 01||Dourado",
+    "phiboDesc": "SANDÁLIA SALTO BLOCO BRILHO / Dourado",
+    "image": "/produtos/sandalia-salto-bloco-glitter-dourado.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália salto bloco glitter dourado.jpg"
+  },
+  {
+    "id": "3367bdaf-1d5d-419c-a5ea-acd592131845",
+    "slug": "sandalia-salto-bloco-glitter-prata",
+    "name": "Sandália Salto Bloco Glitter Prata",
+    "category": "sandalias",
+    "description": "Brilho na medida certa em prata: a sandália que ilumina o look e transforma a noite em ocasião especial.",
+    "price": 109.9,
+    "promoPrice": null,
+    "sizes": [
+      35,
+      38
+    ],
+    "estoque": {
+      "35": 1,
+      "38": 1
+    },
+    "phibo": "SAND SAL GLI 01||Prata",
+    "phiboDesc": "SANDÁLIA SALTO BLOCO GLITTER / Prata",
+    "image": "/produtos/sandalia-salto-bloco-glitter-prata.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália salto bloco glitter prata.jpg"
+  },
+  {
+    "id": "8001b41d-0d2f-4448-8b46-f13f2cf36da0",
+    "slug": "sandalia-salto-bloco-liso-caramelo-claro",
+    "name": "Sandália Salto Bloco Liso Caramelo Claro",
+    "category": "sandalias",
+    "description": "Salto bloco em caramelo — o equilíbrio entre altura e conforto. Para ficar horas em pé sem abrir mão do estilo.",
+    "price": 109.9,
+    "promoPrice": null,
+    "sizes": [
+      35,
+      38,
+      39
+    ],
+    "estoque": {
+      "35": 2,
+      "38": 2,
+      "39": 1
+    },
+    "phibo": "SAND BLO LI 01||Caramelo",
+    "phiboDesc": "SANDÁLIA SALTO BLOCO LISO / Caramelo",
+    "image": "/produtos/sandalia-salto-bloco-liso-caramelo-claro.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália salto bloco liso caramelo claro.jpg"
+  },
+  {
+    "id": "44712cc0-d16c-48ff-804d-a54955f7e05c",
+    "slug": "sandalia-salto-bloco-liso-marrom",
+    "name": "Sandália Salto Bloco Liso Marrom",
+    "category": "sandalias",
+    "description": "Salto bloco em azul — o equilíbrio entre altura e conforto. Para ficar horas em pé sem abrir mão do estilo.",
+    "price": 109.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      35,
+      36,
+      37,
+      38,
+      39
+    ],
+    "estoque": null,
+    "phibo": "SAND BLO LI 02||Azul",
+    "phiboDesc": "SANDÁLIA SALTO BLOCO LISO / Azul",
+    "image": "/produtos/sandalia-salto-bloco-liso-marrom.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália salto bloco liso marrom.jpg"
+  },
+  {
+    "id": "c6f6c4b9-c8e6-46c7-b83d-a55346cd4a8e",
+    "slug": "sandalia-salto-bloco-liso-off-white",
+    "name": "Sandália Salto Bloco Liso Off White",
+    "category": "sandalias",
+    "description": "Salto bloco em branco — o equilíbrio entre altura e conforto. Para ficar horas em pé sem abrir mão do estilo.",
+    "price": 109.9,
+    "promoPrice": null,
+    "sizes": [
+      38
+    ],
+    "estoque": {
+      "38": 2
+    },
+    "phibo": "SAND BLO LI 03||Branco",
+    "phiboDesc": "SANDÁLIA SALTO BLOCO LISO / Branco",
+    "image": "/produtos/sandalia-salto-bloco-liso-off-white.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália salto bloco liso off white.jpg"
+  },
+  {
+    "id": "d5d43b92-643c-4ca3-8957-8a1eaa344e83",
+    "slug": "sandalia-salto-fino-alto-jeans",
+    "name": "Sandália Salto Fino Alto Jeans",
+    "category": "sandalias",
+    "description": "Salto fino em azul: elegância clássica que afina a silhueta e valoriza qualquer produção.",
+    "price": 114.9,
+    "promoPrice": null,
+    "sizes": [
+      36,
+      37,
+      38,
+      39
+    ],
+    "estoque": {
+      "36": 1,
+      "37": 2,
+      "38": 1,
+      "39": 1
+    },
+    "phibo": "SAND SAL FINO 02||Azul",
+    "phiboDesc": "SANDÁLIA SALTO FINO JEANS / Azul",
+    "image": "/produtos/sandalia-salto-fino-alto-jeans.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália salto fino alto jeans.jpg"
+  },
+  {
+    "id": "c9436a4f-8c92-4aef-b210-0f08bbfc015c",
+    "slug": "sandalia-salto-fino-baixo-preto",
+    "name": "Sandália Salto Fino Baixo Preto",
+    "category": "sandalias",
+    "description": "Salto fino em preto: elegância clássica que afina a silhueta e valoriza qualquer produção.",
+    "price": 109.9,
+    "promoPrice": null,
+    "sizes": [
+      38
+    ],
+    "estoque": {
+      "38": 1
+    },
+    "phibo": "SAND BA FINO 01||Preto",
+    "phiboDesc": "SANDÁLIA SALTO BAIXO FINO VERNIZ / Preto",
+    "image": "/produtos/sandalia-salto-fino-baixo-preto.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália salto fino baixo preto.jpg"
+  },
+  {
+    "id": "35ccc328-84af-4343-a66d-e395777f1d68",
+    "slug": "sandalia-salto-fino-tranca-preto",
+    "name": "Sandália Salto Fino Trança Preto",
+    "category": "sandalias",
+    "description": "Salto fino em preto: elegância clássica que afina a silhueta e valoriza qualquer produção.",
+    "price": 109.9,
+    "promoPrice": null,
+    "sizes": [
+      35,
+      39
+    ],
+    "estoque": {
+      "35": 2,
+      "39": 1
+    },
+    "phibo": "SAND SAL FI TRA 01||Preto",
+    "phiboDesc": "SANDÁLIA SALTO FINO TRANÇA BRILHO / Preto",
+    "image": "/produtos/sandalia-salto-fino-tranca-preto.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália salto fino trança preto.jpg"
+  },
+  {
+    "id": "2f0b8b5d-17f1-44ec-b82f-8a343f32149c",
+    "slug": "sandalia-salto-minimo-1-tira-jeans",
+    "name": "Sandália Salto Mínimo 1 Tira Jeans",
+    "category": "sandalias",
+    "description": "Sandália azul com acabamento caprichado, escolhida a dedo para a nossa coleção.",
+    "price": 119.9,
+    "promoPrice": null,
+    "sizes": [
+      34
+    ],
+    "estoque": {
+      "34": 2
+    },
+    "phibo": "SAND MIN 03||Azul",
+    "phiboDesc": "SANDÁLIA SALTO MINIMO 1 TIRA JEANS / Azul",
+    "image": "/produtos/sandalia-salto-minimo-1-tira-jeans.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália salto mínimo 1 tira jeans.jpg"
+  },
+  {
+    "id": "6ab1fac9-93a6-4b6e-9e1f-442e32567707",
+    "slug": "sandalia-salto-minimo-1-tira-nude",
+    "name": "Sandália Salto Mínimo 1 Tira Nude",
+    "category": "sandalias",
+    "description": "Sandália nude com acabamento caprichado, escolhida a dedo para a nossa coleção.",
+    "price": 119.9,
+    "promoPrice": null,
+    "sizes": [
+      33,
+      34,
+      35,
+      37,
+      39,
+      40
+    ],
+    "estoque": {
+      "33": 1,
+      "34": 2,
+      "35": 1,
+      "37": 1,
+      "39": 1,
+      "40": 1
+    },
+    "phibo": "SAND MIN 01||Nude",
+    "phiboDesc": "SANDÁLIA SALTO MINIMO 1 TIRA VERNIZ / Nude",
+    "image": "/produtos/sandalia-salto-minimo-1-tira-nude.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália salto mínimo 1 tira nude.jpg"
+  },
+  {
+    "id": "ec4c7b4b-8a6a-47ac-9e97-fa737fa80f2c",
+    "slug": "sandalia-salto-minimo-1-tira-preto",
+    "name": "Sandália Salto Mínimo 1 Tira Preto",
+    "category": "sandalias",
+    "description": "Sandália preto com acabamento caprichado, escolhida a dedo para a nossa coleção.",
+    "price": 119.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      35,
+      37,
+      38,
+      39,
+      40
+    ],
+    "estoque": {
+      "34": 2,
+      "35": 1,
+      "37": 2,
+      "38": 2,
+      "39": 1,
+      "40": 1
+    },
+    "phibo": "SAND MIN 02||Preto",
+    "phiboDesc": "SANDÁLIA SALTO MINIMO 1 TIRA VERNIZ / Preto",
+    "image": "/produtos/sandalia-salto-minimo-1-tira-preto.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália salto mínimo 1 tira preto.jpg"
+  },
+  {
+    "id": "4a55a39c-780f-4411-9eee-5814a39b3644",
+    "slug": "sandalia-salto-minimo-x-nude",
+    "name": "Sandália Salto Mínimo x Nude",
+    "category": "sandalias",
+    "description": "Sandália nude com acabamento caprichado, escolhida a dedo para a nossa coleção.",
+    "price": 119.9,
+    "promoPrice": null,
+    "sizes": [
+      35,
+      37,
+      38,
+      39
+    ],
+    "estoque": {
+      "35": 2,
+      "37": 1,
+      "38": 1,
+      "39": 1
+    },
+    "phibo": "SAND MIN X 01||Nude",
+    "phiboDesc": "SANDÁLIA SALTO MINIMO X VERNIZ/NAPA / Nude",
+    "image": "/produtos/sandalia-salto-minimo-x-nude.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália salto mínimo X nude.jpg"
+  },
+  {
+    "id": "6045ad68-ac67-4132-8369-f06382c42d0b",
+    "slug": "sandalia-salto-minimo-x-preto",
+    "name": "Sandália Salto Mínimo x Preto",
+    "category": "sandalias",
+    "description": "Sandália preto com acabamento caprichado, escolhida a dedo para a nossa coleção.",
+    "price": 119.9,
+    "promoPrice": null,
+    "sizes": [
+      33,
+      34,
+      35,
+      38,
+      39,
+      40
+    ],
+    "estoque": {
+      "33": 1,
+      "34": 1,
+      "35": 1,
+      "38": 1,
+      "39": 1,
+      "40": 1
+    },
+    "phibo": "SAND MIN X 02||Preto",
+    "phiboDesc": "SANDÁLIA SALTO MINIMO X VERNIZ/NAPA / Preto",
+    "image": "/produtos/sandalia-salto-minimo-x-preto.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sandália salto mínimo X preto.jpg"
+  },
+  {
+    "id": "cd6b3fc0-8b91-417b-9c55-985004c1ec9c",
+    "slug": "sapatilha-laco-cromado-branco",
+    "name": "Sapatilha Laço Cromado Branco",
+    "category": "sapatilhas",
+    "description": "Sapatilha branco de bico fino: o conforto de um calçado baixo com a elegância de um scarpin. Para o dia inteiro, sem cansar.",
+    "price": 79.9,
+    "promoPrice": null,
+    "sizes": [
+      35,
+      37,
+      39
+    ],
+    "estoque": {
+      "35": 1,
+      "37": 1,
+      "39": 1
+    },
+    "phibo": "SAP LA 01||Branco",
+    "phiboDesc": "SAPATILHA NAPA LAÇO CROMADO / Branco",
+    "image": "/produtos/sapatilha-laco-cromado-branco.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sapatilha laço cromado branco.jpg"
+  },
+  {
+    "id": "48cc4811-8f11-4bfb-b3c3-80e1cc3508ac",
+    "slug": "sapatilha-laco-preto",
+    "name": "Sapatilha Laço Preto",
+    "category": "sapatilhas",
+    "description": "Sapatilha preto de bico fino: o conforto de um calçado baixo com a elegância de um scarpin. Para o dia inteiro, sem cansar.",
+    "price": 79.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      37,
+      38,
+      39
+    ],
+    "estoque": {
+      "34": 1,
+      "37": 1,
+      "38": 1,
+      "39": 1
+    },
+    "phibo": "SAP 04||Preto",
+    "phiboDesc": "SAPATILHA TIRAS - NAPA  LACINHO / Preto",
+    "image": "/produtos/sapatilha-laco-preto.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sapatilha laço preto.jpg"
+  },
+  {
+    "id": "4e0e0458-ff76-4271-aa32-748ef08ba16f",
+    "slug": "sapatilha-napa-2-tiras-marrom",
+    "name": "Sapatilha Napa 2 Tiras Marrom",
+    "category": "sapatilhas",
+    "description": "Sapatilha marrom de bico fino: o conforto de um calçado baixo com a elegância de um scarpin. Para o dia inteiro, sem cansar.",
+    "price": 79.9,
+    "promoPrice": null,
+    "sizes": [
+      39
+    ],
+    "estoque": {
+      "39": 1
+    },
+    "phibo": "SAP 05||Marrom",
+    "phiboDesc": "SAPATILHA NAPA 2 TIRAS / Marrom",
+    "image": "/produtos/sapatilha-napa-2-tiras-marrom.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sapatilha napa 2 tiras marrom.jpg"
+  },
+  {
+    "id": "50094dc4-38c1-4486-93fc-c3a6ac07f598",
+    "slug": "sapatilha-napa-no-brilho-preto",
+    "name": "Sapatilha Napa nó Brilho Preto",
+    "category": "sapatilhas",
+    "description": "Sapatilha preto de bico fino: o conforto de um calçado baixo com a elegância de um scarpin. Para o dia inteiro, sem cansar.",
+    "price": 79.9,
+    "promoPrice": null,
+    "sizes": [
+      39
+    ],
+    "estoque": {
+      "39": 1
+    },
+    "phibo": "SAP 03||Preto",
+    "phiboDesc": "SAPATILHA NAPA NÓ BRILHO / Preto",
+    "image": "/produtos/sapatilha-napa-no-brilho-preto.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sapatilha napa nó brilho preto.jpg"
+  },
+  {
+    "id": "6e40b6b7-7392-4c1d-83bb-1a6b62f19fc3",
+    "slug": "sapatilha-napa-tira-marrom",
+    "name": "Sapatilha Napa Tira Marrom",
+    "category": "sapatilhas",
+    "description": "Sapatilha marrom de bico fino: o conforto de um calçado baixo com a elegância de um scarpin. Para o dia inteiro, sem cansar.",
+    "price": 79.9,
+    "promoPrice": null,
+    "sizes": [
+      38,
+      39
+    ],
+    "estoque": {
+      "38": 1,
+      "39": 1
+    },
+    "phibo": "SAP 1||Marrom",
+    "phiboDesc": "SAPATILHA NAPA TIRAS / Marrom",
+    "image": "/produtos/sapatilha-napa-tira-marrom.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sapatilha napa tira marrom.jpg"
+  },
+  {
+    "id": "17671556-5d33-4bb3-a866-35aff63569cd",
+    "slug": "sapatilha-napa-vermelho",
+    "name": "Sapatilha Napa Vermelho",
+    "category": "sapatilhas",
+    "description": "Sapatilha vermelho de bico fino: o conforto de um calçado baixo com a elegância de um scarpin. Para o dia inteiro, sem cansar.",
+    "price": 79.9,
+    "promoPrice": null,
+    "sizes": [
+      36,
+      39
+    ],
+    "estoque": {
+      "36": 1,
+      "39": 1
+    },
+    "phibo": "SAP 02||Vermelho",
+    "phiboDesc": "Sapatilha Lisa - Napa / Vermelho",
+    "image": "/produtos/sapatilha-napa-vermelho.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sapatilha napa vermelho.jpg"
+  },
+  {
+    "id": "476961f7-e28b-4d2e-a683-216bd9b968d4",
+    "slug": "sapatilha-no-napa-marrom",
+    "name": "Sapatilha nó Napa Marrom",
+    "category": "sapatilhas",
+    "description": "Sapatilha marrom de bico fino: o conforto de um calçado baixo com a elegância de um scarpin. Para o dia inteiro, sem cansar.",
+    "price": 79.9,
+    "promoPrice": null,
+    "sizes": [
+      35,
+      38,
+      39
+    ],
+    "estoque": {
+      "35": 2,
+      "38": 1,
+      "39": 2
+    },
+    "phibo": "SAP 01||Marrom",
+    "phiboDesc": "Sapatilha Nó - Napa / Marrom",
+    "image": "/produtos/sapatilha-no-napa-marrom.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sapatilha nó napa marrom.jpg"
+  },
+  {
+    "id": "8bfc51b4-ca49-4720-a571-feb3cea2ecd9",
+    "slug": "sapatilha-no-napa-nude",
+    "name": "Sapatilha nó Napa Nude",
+    "category": "sapatilhas",
+    "description": "Sapatilha nude de bico fino: o conforto de um calçado baixo com a elegância de um scarpin. Para o dia inteiro, sem cansar.",
+    "price": 79.9,
+    "promoPrice": null,
+    "sizes": [
+      34,
+      38
+    ],
+    "estoque": {
+      "34": 1,
+      "38": 1
+    },
+    "phibo": "SAP 01||Nude",
+    "phiboDesc": "Sapatilha Nó - Napa / Nude",
+    "image": "/produtos/sapatilha-no-napa-nude.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sapatilha nó napa nude.jpg"
+  },
+  {
+    "id": "5ab2b1b4-61bb-4115-90fe-54f7ff770277",
+    "slug": "sapatilha-no-napa-preto",
+    "name": "Sapatilha nó Napa Preto",
+    "category": "sapatilhas",
+    "description": "Sapatilha preto de bico fino: o conforto de um calçado baixo com a elegância de um scarpin. Para o dia inteiro, sem cansar.",
+    "price": 79.9,
+    "promoPrice": null,
+    "sizes": [
+      35,
+      36,
+      37,
+      38,
+      39
+    ],
+    "estoque": {
+      "35": 2,
+      "36": 1,
+      "37": 1,
+      "38": 2,
+      "39": 1
+    },
+    "phibo": "SAP 01||Preto",
+    "phiboDesc": "Sapatilha Nó - Napa / Preto",
+    "image": "/produtos/sapatilha-no-napa-preto.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Sapatilha nó napa preto.jpg"
+  },
+  {
+    "id": "485db328-d997-4b28-ab97-fc13e0801d6a",
+    "slug": "tamanco-dedo-nude",
+    "name": "Tamanco Dedo Nude",
+    "category": "tamancos",
+    "description": "Tamanco de dedo em nude — fácil de calçar e confortável, com um toque moderno que combina com vestido e jeans.",
+    "price": 139.9,
+    "promoPrice": null,
+    "sizes": [
+      35
+    ],
+    "estoque": {
+      "35": 2
+    },
+    "phibo": "TAM 01||Nude",
+    "phiboDesc": "TAMANCO NAPA / Nude",
+    "image": "/produtos/tamanco-dedo-nude.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Tamanco dedo nude.jpg"
+  },
+  {
+    "id": "216120e7-d961-418c-b20d-e03ef363cec7",
+    "slug": "tamanco-dedo-preto",
+    "name": "Tamanco Dedo Preto",
+    "category": "tamancos",
+    "description": "Tamanco de dedo em preto — fácil de calçar e confortável, com um toque moderno que combina com vestido e jeans.",
+    "price": 139.9,
+    "promoPrice": null,
+    "sizes": [
+      35,
+      37
+    ],
+    "estoque": {
+      "35": 1,
+      "37": 3
+    },
+    "phibo": "TAM FI 01||Preto",
+    "phiboDesc": "TAMANCO FIVELA / Preto",
+    "image": "/produtos/tamanco-dedo-preto.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Tamanco dedo preto.jpg"
+  },
+  {
+    "id": "da9d9a9a-1238-4472-8ef9-3f906ef14dda",
+    "slug": "tamanco-fivela-azul",
+    "name": "Tamanco Fivela Azul",
+    "category": "tamancos",
+    "description": "Tamanco azul com fivela: firmeza no passo e muito charme. Ideal para quem quer altura sem abrir mão do conforto.",
+    "price": 139.9,
+    "promoPrice": null,
+    "sizes": [
+      35,
+      39
+    ],
+    "estoque": {
+      "35": 1,
+      "39": 1
+    },
+    "phibo": "TAM FI 02||Azul",
+    "phiboDesc": "TAMANCO FIVELA BABY / Azul",
+    "image": "/produtos/tamanco-fivela-azul.jpg",
+    "featured": false,
+    "active": true,
+    "sort": 0,
+    "_arquivo": "Tamanco fivela azul.jpg"
+  }
+]

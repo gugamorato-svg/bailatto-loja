@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+/* ==================== BAILATTO — identidade ==================== */
+/* Tema claro (padrão) */
+:root {
+  --bg: #F6F0E6;
+  --surface: #FCF7EF;
+  --surface-2: #EFE3D4;
+  --border: #E7D9C7;
+  --text: #3B2A28;
+  --text-2: #806661;
+  --rose: #C17A7A;
+  --rose-2: #B06B6B;
+  --on-rose: #3B2A28;
+  --wine: #9E5457;
+  --wine-2: #8C474A;
+  --on-wine: #FBF3EC;
+  --band: #412B29;
+  --band-text: #F6E9E2;
+  --ph-a: #F0DED4;
+  --ph-b: #E4C4BF;
+  --shadow: rgba(59, 42, 40, 0.12);
+  --shadow-2: rgba(59, 42, 40, 0.20);
+}
+
+/* Tema escuro (acompanha o sistema) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1B1210;
+    --surface: #241815;
+    --surface-2: #2F201C;
+    --border: #412D28;
+    --text: #F6E9E2;
+    --text-2: #CBAAA3;
+    --rose: #D89A9A;
+    --rose-2: #E6B3B0;
+    --on-rose: #1B1210;
+    --wine: #CE7E80;
+    --wine-2: #DC9092;
+    --on-wine: #1B1210;
+    --band: #140C0B;
+    --band-text: #F6E9E2;
+    --ph-a: #2C1A1A;
+    --ph-b: #3A2422;
+    --shadow: rgba(0, 0, 0, 0.5);
+    --shadow-2: rgba(0, 0, 0, 0.65);
+  }
+}
+
+/* Mapeia as variáveis para tokens do Tailwind (bg-bg, text-text, bg-wine, etc.) */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-text-2: var(--text-2);
+  --color-rose: var(--rose);
+  --color-rose-2: var(--rose-2);
+  --color-on-rose: var(--on-rose);
+  --color-wine: var(--wine);
+  --color-wine-2: var(--wine-2);
+  --color-on-wine: var(--on-wine);
+  --color-band: var(--band);
+  --color-band-text: var(--band-text);
+
+  --font-serif: var(--font-bodoni);
+  --font-sans: var(--font-jost);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-jost), ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+}
+
+h1, h2, h3, h4, .font-serif {
+  font-family: var(--font-bodoni), Georgia, "Times New Roman", serif;
+}
+
+::selection {
+  background: var(--rose);
+  color: var(--on-rose);
+}
+
+/* Placeholder de imagem (enquanto carrega / sem foto) */
+.ph-gradient {
+  background: linear-gradient(135deg, var(--ph-a), var(--ph-b));
+}

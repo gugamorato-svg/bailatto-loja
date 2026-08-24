@@ -1,0 +1,61 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+.vercel
+
+# --- arquivos de trabalho das sessões (não vão para o deploy) ---
+# Fotos processadas e recortes: reproduzíveis pelos scripts, 28 MB somados.
+/fotos-novas/
+/recortes/
+/teste-claid/
+folha-*.jpg
+tabela-numeracao.png
+amostra.txt
+
+# Planilhas geradas para o TikTok Shop (saída dos scripts)
+tiktok-produtos.xlsx
+tiktok-conteudo.json
+
+# Modelos baixados em testes. O modelo-fem.xlsx FICA versionado: é a entrada
+# que scripts/tiktok-planilha.mjs precisa para rodar.
+modelo-tiktok.xlsx
+modelo-salto.xlsx
