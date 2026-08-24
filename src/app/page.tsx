@@ -120,7 +120,7 @@ export default async function Home() {
             </div>
           </div>
 
-          <div className="relative hidden aspect-[4/5] overflow-hidden bg-surface-2 md:block">
+          <div className="relative hidden aspect-square overflow-hidden bg-surface-2 md:block">
             <Image
               src="/hero.jpg"
               alt="Calçados em destaque na loja BAILATTO"
