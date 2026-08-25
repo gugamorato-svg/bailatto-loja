@@ -15,16 +15,16 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <Link href={`/produtos/${product.slug}`} className="group block">
-      {/* Retrato 4:5, no padrão das grandes marcas. As fotos originais foram
-          reenquadradas em 4:5 (produto real, fundo preenchido), então nada é
-          cortado. */}
+      {/* Cartão retrato 4:5, mas a foto (deitada) entra INTEIRA via object-contain:
+          o produto nunca é cortado e o fundo do cartão preenche em cima/embaixo,
+          adaptando-se ao tema. Nada de recorte nem de fundo borrado. */}
       <div className="relative aspect-[4/5] overflow-hidden bg-surface-2">
         <Image
           src={product.image}
           alt={product.name}
           fill
           sizes="(max-width: 768px) 50vw, (max-width: 1180px) 33vw, 280px"
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          className="object-contain transition-transform duration-700 ease-out group-hover:scale-105"
         />
         {ultimasPecas && (
           <span className="absolute left-3 top-3 bg-bg/90 px-2.5 py-1 text-[10px] uppercase tracking-[0.14em] text-text backdrop-blur-sm">
