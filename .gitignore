@@ -63,3 +63,9 @@ modelo-salto.xlsx
 # arquivos temporários de scripts
 _*.json
 _*.txt
+
+# pastas de trabalho de fotos (não versionar)
+_orig/
+fotos-ia/
+fotos-gemini/
+fotos-novas/
