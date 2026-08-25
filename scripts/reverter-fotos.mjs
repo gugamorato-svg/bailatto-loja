@@ -31,9 +31,11 @@ async function reenquadrar(src) {
   // Fundo: a própria foto ampliada e desfocada — some a emenda, preenche o 4:5.
   const fundo = await sharp(src).resize({ width: L, height: A, fit: "cover" })
     .blur(30).modulate({ brightness: 1.04, saturation: 0.6 }).toBuffer();
-  // Frente: a foto inteira cabendo dentro do quadro (nada é cortado).
+  // Frente: a foto inteira cabendo dentro do quadro, com MARGEM confortável
+  // (80% da largura). Em fotos onde o sapato foi posto na diagonal preenchendo
+  // o quadro, 94% fazia ele encostar nas bordas e parecer cortado.
   const frente = await sharp(src)
-    .resize({ width: Math.round(L * 0.94), height: Math.round(A * 0.9), fit: "inside" })
+    .resize({ width: Math.round(L * 0.8), height: Math.round(A * 0.72), fit: "inside" })
     .sharpen({ sigma: 0.5 }).toBuffer();
   const fm = await sharp(frente).metadata();
   return sharp(fundo).composite([{
