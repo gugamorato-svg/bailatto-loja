@@ -15,9 +15,9 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <Link href={`/produtos/${product.slug}`} className="group block">
-      {/* 3:2 = formato real das fotos atuais (o par deitado), então nada é
-          cortado. Vira retrato 4:5 quando as fotos forem refeitas em retrato. */}
-      <div className="relative aspect-[3/2] overflow-hidden bg-surface-2">
+      {/* Retrato 4:5, no padrão das grandes marcas — as fotos foram refeitas
+          em retrato pela IA, então enquadram certinho sem cortar. */}
+      <div className="relative aspect-[4/5] overflow-hidden bg-surface-2">
         <Image
           src={product.image}
           alt={product.name}

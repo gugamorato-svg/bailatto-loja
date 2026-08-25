@@ -98,8 +98,12 @@ const produtos = await (
 
 const args = process.argv.slice(2);
 const limite = args.includes("--teste") ? Number(args[args.indexOf("--teste") + 1]) || 3 : Infinity;
+// Slugs explícitos (qualquer arg que não seja flag nem número) rodam só esses.
+const slugsPedidos = args.filter((a, i) => !a.startsWith("--") && !(args[i - 1] === "--teste"));
 
-const faltam = produtos.filter((p) => p.image && !existsSync(new URL(`.${p.image.replace("/produtos", "").replace(".jpg", ".png")}`, DESTINO)));
+const jaFeito = (p) => existsSync(new URL(`${p.slug}.png`, DESTINO));
+let faltam = produtos.filter((p) => p.image && !jaFeito(p));
+if (slugsPedidos.length) faltam = produtos.filter((p) => slugsPedidos.includes(p.slug));
 console.log(`catálogo: ${produtos.length} | faltam: ${faltam.length} | rodando: ${Math.min(limite, faltam.length)}`);
 
 let ok = 0, erros = 0;

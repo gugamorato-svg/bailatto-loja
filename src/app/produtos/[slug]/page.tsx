@@ -113,7 +113,7 @@ export default async function ProdutoPage({
       </Link>
 
       <div className="mt-6 grid gap-10 md:grid-cols-2">
-        <div className="relative aspect-[3/2] overflow-hidden rounded-[2px] bg-surface-2">
+        <div className="relative aspect-[4/5] overflow-hidden rounded-[2px] bg-surface-2">
           <Image
             src={product.image}
             alt={product.name}
