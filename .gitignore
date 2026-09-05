@@ -73,3 +73,9 @@ _prereframe/
 /output/
 /_auditoria-*/
 /_backup-fotos-*/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
