@@ -1,4 +1,5 @@
 import crypto from "node:crypto";
+import { registrarCompra } from "./rastreamentoServidor";
 import { getSupabaseAdmin, BUCKET_PRIVADO } from "./supabaseAdmin";
 
 // Pedidos ficam no bucket PRIVADO — contêm nome, telefone, e-mail e CPF.
@@ -137,6 +138,23 @@ export async function updateOrder(
   const list = await loadOrders();
   const i = list.findIndex((o) => o.id === id);
   if (i < 0) return "Pedido não encontrado.";
+  const antes = list[i].status;
   list[i] = { ...list[i], ...patch };
-  return saveOrders(list);
+  const erro = await saveOrders(list);
+  if (erro) return erro;
+
+  // A conversão vale quando o dinheiro entra, não quando o pedido é feito:
+  // com Pix manual os dois momentos são diferentes. Só na transição para
+  // "pago", para não contar de novo em edições posteriores.
+  if (antes !== "pago" && list[i].status === "pago") {
+    const p = list[i];
+    await registrarCompra({
+      id: p.id,
+      total: p.total ?? 0,
+      email: p.customer?.email,
+      telefone: p.customer?.phone,
+      itens: (p.items ?? []).map((it) => ({ slug: it.slug, qty: it.qty })),
+    });
+  }
+  return null;
 }

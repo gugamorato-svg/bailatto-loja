@@ -26,13 +26,26 @@ export function fretePorCepDisponivel(): boolean {
 }
 
 /**
- * Caixa de um par. O peso de 0,75 kg é o mesmo cadastrado nos anúncios do
- * TikTok Shop — antes o site usava 0,9 kg e cobrava frete diferente do
+ * Caixa do pedido. O peso de 0,75 kg por par é o mesmo cadastrado nos anúncios
+ * do TikTok Shop — antes o site usava 0,9 kg e cobrava frete diferente do
  * marketplace para o mesmo produto. Pares adicionais empilham.
+ *
+ * Semijoia e acessório NÃO podem ser cotados como caixa de sapato: um brinco de
+ * R$ 15 sairia com frete maior que o produto, e a caixa de 33 cm desqualifica o
+ * Mini Envios, que é justamente a modalidade barata para esse item.
  */
-export function calcularPacote(pares: number) {
-  const n = Math.max(1, pares);
-  return { height: 12 * n, width: 22, length: 33, weight: 0.75 * n };
+export function calcularPacote(pares: number, pesoMiudos = 0, volumoso = false) {
+  const n = Math.max(0, pares);
+  const extra = Math.max(0, pesoMiudos);
+
+  if (n === 0) {
+    // Só miudezas.
+    if (volumoso) return { height: 12, width: 20, length: 28, weight: Math.max(0.4, extra) };
+    // Envelope: dentro do limite de 300 g do Mini Envios.
+    return { height: 2, width: 11, length: 16, weight: Math.min(0.3, Math.max(0.05, extra)) };
+  }
+  // Tendo calçado, a caixa manda; a miudeza entra só como peso.
+  return { height: 12 * n, width: 22, length: 33, weight: 0.75 * n + extra };
 }
 
 type RespostaServico = {
@@ -48,6 +61,8 @@ type RespostaServico = {
 export async function cotarFrete(
   cepDestino: string,
   pares: number,
+  pesoMiudos = 0,
+  volumoso = false,
 ): Promise<{ opcoes: OpcaoFrete[]; erro?: string }> {
   const token = process.env.SUPERFRETE_TOKEN;
   const origem = process.env.LOJA_CEP_ORIGEM;
@@ -66,7 +81,7 @@ export async function cotarFrete(
       insurance_value: 0,
       use_insurance_value: false,
     },
-    package: calcularPacote(pares),
+    package: calcularPacote(pares, pesoMiudos, volumoso),
   };
 
   // A API às vezes recusa a primeira conexão; uma retentativa resolve.

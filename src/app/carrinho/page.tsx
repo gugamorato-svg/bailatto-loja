@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/components/CartProvider";
 import { formatPrice } from "@/lib/format";
+import { rotuloTamanho } from "@/lib/products";
+import { faltaParaFreteGratis } from "@/lib/freteGratis";
 
 const WHATSAPP = "5516993392022";
 
@@ -31,11 +33,13 @@ export default function CarrinhoPage() {
 
   const allPriced = items.every((i) => i.price != null);
   const subtotal = items.reduce((s, i) => s + (i.price ?? 0) * i.qty, 0);
+  // Sem CEP ainda: mostra o menor limiar do país (Sudeste/PR).
+  const frete = faltaParaFreteGratis(subtotal);
 
   const linhas = items
     .map(
       (i) =>
-        `• ${i.name} — Nº ${i.size} — Qtd ${i.qty}\n  https://bailatto.com.br/produtos/${i.slug}`,
+        `• ${i.name} — ${rotuloTamanho(i.size)} — Qtd ${i.qty}\n  https://bailatto.com.br/produtos/${i.slug}`,
     )
     .join("\n");
 
@@ -72,7 +76,7 @@ export default function CarrinhoPage() {
               </div>
               <div className="flex flex-1 flex-col">
                 <h3 className="font-serif text-lg text-text">{i.name}</h3>
-                <p className="text-sm text-text-2">Numeração {i.size}</p>
+                <p className="text-sm text-text-2">{rotuloTamanho(i.size)}</p>
                 <p className="text-sm text-wine">{formatPrice(i.price)}</p>
                 <div className="mt-auto flex items-center gap-3">
                   <div className="flex items-center rounded-[2px] border border-border">
@@ -119,6 +123,39 @@ export default function CarrinhoPage() {
             <p className="mt-2 text-xs text-text-2">
               Alguns preços serão confirmados no atendimento.
             </p>
+          )}
+
+          {/* Barra de frete grátis: é o lugar de maior intenção do site, e dá
+              um motivo concreto para somar mais um item. O limiar exato por
+              estado aparece no checkout, quando já sabemos o CEP. */}
+          {allPriced && (
+            <div className="mt-5 border-t border-border pt-4">
+              {frete.atingiu ? (
+                <p className="text-sm text-wine">
+                  ✦ Você ganhou frete grátis para o Sudeste e Paraná.
+                </p>
+              ) : (
+                <>
+                  <p className="text-sm text-text">
+                    Faltam{" "}
+                    <span className="text-wine">{formatPrice(frete.falta)}</span>{" "}
+                    para o frete grátis
+                  </p>
+                  <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-surface-2">
+                    <div
+                      className="h-full bg-wine transition-[width] duration-500"
+                      style={{
+                        width: `${Math.min(100, (subtotal / frete.limiar) * 100)}%`,
+                      }}
+                    />
+                  </div>
+                  <p className="mt-2 text-xs text-text-2">
+                    A partir de {formatPrice(frete.limiar)} no Sudeste e Paraná.
+                    Outras regiões têm valor próprio, calculado no checkout.
+                  </p>
+                </>
+              )}
+            </div>
           )}
 
           <Link

@@ -2,9 +2,13 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { use, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import { useCart } from "@/components/CartProvider";
 import { formatPrice } from "@/lib/format";
+import { pesoMiudo, ehVolumoso, TAMANHO_UNICO } from "@/lib/products";
+import { iniciarCheckout } from "@/lib/eventos";
+import { limiarDaUf } from "@/lib/freteGratis";
+import { rotuloTamanho } from "@/lib/products";
 import { submitOrder } from "./actions";
 
 const inputCls =
@@ -55,11 +59,31 @@ export default function CheckoutPage({
   const [cotando, setCotando] = useState(false);
   const [erroFrete, setErroFrete] = useState("");
 
+  // Chegar no checkout é o passo mais próximo da compra que dá para medir no
+  // navegador; o Purchase sai do servidor quando o Pix é confirmado.
+  const disparado = useRef(false);
+  useEffect(() => {
+    if (disparado.current || items.length === 0) return;
+    disparado.current = true;
+    iniciarCheckout(items);
+  }, [items]);
+
   const allPriced = items.every((i) => i.price != null);
   const subtotal = items.reduce((s, i) => s + (i.price ?? 0) * i.qty, 0);
   const opcaoEscolhida = opcoes.find((o) => o.id === servico);
-  const frete =
+
+  // Frete grátis por região: o limiar depende da UF do CEP, porque enviar para
+  // o Norte custa o dobro do Sudeste. A loja ABSORVE o frete — a transportadora
+  // continua sendo paga, então o valor cotado segue aparecendo, riscado.
+  const gratis =
+    metodo === "correios" &&
+    allPriced &&
+    limiarDaUf(cep.uf) != null &&
+    subtotal >= (limiarDaUf(cep.uf) as number);
+
+  const freteCotado =
     metodo === "correios" ? opcaoEscolhida?.preco ?? null : FRETE[metodo];
+  const frete = gratis && freteCotado != null ? 0 : freteCotado;
   const total = allPriced && frete != null ? subtotal + frete : null;
 
   async function cotarFrete(cepLimpo: string) {
@@ -68,11 +92,18 @@ export default function CheckoutPage({
     setOpcoes([]);
     setServico("");
     try {
-      const pares = items.reduce((s, i) => s + i.qty, 0);
+      // Calçado vai por par; o resto (size 0 = tamanho único) vai por peso,
+      // senão um brinco de R$ 15 é cotado como uma caixa de sapato.
+      const pares = items
+        .filter((i) => i.size !== TAMANHO_UNICO)
+        .reduce((s, i) => s + i.qty, 0);
+      const miudos = items.filter((i) => i.size === TAMANHO_UNICO);
+      const pesoMiudos = miudos.reduce((s, i) => s + pesoMiudo(i.name) * i.qty, 0);
+      const volumoso = miudos.some((i) => ehVolumoso(i.name));
       const r = await fetch("/api/frete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cep: cepLimpo, pares }),
+        body: JSON.stringify({ cep: cepLimpo, pares, pesoMiudos, volumoso }),
       });
       const d = await r.json();
       if (d.erro || !d.opcoes?.length) {
@@ -402,7 +433,7 @@ export default function CheckoutPage({
                 <div className="flex-1 text-sm">
                   <p className="text-text">{i.name}</p>
                   <p className="text-text-2">
-                    Nº {i.size} · {i.qty}x
+                    {rotuloTamanho(i.size)} · {i.qty}x
                   </p>
                 </div>
                 <p className="text-sm text-wine">{formatPrice(i.price)}</p>
@@ -417,7 +448,16 @@ export default function CheckoutPage({
             </div>
             <div className="flex justify-between text-text-2">
               <span>Frete</span>
-              <span>{frete == null ? "a combinar" : formatPrice(frete)}</span>
+              {gratis && freteCotado != null ? (
+                <span>
+                  <span className="mr-2 text-text-2/60 line-through">
+                    {formatPrice(freteCotado)}
+                  </span>
+                  <span className="text-wine">grátis</span>
+                </span>
+              ) : (
+                <span>{frete == null ? "a combinar" : formatPrice(frete)}</span>
+              )}
             </div>
             <div className="flex justify-between pt-2 text-base text-text">
               <span>Total</span>
@@ -432,8 +472,8 @@ export default function CheckoutPage({
             Confirmar pedido
           </button>
           <p className="mt-3 text-center text-xs text-text-2">
-            Você combina o pagamento com a gente no WhatsApp. Pagamento por Pix
-            direto no site chega em breve.
+            Na próxima tela você recebe o QR Code do Pix com o valor já
+            calculado. Pagou, é só mandar o comprovante no WhatsApp.
           </p>
         </aside>
       </form>

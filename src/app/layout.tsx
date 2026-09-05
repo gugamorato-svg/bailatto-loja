@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bodoni_Moda, Jost } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/components/CartProvider";
+import { Rastreamento } from "@/components/Rastreamento";
 import { Chrome } from "@/components/Chrome";
 import { SITE } from "@/lib/site";
 
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${bodoni.variable} ${jost.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-bg text-text">
+        <Rastreamento />
         <CartProvider>
           <Chrome>{children}</Chrome>
         </CartProvider>

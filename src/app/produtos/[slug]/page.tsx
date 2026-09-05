@@ -10,6 +10,8 @@ import { CalculadoraFrete } from "@/components/CalculadoraFrete";
 import { GuiaNumeracao } from "@/components/GuiaNumeracao";
 import { FichaTecnica } from "@/components/FichaTecnica";
 import { VoceTambemVaiGostar } from "@/components/VoceTambemVaiGostar";
+import { LeveJunto } from "@/components/LeveJunto";
+import { VerProduto } from "@/components/VerProduto";
 import { SITE, enderecoCompleto } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
@@ -37,7 +39,6 @@ export async function generateMetadata({
 
   const descricao = descricaoBusca(product);
   const url = `${SITE.url}/produtos/${product.slug}`;
-
   return {
     title: product.name,
     description: descricao,
@@ -47,7 +48,12 @@ export async function generateMetadata({
       url,
       title: `${product.name} — ${SITE.nome}`,
       description: descricao,
-      images: [{ url: product.image, width: 1200, height: 800, alt: product.name }],
+      images: [{
+        url: product.image,
+        width: 1200,
+        height: 1500,
+        alt: product.name,
+      }],
     },
     twitter: {
       card: "summary_large_image",
@@ -58,10 +64,10 @@ export async function generateMetadata({
   };
 }
 
-const GARANTIAS = [
+const garantias = (tamanhoUnico?: boolean) => [
   ["🏪", "Loja física em São Carlos", enderecoCompleto],
   ["↩️", "7 dias para troca", "direito de arrependimento garantido por lei"],
-  ["💬", "Atendimento pessoal", "tire dúvidas de numeração no WhatsApp"],
+  ["💬", "Atendimento pessoal", tamanhoUnico ? "tire suas dúvidas no WhatsApp" : "tire dúvidas de numeração no WhatsApp"],
 ];
 
 export default async function ProdutoPage({
@@ -76,6 +82,9 @@ export default async function ProdutoPage({
   const emEstoque = product.estoque
     ? Object.values(product.estoque).reduce((s, n) => s + n, 0)
     : null;
+  const imagemAbsoluta = (imagem: string) =>
+    /^https?:\/\//i.test(imagem) ? imagem : `${SITE.url}${imagem}`;
+  const imagemPrincipal = imagemAbsoluta(product.image);
 
   // Dados estruturados: é assim que o Google mostra preço e disponibilidade na busca.
   const jsonLd = {
@@ -83,7 +92,7 @@ export default async function ProdutoPage({
     "@type": "Product",
     name: product.name,
     description: product.description,
-    image: `${SITE.url}${product.image}`,
+    image: [imagemPrincipal],
     category: categoryLabel(product.category),
     brand: { "@type": "Brand", name: "BAILATTO" },
     ...(product.price != null && {
@@ -108,19 +117,21 @@ export default async function ProdutoPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
+      <VerProduto slug={product.slug} name={product.name} price={product.price} />
+
       <Link href="/produtos" className="text-sm text-text-2 hover:text-wine">
         ← Voltar para a coleção
       </Link>
 
       <div className="mt-6 grid gap-10 md:grid-cols-2">
-        <div className="relative aspect-[3/2] overflow-hidden rounded-[2px] bg-surface-2">
+        <div className="relative aspect-[4/5] overflow-hidden rounded-[2px] bg-white">
           <Image
             src={product.image}
             alt={product.name}
             fill
             sizes="(max-width: 768px) 100vw, 560px"
-            className="object-cover"
-            priority
+            className="object-contain"
+            preload
           />
         </div>
 
@@ -145,12 +156,14 @@ export default async function ProdutoPage({
             <AddToCart product={product} />
           </div>
 
-          <GuiaNumeracao nomeProduto={product.name} numeracoes={product.sizes} />
+          {!product.tamanhoUnico && (
+            <GuiaNumeracao nomeProduto={product.name} numeracoes={product.sizes} />
+          )}
 
           <CalculadoraFrete />
 
           <ul className="mt-8 space-y-3 border-t border-border pt-6 text-sm">
-            {GARANTIAS.map(([icone, titulo, detalhe]) => (
+            {garantias(product.tamanhoUnico).map(([icone, titulo, detalhe]) => (
               <li key={titulo} className="flex gap-3">
                 <span aria-hidden>{icone}</span>
                 <span>
@@ -165,7 +178,7 @@ export default async function ProdutoPage({
 
           <div className="mt-6 border-t border-border pt-6 text-sm text-text-2">
             <p>
-              Dúvidas sobre numeração ou modelos?{" "}
+              {product.tamanhoUnico ? "Quer ver mais de perto?" : "Dúvidas sobre numeração ou modelos?"}{" "}
               <a
                 href={`https://wa.me/${SITE.whatsapp}`}
                 target="_blank"
@@ -179,6 +192,8 @@ export default async function ProdutoPage({
           </div>
         </div>
       </div>
+
+      <LeveJunto atual={product} todos={relacionados} />
 
       <VoceTambemVaiGostar atual={product} todos={relacionados} />
     </section>

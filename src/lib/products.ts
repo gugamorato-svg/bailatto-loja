@@ -13,7 +13,9 @@ export type CategorySlug =
   | "mules"
   | "tamancos"
   | "papete"
-  | "sapatilhas";
+  | "sapatilhas"
+  | "semijoias"
+  | "acessorios";
 
 export const categories: { slug: CategorySlug; label: string }[] = [
   { slug: "scarpins", label: "Scarpins" },
@@ -27,6 +29,8 @@ export const categories: { slug: CategorySlug; label: string }[] = [
   { slug: "tamancos", label: "Tamancos" },
   { slug: "papete", label: "Papete" },
   { slug: "sapatilhas", label: "Sapatilhas" },
+  { slug: "semijoias", label: "Semijoias" },
+  { slug: "acessorios", label: "Acessórios" },
 ];
 
 export type Product = {
@@ -36,13 +40,38 @@ export type Product = {
   description: string;
   price: number | null; // null = a confirmar
   image: string;
+  /** Fotos secundárias exibidas na página do produto (perfil e traseira/detalhe). */
+  images?: string[];
   sizes: number[];
   featured?: boolean;
   /** codigo do produto no Phibo (codigo + cor) — usado na importacao */
   phibo?: string;
   /** estoque por numeracao: { "36": 2 } */
   estoque?: Record<string, number> | null;
+  /** acessorios e semijoias nao tem numeracao — vendem em tamanho unico */
+  tamanhoUnico?: boolean;
 };
+
+/**
+ * Peso aproximado (kg) de um item sem numeração, pelo nome. Bolsa e nécessaire
+ * pesam e ocupam; brinco, lenço e carteira cabem num envelope.
+ */
+export function pesoMiudo(nome: string): number {
+  return /bolsa|n[ée]cessaire/i.test(nome) ? 0.4 : 0.05;
+}
+
+/** Um item sem numeração que não cabe em envelope. */
+export function ehVolumoso(nome: string): boolean {
+  return /bolsa|n[ée]cessaire/i.test(nome);
+}
+
+/** Valor de `size` no carrinho para produto sem numeracao. */
+export const TAMANHO_UNICO = 0;
+
+/** Como a numeracao aparece para a cliente (carrinho, checkout, pedido). */
+export function rotuloTamanho(size: number): string {
+  return size === TAMANHO_UNICO ? "Tamanho único" : `Nº ${size}`;
+}
 
 const S = [34, 35, 36, 37, 38, 39];
 

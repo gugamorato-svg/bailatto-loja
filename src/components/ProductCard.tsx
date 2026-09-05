@@ -11,13 +11,16 @@ export function paresEmEstoque(p: Product): number | null {
 
 export function ProductCard({ product }: { product: Product }) {
   const pares = paresEmEstoque(product);
-  const ultimasPecas = pares !== null && pares > 0 && pares <= 2;
+  // So em calcado: semijoia e acessorio sao peca unica por natureza, entao o
+  // selo apareceria em quase todo cartao e deixaria de significar escassez.
+  const ultimasPecas =
+    !product.tamanhoUnico && pares !== null && pares > 0 && pares <= 2;
 
   return (
     <Link href={`/produtos/${product.slug}`} className="group block">
-      {/* Cartão retrato 4:5, mas a foto (deitada) entra INTEIRA via object-contain:
-          o produto nunca é cortado e o fundo do cartão preenche em cima/embaixo,
-          adaptando-se ao tema. Nada de recorte nem de fundo borrado. */}
+      {/* As fotos já são 4:5 com o produto normalizado (80% da largura, centro
+          óptico a 53%), então preenchem o cartão exatamente. O object-contain
+          fica como rede de segurança para qualquer foto fora do padrão. */}
       <div className="relative aspect-[4/5] overflow-hidden bg-surface-2">
         <Image
           src={product.image}

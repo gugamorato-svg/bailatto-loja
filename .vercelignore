@@ -1,0 +1,17 @@
+# Arquivos locais de processamento e auditoria; as galerias finais ficam no Supabase.
+output/
+_orig/
+_prereframe/
+_auditoria-*/
+_backup-fotos-*/
+fotos-ia/
+fotos-gemini/
+fotos-novas/
+recortes/
+teste-claid/
+
+# Artefatos temporários e planilhas de importação.
+_*.json
+_*.txt
+*.xlsx
+*.csv

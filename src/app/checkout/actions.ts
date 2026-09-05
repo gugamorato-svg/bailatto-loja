@@ -3,6 +3,8 @@
 import { redirect } from "next/navigation";
 import { getAllProducts } from "@/lib/db";
 import { cotarFrete } from "@/lib/frete";
+import { pesoMiudo, ehVolumoso } from "@/lib/products";
+import { limiarDaUf } from "@/lib/freteGratis";
 import {
   createOrder,
   DELIVERY_PRICE,
@@ -77,15 +79,33 @@ export async function submitOrder(formData: FormData) {
     const escolhido = String(formData.get("servicoFrete") || "").trim();
     if (!escolhido) fail("Escolha uma opção de envio.");
 
-    const pares = items.reduce((s, i) => s + i.qty, 0);
-    const { opcoes, erro } = await cotarFrete(delivery.cep ?? "", pares);
+    // Mesma separação do navegador: só calçado conta como par. Contar um
+    // brinco como caixa de sapato faria o servidor cobrar um frete que a
+    // cliente nunca viu na tela.
+    const semNumeracao = (i: OrderItem) =>
+      products.find((p) => p.slug === i.slug)?.tamanhoUnico === true;
+    const pares = items.filter((i) => !semNumeracao(i)).reduce((s, i) => s + i.qty, 0);
+    const miudos = items.filter(semNumeracao);
+    const pesoMiudos = miudos.reduce((s, i) => s + pesoMiudo(i.name) * i.qty, 0);
+    const volumoso = miudos.some((i) => ehVolumoso(i.name));
+
+    const { opcoes, erro } = await cotarFrete(
+      delivery.cep ?? "",
+      pares,
+      pesoMiudos,
+      volumoso,
+    );
     if (erro || opcoes.length === 0) {
       fail(erro || "Não consegui calcular o frete. Tente de novo.");
     }
     const opcao = opcoes.find((o) => o.id === escolhido);
     if (!opcao) fail("Essa opção de envio não está mais disponível. Escolha outra.");
-    shipping = opcao!.preco;
     delivery.transportadora = opcao!.nome;
+
+    // Frete grátis por região: a mesma regra que a cliente viu na sacola e no
+    // checkout. Confere aqui também para o pedido gravado bater com a tela.
+    const limiar = limiarDaUf(delivery.uf);
+    shipping = limiar != null && subtotal >= limiar ? 0 : opcao!.preco;
   }
 
   const total = allPriced && shipping != null ? subtotal + shipping : null;

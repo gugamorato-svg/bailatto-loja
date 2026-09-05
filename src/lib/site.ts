@@ -7,6 +7,8 @@ export const SITE = {
   telefone: "+5516993392022",
   whatsapp: "5516993392022",
   instagram: "https://instagram.com/bailatto.calcados.saocarlos",
+  /** Ficha do Google Business. No sameAs, é o que casa a identidade do site com a do GBP. */
+  googleMaps: "https://maps.app.goo.gl/EZYKJ1KQmmY1WsaX9",
   endereco: {
     rua: "Rua Geminiano Costa, 416",
     bairro: "Centro",

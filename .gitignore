@@ -69,3 +69,7 @@ _orig/
 fotos-ia/
 fotos-gemini/
 fotos-novas/
+_prereframe/
+/output/
+/_auditoria-*/
+/_backup-fotos-*/

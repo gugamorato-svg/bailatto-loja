@@ -60,6 +60,19 @@ export async function saveProduct(formData: FormData) {
     if (up.url) image = up.url;
   }
 
+  // Galeria: cada campo mantém a foto atual se não houver um novo arquivo.
+  const images = [1, 2].map((slot) =>
+    String(formData.get(`currentGalleryImage${slot}`) || ""),
+  );
+  for (let i = 0; i < 2; i++) {
+    const galleryFile = formData.get(`galleryImage${i + 1}`);
+    if (galleryFile instanceof File && galleryFile.size > 0) {
+      const up = await adminUploadImage(galleryFile);
+      if (up.error) redirect(`${back}?erro=${encodeURIComponent(up.error)}`);
+      if (up.url) images[i] = up.url;
+    }
+  }
+
   const input: ProductInput = {
     slug: "",
     name,
@@ -69,6 +82,7 @@ export async function saveProduct(formData: FormData) {
     promoPrice,
     sizes: sizes.length ? sizes : [34, 35, 36, 37, 38, 39],
     image,
+    images: images.filter(Boolean),
     featured,
     active,
   };

@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getOrder, DELIVERY_LABEL, STATUS_LABEL } from "@/lib/orders";
+import { rotuloTamanho } from "@/lib/products";
 import { formatPrice } from "@/lib/format";
 import { ClearCartOnMount } from "@/components/ClearCartOnMount";
 import { PixPagamento } from "@/components/PixPagamento";
@@ -22,7 +23,7 @@ export default async function PedidoPage({
   if (!order) notFound();
 
   const linhas = order.items
-    .map((i) => `• ${i.name} — Nº ${i.size} — ${i.qty}x`)
+    .map((i) => `• ${i.name} — ${rotuloTamanho(i.size)} — ${i.qty}x`)
     .join("\n");
   const msg = encodeURIComponent(
     `Olá! Acabei de fazer o pedido #${order.number} no site da BAILATTO.\n\n` +
@@ -93,7 +94,7 @@ export default async function PedidoPage({
               <div className="flex-1 text-sm">
                 <p className="text-text">{i.name}</p>
                 <p className="text-text-2">
-                  Nº {i.size} · {i.qty}x
+                  {rotuloTamanho(i.size)} · {i.qty}x
                 </p>
               </div>
               <p className="text-sm text-wine">{formatPrice(i.price)}</p>

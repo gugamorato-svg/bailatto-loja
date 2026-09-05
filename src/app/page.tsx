@@ -41,7 +41,7 @@ export default async function Home() {
     url: SITE.url,
     telephone: SITE.telefone,
     image: `${SITE.url}/loja.jpg`,
-    priceRange: "R$ 79 - R$ 249",
+    priceRange: "R$ 15 - R$ 189",
     address: {
       "@type": "PostalAddress",
       streetAddress: SITE.endereco.rua,
@@ -64,7 +64,8 @@ export default async function Home() {
         closes: "13:00",
       },
     ],
-    sameAs: [SITE.instagram],
+    sameAs: [SITE.instagram, SITE.googleMaps],
+    hasMap: SITE.googleMaps,
   };
 
   return (
@@ -74,61 +75,90 @@ export default async function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(negocioJsonLd) }}
       />
       {/* HERO */}
-      <section className="border-b border-border">
-        <div className="mx-auto grid max-w-[1240px] items-center md:grid-cols-[1.05fr_1fr]">
-          <div className="px-5 py-16 sm:py-20 md:px-14">
-            <p className="text-[0.66rem] uppercase tracking-[0.28em] text-text-2">
-              Nova coleção · Verão 2026
-            </p>
-            <h1 className="mt-6 font-serif text-[2.7rem] leading-[1.04] text-text sm:text-6xl">
-              O par certo <span className="italic text-wine">combina</span> com
-              você.
-            </h1>
-            <p className="mt-6 max-w-md text-text-2">
-              Calçados femininos escolhidos a dedo, do trabalho à festa. Retirada
-              grátis em São Carlos ou entrega para todo o Brasil.
-            </p>
-            <div className="mt-9 flex flex-wrap items-center gap-7">
-              <Link
-                href="/produtos"
-                className="border-b border-text pb-1.5 text-[0.72rem] uppercase tracking-[0.2em] text-text transition-colors hover:border-wine hover:text-wine"
-              >
-                Ver a coleção
-              </Link>
-              <a
-                href={WA}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="border-b border-transparent pb-1.5 text-[0.72rem] uppercase tracking-[0.2em] text-text-2 transition-colors hover:border-wine hover:text-wine"
-              >
-                Falar no WhatsApp
-              </a>
+      <section className="border-b border-border bg-bg">
+        <div className="mx-auto max-w-[1440px] md:px-5 md:pt-5">
+          <div className="overflow-hidden bg-[#261d18]">
+            <div className="relative aspect-[3/4] min-h-[520px] overflow-hidden sm:aspect-[4/5] md:aspect-[16/9] md:min-h-[580px] lg:aspect-[16/8] lg:max-h-[760px]">
+              <Image
+                src="/hero-modelo-bailatto-20260831-v2.webp"
+                alt="Modelo BAILATTO caminhando com scarpin vinho em uma boutique"
+                fill
+                sizes="100vw"
+                className="object-cover object-[70%_center] md:object-center"
+                priority
+              />
+              <div className="absolute inset-0 hidden bg-gradient-to-r from-black/70 via-black/30 to-transparent md:block" />
+              <div className="absolute inset-0 hidden items-center px-10 md:flex lg:px-20">
+                <div className="max-w-[610px] text-white">
+                  <p className="text-[0.68rem] uppercase tracking-[0.3em] text-white/80">
+                    Nova coleção · Verão 2026
+                  </p>
+                  <h1 className="mt-6 font-serif text-5xl leading-[0.98] lg:text-[4.5rem]">
+                    Elegância que acompanha <span className="italic">cada passo.</span>
+                  </h1>
+                  <p className="mt-6 max-w-lg text-base leading-relaxed text-white/85">
+                    Scarpins escolhidos para transformar o essencial em presença —
+                    do trabalho aos momentos que pedem algo especial.
+                  </p>
+                  <div className="mt-9 flex flex-wrap items-center gap-7">
+                    <Link
+                      href="/produtos?categoria=scarpins"
+                      className="inline-flex h-12 items-center justify-center rounded-[2px] bg-white px-9 text-[0.72rem] uppercase tracking-[0.2em] text-[#1a1613] transition-colors hover:bg-[#f4f0ea]"
+                    >
+                      Descobrir os scarpins <span className="ml-3 text-lg">→</span>
+                    </Link>
+                    <a
+                      href={WA}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[0.7rem] uppercase tracking-[0.16em] text-white/85 underline-offset-4 transition-colors hover:text-white hover:underline"
+                    >
+                      Fale com a gente
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="mt-12 flex gap-10 border-t border-border pt-7 text-sm">
-              <div>
-                <p className="font-serif text-xl text-wine">5,0★</p>
-                <p className="text-[0.72rem] uppercase tracking-[0.12em] text-text-2">no Google</p>
-              </div>
-              <div>
-                <p className="font-serif text-xl text-text">São Carlos</p>
-                <p className="text-[0.72rem] uppercase tracking-[0.12em] text-text-2">loja física</p>
-              </div>
-              <div>
-                <p className="font-serif text-xl text-text">151</p>
-                <p className="text-[0.72rem] uppercase tracking-[0.12em] text-text-2">modelos</p>
-              </div>
+
+            <div className="bg-bg px-5 py-10 md:hidden">
+              <p className="text-[0.66rem] uppercase tracking-[0.28em] text-text-2">
+                Nova coleção · Verão 2026
+              </p>
+              <h1 className="mt-4 font-serif text-[2.65rem] leading-[1.02] text-text">
+                Elegância que acompanha <span className="italic text-wine">cada passo.</span>
+              </h1>
+              <p className="mt-5 max-w-md text-sm leading-relaxed text-text-2">
+                Scarpins escolhidos para transformar o essencial em presença — do
+                trabalho aos momentos especiais.
+              </p>
+              <Link
+                href="/produtos?categoria=scarpins"
+                className="mt-7 inline-flex h-12 w-full items-center justify-center rounded-[2px] bg-wine px-6 text-[0.7rem] uppercase tracking-[0.18em] text-on-wine transition-colors hover:bg-wine-2"
+              >
+                Descobrir os scarpins <span className="ml-3 text-lg">→</span>
+              </Link>
             </div>
           </div>
 
-          <div className="relative hidden aspect-square overflow-hidden bg-surface-2 md:block">
-            <Image
-              src="/hero.jpg"
-              alt="Calçados em destaque na loja BAILATTO"
-              fill
-              sizes="(max-width: 768px) 0px, 560px"
-              className="object-cover"
-              priority
-            />
+          <div className="grid grid-cols-3 border-x border-border bg-bg text-center">
+            <div className="border-r border-border px-2 py-5">
+              <p className="font-serif text-lg text-wine sm:text-xl">5,0★</p>
+              <p className="mt-1 text-[0.58rem] uppercase tracking-[0.1em] text-text-2 sm:text-[0.68rem]">
+                no Google
+              </p>
+            </div>
+            <div className="border-r border-border px-2 py-5">
+              <p className="font-serif text-lg text-text sm:text-xl">São Carlos</p>
+              <p className="mt-1 text-[0.58rem] uppercase tracking-[0.1em] text-text-2 sm:text-[0.68rem]">
+                loja física
+              </p>
+            </div>
+            <div className="px-2 py-5">
+              <p className="font-serif text-lg text-text sm:text-xl">{all.length}</p>
+              <p className="mt-1 text-[0.58rem] uppercase tracking-[0.1em] text-text-2 sm:text-[0.68rem]">
+                modelos
+              </p>
+            </div>
           </div>
         </div>
       </section>

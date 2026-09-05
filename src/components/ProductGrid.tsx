@@ -54,7 +54,9 @@ export function ProductGrid({
 
   let visiveis = products.filter((p) => {
     if (categoria !== "todos" && p.category !== categoria) return false;
-    if (numeracao && !p.sizes.includes(numeracao)) return false;
+    // Semijoia e acessório não têm numeração: filtrar por número não pode
+    // fazê-los sumir da vitrine.
+    if (numeracao && !p.tamanhoUnico && !p.sizes.includes(numeracao)) return false;
     return true;
   });
 

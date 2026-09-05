@@ -30,6 +30,7 @@ export type ProductInput = {
   promoPrice: number | null;
   sizes: number[];
   image: string;
+  images: string[];
   featured: boolean;
   active: boolean;
 };
@@ -104,6 +105,7 @@ export async function adminCreateProduct(input: ProductInput): Promise<string | 
     promoPrice: input.promoPrice,
     sizes: input.sizes,
     image: input.image,
+    images: input.images,
     featured: input.featured,
     active: input.active,
     sort: list.length,
@@ -126,6 +128,7 @@ export async function adminUpdateProduct(id: string, input: ProductInput): Promi
     promoPrice: input.promoPrice,
     sizes: input.sizes,
     image: input.image,
+    images: input.images,
     featured: input.featured,
     active: input.active,
   };

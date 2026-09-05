@@ -43,6 +43,7 @@ function detalhes(p: Product): [string, string][] {
   if (/strass|brilho/.test(n)) linhas.push(["Detalhe", "Aplicação de brilho"]);
 
   linhas.push(["Categoria", categoryLabel(p.category)]);
+  if (p.tamanhoUnico) linhas.push(["Tamanho", "Único"]);
   if (p.sizes.length) {
     linhas.push([
       "Numerações",

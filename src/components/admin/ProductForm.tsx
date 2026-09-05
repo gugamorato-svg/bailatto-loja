@@ -27,6 +27,8 @@ export function ProductForm({ product }: { product?: AdminProduct }) {
     <form action={saveProduct} className="space-y-6">
       {product && <input type="hidden" name="id" value={product.id} />}
       <input type="hidden" name="currentImage" value={product?.image ?? ""} />
+      <input type="hidden" name="currentGalleryImage1" value={product?.images?.[0] ?? ""} />
+      <input type="hidden" name="currentGalleryImage2" value={product?.images?.[1] ?? ""} />
 
       <Field label="Nome do produto">
         <input
@@ -36,6 +38,35 @@ export function ProductForm({ product }: { product?: AdminProduct }) {
           placeholder="Ex.: Scarpin Vermelho Verniz Salto Alto"
           className={inputCls}
         />
+      </Field>
+
+      <Field label="Galeria — perfil e outro ângulo (opcional)">
+        <div className="grid gap-5 sm:grid-cols-2">
+          {[0, 1].map((index) => (
+            <div key={index} className="rounded-[2px] border border-border p-4">
+              {product?.images?.[index] ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={product.images[index]}
+                  alt=""
+                  className="mb-3 aspect-[4/5] h-32 rounded-[2px] bg-white object-contain"
+                />
+              ) : null}
+              <p className="mb-2 text-xs uppercase tracking-wide text-text-2">
+                Foto {index + 2} — {index === 0 ? "perfil" : "traseira ou detalhe"}
+              </p>
+              <input
+                type="file"
+                name={`galleryImage${index + 1}`}
+                accept="image/*"
+                className="block w-full text-sm text-text-2 file:mr-3 file:rounded-[2px] file:border-0 file:bg-wine file:px-4 file:py-2 file:text-on-wine"
+              />
+            </div>
+          ))}
+        </div>
+        <p className="mt-2 text-xs text-text-2">
+          Deixe vazio para manter as fotos atuais. Use imagens verticais 4:5 sem cortar o produto.
+        </p>
       </Field>
 
       <Field label="Categoria">

@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { Product } from "@/lib/products";
+import { type Product, TAMANHO_UNICO } from "@/lib/products";
 import { useCart } from "./CartProvider";
 import { formatPrice } from "@/lib/format";
 import { SITE } from "@/lib/site";
+import { adicionarAoCarrinho } from "@/lib/eventos";
 
 export function AddToCart({ product }: { product: Product }) {
   const { add } = useCart();
@@ -52,27 +53,70 @@ export function AddToCart({ product }: { product: Product }) {
       size: n,
       price: product.price,
     });
+    adicionarAoCarrinho(product);
     setError(false);
     setAdded(true);
     window.setTimeout(() => setAdded(false), 2500);
   }
 
-  if (product.sizes.length === 0) {
+  const esgotado = (
+    <div className="rounded-[2px] border border-border bg-surface p-4 text-sm text-text-2">
+      Esgotado no momento —{" "}
+      <a
+        href={`https://wa.me/${SITE.whatsapp}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-wine hover:underline"
+      >
+        consulte pelo WhatsApp
+      </a>
+      .
+    </div>
+  );
+
+  // Semijoias e acessorios nao tem numeracao: vao direto para a sacola.
+  // Precisa vir ANTES do bloco de esgotado, que olha so para sizes.length.
+  if (product.tamanhoUnico) {
+    const unidades = product.estoque
+      ? Object.values(product.estoque).reduce((s, n) => s + n, 0)
+      : null;
+    if (unidades === 0) return esgotado;
     return (
-      <div className="rounded-[2px] border border-border bg-surface p-4 text-sm text-text-2">
-        Esgotado no momento —{" "}
-        <a
-          href={`https://wa.me/${SITE.whatsapp}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-wine hover:underline"
+      <div>
+        <p className="mb-4 text-sm text-text-2">Tamanho único</p>
+        <button
+          ref={botaoRef}
+          type="button"
+          onClick={() => adicionar(TAMANHO_UNICO)}
+          className="w-full rounded-[2px] bg-wine px-6 py-3.5 text-sm font-medium uppercase tracking-wide text-on-wine transition-colors hover:bg-wine-2 sm:w-auto"
         >
-          consulte pelo WhatsApp
-        </a>
-        .
+          {added ? "Adicionado à sacola ✓" : "Adicionar à sacola"}
+        </button>
+        {!botaoVisivel && (
+          <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-surface/95 px-4 py-3 backdrop-blur md:hidden">
+            <div className="flex items-center gap-3">
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-xs text-text-2">{product.name}</p>
+                <p className="text-lg leading-tight text-wine">
+                  {formatPrice(product.price)}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => adicionar(TAMANHO_UNICO)}
+                className="shrink-0 rounded-[2px] bg-wine px-5 py-3 text-sm font-medium uppercase tracking-wide text-on-wine"
+              >
+                {added ? "Na sacola ✓" : "Adicionar"}
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
+
+  if (product.sizes.length === 0 && !product.tamanhoUnico) return esgotado;
+
 
   /** Alvo de toque de 48px: abaixo de 44px a cliente erra a numeração e vira troca. */
   const botaoNumeracao = (s: number, selecionada: boolean) =>
