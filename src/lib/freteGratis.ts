@@ -8,16 +8,17 @@
  *    RJ R$ 15,82 · PR R$ 14,62 · SC R$ 16,22 · RS R$ 16,52 · GO R$ 17,37 ·
  *    BA R$ 17,17 · PE R$ 19,50 · CE R$ 19,71 · MT R$ 23,50 · PA R$ 24,41 ·
  *    AM R$ 34,14.
- * 2. TICKET MÉDIO real dos pedidos: R$ 297 (mediana R$ 299,80), 2 itens por
- *    pedido.
+ * 2. TICKET MÉDIO e número de itens por pedido, apurados sobre os pedidos
+ *    reais no Supabase (rode a apuração de novo antes de mexer nos limiares —
+ *    o ticket muda conforme o mix de produto).
  *
  * O limiar fica ACIMA do ticket atual de propósito: frete grátis abaixo dele
  * só daria de presente o que a cliente já ia gastar. Acima, ela precisa somar
  * um item — e é aí que as semijoias de R$ 15 a R$ 40 entram.
  *
- * Com custo de R$ 60 por par, um pedido de R$ 349 tem margem perto de R$ 200;
- * absorver R$ 15 de frete é ~7% dela. O Norte fica de fora porque lá o envio
- * custa R$ 24 a R$ 34 e o volume não justifica.
+ * A regra de bolso: o frete absorvido tem de ficar bem abaixo de 10% da margem
+ * do pedido no limiar. O Norte fica de fora porque lá o envio custa o dobro do
+ * Sudeste e o volume não justifica.
  */
 export const LIMIARES: { ufs: string[]; limiar: number; rotulo: string }[] = [
   { ufs: ["SP", "MG", "RJ", "ES", "PR"], limiar: 349, rotulo: "Sudeste e Paraná" },
