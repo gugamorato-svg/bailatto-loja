@@ -11,18 +11,29 @@ const IG = "https://instagram.com/bailatto.calcados.saocarlos";
 
 export const dynamic = "force-dynamic";
 
-const depoimentos = [
+/**
+ * Aqui havia três depoimentos inventados. Saíram: declarar como cliente quem
+ * não é engana a consumidora, e não se conserta com nome fictício.
+ *
+ * O espaço agora traz o que é verdade e dá para conferir — endereço real,
+ * direito de troca garantido por lei, horário de atendimento. Quando houver
+ * avaliação real de cliente, ela entra aqui, com o nome de quem escreveu.
+ */
+const motivos = [
   {
-    name: "Ana P.",
-    text: "Fui super bem atendida e amei o sapato! Confortável de verdade e ainda por cima chique. Já virei cliente.",
+    titulo: "Experimente antes de levar",
+    texto:
+      "A loja é física, no Centro de São Carlos. Você prova, anda pela loja e só leva o par que serviu de verdade.",
   },
   {
-    name: "Marina S.",
-    text: "A loja é um charme e as meninas ajudam a escolher com toda a paciência. Saí de lá apaixonada pela minha sandália.",
+    titulo: "7 dias para trocar",
+    texto:
+      "Comprou pela internet e não serviu? O direito de arrependimento é garantido por lei, e a troca é simples: fale com a gente e resolvemos.",
   },
   {
-    name: "Juliana R.",
-    text: "Qualidade ótima e preço justo. Comprei pra um casamento e recebi um monte de elogios!",
+    titulo: "Dúvida de numeração? Pergunte",
+    texto:
+      "Quem responde no WhatsApp conhece cada modelo e sabe quais calçam menor. De segunda a sexta, 9h às 18h, e sábado até 13h.",
   },
 ];
 
@@ -247,30 +258,25 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* DEPOIMENTOS */}
+      {/* POR QUE COMPRAR AQUI */}
       <section className="mx-auto max-w-[1180px] px-4 py-16">
         <div className="mb-10 text-center">
           <h2 className="font-serif text-3xl text-text">
-            Quem usa, <span className="italic text-wine">recomenda</span>
+            Comprar de quem <span className="italic text-wine">atende</span>
           </h2>
-          <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
-            <span className="text-2xl leading-none text-wine">★★★★★</span>
-            <span className="font-serif text-2xl text-text">5,0</span>
-            <span className="text-text-2">no Google · 3 avaliações</span>
-          </div>
+          <p className="mx-auto mt-3 max-w-xl text-text-2">
+            Uma loja de rua, com gente que conhece cada modelo do estoque.
+          </p>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
-          {depoimentos.map((t) => (
-            <figure
-              key={t.name}
+          {motivos.map((m) => (
+            <div
+              key={m.titulo}
               className="rounded-[2px] border border-border bg-surface p-6"
             >
-              <div className="leading-none text-wine">★★★★★</div>
-              <blockquote className="mt-3 text-text-2">{t.text}</blockquote>
-              <figcaption className="mt-4 text-sm font-medium text-text">
-                — {t.name}
-              </figcaption>
-            </figure>
+              <h3 className="font-serif text-lg text-text">{m.titulo}</h3>
+              <p className="mt-3 leading-relaxed text-text-2">{m.texto}</p>
+            </div>
           ))}
         </div>
       </section>
