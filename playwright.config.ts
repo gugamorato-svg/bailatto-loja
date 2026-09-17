@@ -17,8 +17,18 @@ export default defineConfig({
     trace: "retain-on-failure",
   },
   projects: [
-    { name: "desktop", use: { ...devices["Desktop Chrome"] } },
+    // Contas puras (estoque, status do pedido): sem navegador, rodam uma vez.
+    { name: "unidade", testMatch: /\.unit\.spec\.ts$/ },
+    {
+      name: "desktop",
+      testIgnore: /\.unit\.spec\.ts$/,
+      use: { ...devices["Desktop Chrome"] },
+    },
     // A maior parte do tráfego vem do navegador do Instagram, no celular.
-    { name: "mobile", use: { ...devices["Pixel 7"] } },
+    {
+      name: "mobile",
+      testIgnore: /\.unit\.spec\.ts$/,
+      use: { ...devices["Pixel 7"] },
+    },
   ],
 });

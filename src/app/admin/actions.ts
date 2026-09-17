@@ -11,7 +11,12 @@ import {
   type ProductInput,
 } from "@/lib/db";
 import { slugify } from "@/lib/slug";
-import { updateOrder, type OrderStatus } from "@/lib/orders";
+import {
+  updateOrder,
+  normalizarChaveNfe,
+  TODOS_STATUS,
+  type OrderStatus,
+} from "@/lib/orders";
 
 export async function loginAction(formData: FormData) {
   const password = String(formData.get("password") || "");
@@ -117,9 +122,28 @@ export async function deleteProductAction(formData: FormData) {
 export async function updateOrderAction(formData: FormData) {
   if (!(await isAdmin())) redirect("/admin/login");
   const id = String(formData.get("id") || "");
-  const status = String(formData.get("status") || "") as OrderStatus;
-  const tracking = String(formData.get("tracking") || "").trim();
   if (!id) redirect("/admin/pedidos");
-  await updateOrder(id, { status, tracking: tracking || undefined });
-  redirect(`/admin/pedidos/${id}?ok=1`);
+  const volta = (q: string) => redirect(`/admin/pedidos/${id}?${q}`);
+
+  // O status vem de um <select>, mas o formulário pode ser forjado: um valor
+  // fora da lista gravaria um pedido que nenhuma tela sabe mostrar.
+  const bruto = String(formData.get("status") || "");
+  if (!TODOS_STATUS.includes(bruto as OrderStatus)) volta("erro=Status inválido.");
+  const status = bruto as OrderStatus;
+
+  const tracking = String(formData.get("tracking") || "").trim();
+  const nfNumero = String(formData.get("nfNumero") || "").trim();
+  const nfChaveBruta = String(formData.get("nfChave") || "").trim();
+  const nfChave = nfChaveBruta ? normalizarChaveNfe(nfChaveBruta) : "";
+  if (nfChave === null) {
+    volta("erro=" + encodeURIComponent("A chave da NF-e tem 44 dígitos. Confira e cole de novo."));
+  }
+
+  const aviso = await updateOrder(id, {
+    status,
+    tracking: tracking || undefined,
+    notaFiscal:
+      nfNumero || nfChave ? { numero: nfNumero || undefined, chave: nfChave || undefined } : undefined,
+  });
+  volta(aviso ? `erro=${encodeURIComponent(aviso)}` : "ok=1");
 }

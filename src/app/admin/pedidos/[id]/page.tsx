@@ -4,22 +4,31 @@ import { notFound } from "next/navigation";
 import { requireAdmin } from "@/lib/auth";
 import {
   getOrder,
+  prazoArrependimento,
   STATUS_LABEL,
   DELIVERY_LABEL,
-  type OrderStatus,
+  TODOS_STATUS,
 } from "@/lib/orders";
+import { rotuloTamanho } from "@/lib/products";
 import { formatPrice } from "@/lib/format";
 import { updateOrderAction } from "../../actions";
 
 export const dynamic = "force-dynamic";
 
-const STATUSES: OrderStatus[] = [
-  "aguardando",
-  "pago",
-  "enviado",
-  "entregue",
-  "cancelado",
-];
+const dataHora = (iso: string) =>
+  new Date(iso).toLocaleString("pt-BR", {
+    timeZone: "America/Sao_Paulo",
+    day: "2-digit",
+    month: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+const data = (d: Date) =>
+  d.toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" });
+
+const campo =
+  "w-full rounded-[2px] border border-border bg-bg px-4 py-2.5 text-text outline-none focus:border-wine";
 
 export default async function AdminPedido({
   params,
@@ -33,6 +42,7 @@ export default async function AdminPedido({
 
   const end = order.delivery;
   const waLink = `https://wa.me/55${order.customer.phone.replace(/\D/g, "")}`;
+  const prazo = prazoArrependimento(order);
 
   return (
     <section className="mx-auto max-w-3xl px-4 py-10">
@@ -50,6 +60,31 @@ export default async function AdminPedido({
       {sp?.ok && (
         <p className="mt-4 rounded-[2px] border border-wine/40 bg-surface p-3 text-sm text-wine">
           Pedido atualizado ✓
+        </p>
+      )}
+      {typeof sp?.erro === "string" && (
+        <p className="mt-4 rounded-[2px] border border-wine bg-surface p-3 text-sm text-wine">
+          {sp.erro}
+        </p>
+      )}
+
+      {/* Prazo de arrependimento: é a pergunta que chega quando a cliente quer
+          devolver. Com a data na tela, não precisa fazer conta. */}
+      {prazo && (
+        <p className="mt-4 rounded-[2px] border border-border bg-surface p-3 text-sm text-text-2">
+          {prazo.aberto ? (
+            <>
+              Dentro do prazo de arrependimento — a cliente pode desistir até{" "}
+              <strong className="text-text">{data(prazo.limite)}</strong>, sem precisar
+              justificar. O frete de volta é da loja.
+            </>
+          ) : (
+            <>
+              Prazo de arrependimento encerrado em{" "}
+              <strong className="text-text">{data(prazo.limite)}</strong>. Devolução
+              agora só por defeito.
+            </>
+          )}
         </p>
       )}
 
@@ -102,7 +137,7 @@ export default async function AdminPedido({
               <div className="flex-1 text-sm">
                 <p className="text-text">{i.name}</p>
                 <p className="text-text-2">
-                  Nº {i.size} · {i.qty}x
+                  {rotuloTamanho(i.size)} · {i.qty}x
                 </p>
               </div>
               <p className="text-sm text-wine">{formatPrice(i.price)}</p>
@@ -125,6 +160,20 @@ export default async function AdminPedido({
         </div>
       </div>
 
+      {order.historico && order.historico.length > 0 && (
+        <div className="mt-6 rounded-[2px] border border-border bg-surface p-5 text-sm">
+          <h2 className="mb-3 font-serif text-lg text-text">Histórico</h2>
+          <ol className="space-y-1.5">
+            {order.historico.map((h, n) => (
+              <li key={n} className="flex justify-between gap-4 text-text-2">
+                <span className="text-text">{STATUS_LABEL[h.status]}</span>
+                <span>{dataHora(h.em)}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
+
       <form
         action={updateOrderAction}
         className="mt-6 rounded-[2px] border border-border bg-surface p-5"
@@ -134,12 +183,8 @@ export default async function AdminPedido({
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="block">
             <span className="mb-1.5 block text-sm font-medium text-text">Status</span>
-            <select
-              name="status"
-              defaultValue={order.status}
-              className="w-full rounded-[2px] border border-border bg-bg px-4 py-2.5 text-text outline-none focus:border-wine"
-            >
-              {STATUSES.map((s) => (
+            <select name="status" defaultValue={order.status} className={campo}>
+              {TODOS_STATUS.map((s) => (
                 <option key={s} value={s}>
                   {STATUS_LABEL[s]}
                 </option>
@@ -150,13 +195,39 @@ export default async function AdminPedido({
             <span className="mb-1.5 block text-sm font-medium text-text">
               Código de rastreio (opcional)
             </span>
+            <input name="tracking" defaultValue={order.tracking ?? ""} className={campo} />
+          </label>
+          <label className="block">
+            <span className="mb-1.5 block text-sm font-medium text-text">
+              Número da NF-e (opcional)
+            </span>
             <input
-              name="tracking"
-              defaultValue={order.tracking ?? ""}
-              className="w-full rounded-[2px] border border-border bg-bg px-4 py-2.5 text-text outline-none focus:border-wine"
+              name="nfNumero"
+              inputMode="numeric"
+              defaultValue={order.notaFiscal?.numero ?? ""}
+              className={campo}
+            />
+          </label>
+          <label className="block">
+            <span className="mb-1.5 block text-sm font-medium text-text">
+              Chave de acesso da NF-e (44 dígitos)
+            </span>
+            <input
+              name="nfChave"
+              inputMode="numeric"
+              defaultValue={order.notaFiscal?.chave ?? ""}
+              className={campo}
             />
           </label>
         </div>
+
+        <p className="mt-4 text-xs leading-relaxed text-text-2">
+          Ao marcar como <strong>Pago</strong> o estoque do site é baixado. Ao marcar
+          um pedido pago como <strong>Devolvido</strong> ou <strong>Cancelado</strong>,
+          ele volta. Lance a venda e a devolução no Phibo também — a próxima
+          importação da planilha substitui o estoque do site pelo do Phibo.
+        </p>
+
         <button
           type="submit"
           className="mt-5 rounded-[2px] bg-wine px-8 py-3 text-sm font-medium uppercase tracking-wide text-on-wine hover:bg-wine-2"

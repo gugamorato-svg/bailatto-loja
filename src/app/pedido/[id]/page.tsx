@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { getOrder, DELIVERY_LABEL, STATUS_LABEL } from "@/lib/orders";
+import {
+  getOrder,
+  prazoArrependimento,
+  DELIVERY_LABEL,
+  STATUS_LABEL,
+} from "@/lib/orders";
 import { rotuloTamanho } from "@/lib/products";
 import { formatPrice } from "@/lib/format";
 import { ClearCartOnMount } from "@/components/ClearCartOnMount";
@@ -22,18 +27,25 @@ export default async function PedidoPage({
   const order = await getOrder(id);
   if (!order) notFound();
 
+  const end = order.delivery;
+  const aguardando = order.status === "aguardando";
+  const pago = ["pago", "enviado", "entregue"].includes(order.status);
+  const prazo = prazoArrependimento(order);
+
+  // A mesma página é revisitada depois (o link fica no WhatsApp da cliente):
+  // passado o pagamento, "combinar o pagamento" deixa de ser verdade.
   const linhas = order.items
     .map((i) => `• ${i.name} — ${rotuloTamanho(i.size)} — ${i.qty}x`)
     .join("\n");
   const msg = encodeURIComponent(
-    `Olá! Acabei de fazer o pedido #${order.number} no site da BAILATTO.\n\n` +
+    (aguardando
+      ? `Olá! Acabei de fazer o pedido #${order.number} no site da BAILATTO.\n\n`
+      : `Olá! Queria falar sobre o meu pedido #${order.number} da BAILATTO.\n\n`) +
       `${linhas}\n\n` +
       `${DELIVERY_LABEL[order.delivery.method]}\n` +
       (order.total != null ? `Total: ${formatPrice(order.total)}\n` : "") +
-      `\nGostaria de combinar o pagamento.`,
+      (aguardando ? `\nGostaria de combinar o pagamento.` : ""),
   );
-
-  const end = order.delivery;
 
   // Pix só faz sentido quando o total está fechado (frete definido e itens com preço).
   let pix: { codigo: string; qr: string } | null = null;
@@ -56,7 +68,8 @@ export default async function PedidoPage({
         </h1>
         <p className="mt-2 text-text-2">
           Seu pedido <strong className="text-text">#{order.number}</strong> foi
-          registrado. Agora é só combinar o pagamento com a gente.
+          registrado.
+          {aguardando && " Agora é só fazer o pagamento."}
         </p>
       </div>
 
@@ -74,8 +87,59 @@ export default async function PedidoPage({
             : "mt-8 block rounded-[2px] bg-wine px-6 py-4 text-center text-sm font-medium uppercase tracking-wide text-on-wine hover:bg-wine-2"
         }
       >
-        {pix ? "Enviar comprovante no WhatsApp" : "Combinar pagamento no WhatsApp"}
+        {pix
+          ? "Enviar comprovante no WhatsApp"
+          : aguardando
+            ? "Combinar pagamento no WhatsApp"
+            : "Falar sobre o pedido no WhatsApp"}
       </a>
+
+      {/* A dúvida sobre devolução chega sempre como "ainda dá tempo?". Com a
+          data na tela, a cliente não precisa perguntar nem fazer conta. */}
+      {(pago || order.notaFiscal?.numero) && (
+        <div className="mt-8 rounded-[2px] border border-border bg-surface p-5 text-sm text-text-2">
+          {pago && (
+            <>
+              <p className="font-medium text-text">Troca e devolução</p>
+              <p className="mt-1.5 leading-relaxed">
+                {prazo ? (
+                  prazo.aberto ? (
+                    <>
+                      Não serviu ou não gostou? Você pode desistir da compra até{" "}
+                      <strong className="text-text">
+                        {prazo.limite.toLocaleDateString("pt-BR", {
+                          timeZone: "America/Sao_Paulo",
+                        })}
+                      </strong>
+                      , sem precisar explicar o motivo — e o frete de volta é por nossa
+                      conta.
+                    </>
+                  ) : (
+                    <>
+                      O prazo de 7 dias para desistir da compra terminou. Se o calçado
+                      apresentar defeito, fale com a gente que resolvemos.
+                    </>
+                  )
+                ) : (
+                  <>
+                    Depois de receber, você tem 7 dias para desistir da compra, sem
+                    precisar explicar o motivo — e o frete de volta é por nossa conta.
+                  </>
+                )}{" "}
+                <Link href="/trocas" className="text-wine hover:underline">
+                  Como funciona
+                </Link>
+              </p>
+            </>
+          )}
+          {order.notaFiscal?.numero && (
+            <p className={pago ? "mt-3 border-t border-border pt-3" : ""}>
+              Nota fiscal nº{" "}
+              <strong className="text-text">{order.notaFiscal.numero}</strong>
+            </p>
+          )}
+        </div>
+      )}
 
       <div className="mt-10 rounded-[2px] border border-border bg-surface p-6">
         <div className="flex items-center justify-between">

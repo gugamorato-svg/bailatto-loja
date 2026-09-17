@@ -2,6 +2,7 @@ import crypto from "node:crypto";
 import { getSupabaseAdmin, BUCKET, DATA_PATH } from "./supabaseAdmin";
 import {
   products as seedProducts,
+  TAMANHO_UNICO,
   type Product,
   type CategorySlug,
 } from "./products";
@@ -184,6 +185,60 @@ export async function limparImportTemp(): Promise<void> {
   } catch {
     // se falhar, o próximo upload sobrescreve de qualquer forma
   }
+}
+
+// ---------- Movimentação de estoque pelas vendas do site ----------
+
+export type MovimentoEstoque = { slug: string; size: number; qty: number };
+
+/**
+ * Baixa (sinal -1) ou devolve (sinal +1) estoque por item de pedido.
+ *
+ * Antes o site nunca descontava o que vendia: o estoque só mudava na
+ * importação do Phibo. Entre uma importação e outra, o último par de uma
+ * numeração — ou uma semijoia, que é peça única — continuava à venda e podia
+ * ser vendido duas vezes.
+ *
+ * A importação do Phibo continua sendo a verdade: ela grava valores
+ * absolutos e reconcilia tudo. Por isso a venda do site precisa ser lançada
+ * no Phibo também, senão a próxima importação "devolve" o que já saiu.
+ *
+ * Só mexe na numeração tocada: `sizes` pode ter sido editado à mão no painel,
+ * e recalcular a lista inteira apagaria essa edição.
+ */
+export async function movimentarEstoque(
+  movimentos: MovimentoEstoque[],
+  sinal: 1 | -1,
+): Promise<string | null> {
+  if (!configured || movimentos.length === 0) return null;
+  const list = await loadAll();
+  if (!list) return "catálogo indisponível";
+  return saveAll(aplicarMovimentos(list, movimentos, sinal));
+}
+
+/** A conta em si, sem ler nem gravar nada — é o que os testes exercitam. */
+export function aplicarMovimentos<T extends Product>(
+  list: T[],
+  movimentos: MovimentoEstoque[],
+  sinal: 1 | -1,
+): T[] {
+  const saida = list.map((p) => ({ ...p }));
+  for (const m of movimentos) {
+    const p = saida.find((x) => x.slug === m.slug);
+    // Produto sem controle de estoque (nunca importado do Phibo): nada a fazer.
+    if (!p || !p.estoque) continue;
+
+    const chave = m.size === TAMANHO_UNICO ? "U" : String(m.size);
+    const novo = Math.max(0, (p.estoque[chave] ?? 0) + sinal * m.qty);
+    p.estoque = { ...p.estoque, [chave]: novo };
+
+    if (!p.tamanhoUnico) {
+      const tem = p.sizes.includes(m.size);
+      if (novo === 0 && tem) p.sizes = p.sizes.filter((n) => n !== m.size);
+      if (novo > 0 && !tem) p.sizes = [...p.sizes, m.size].sort((a, b) => a - b);
+    }
+  }
+  return saida;
 }
 
 export type ImportUpdate = {

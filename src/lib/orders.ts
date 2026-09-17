@@ -1,25 +1,23 @@
 import crypto from "node:crypto";
 import { registrarCompra } from "./rastreamentoServidor";
+import { movimentarEstoque } from "./db";
 import { getSupabaseAdmin, BUCKET_PRIVADO } from "./supabaseAdmin";
+import { efeitosDaTransicao, type OrderStatus } from "./statusPedido";
+
+export {
+  STATUS_LABEL,
+  TODOS_STATUS,
+  PAGOS,
+  efeitosDaTransicao,
+  type OrderStatus,
+} from "./statusPedido";
 
 // Pedidos ficam no bucket PRIVADO — contêm nome, telefone, e-mail e CPF.
 // Já eram lidos/gravados com a service key, que acessa bucket privado igual.
 const ORDERS_PATH = "data/orders.json";
 
-export type OrderStatus =
-  | "aguardando"
-  | "pago"
-  | "enviado"
-  | "entregue"
-  | "cancelado";
-
-export const STATUS_LABEL: Record<OrderStatus, string> = {
-  aguardando: "Aguardando pagamento",
-  pago: "Pago",
-  enviado: "Enviado",
-  entregue: "Entregue",
-  cancelado: "Cancelado",
-};
+/** Direito de arrependimento (CDC art. 49): 7 dias contados do recebimento. */
+export const PRAZO_ARREPENDIMENTO_DIAS = 7;
 
 export type DeliveryMethod = "retirada" | "entrega_local" | "correios";
 
@@ -72,14 +70,47 @@ export type Order = {
   subtotal: number;
   shipping: number | null;
   total: number | null;
-  /** Preenchido quando integrarmos o Pix (BB). */
   payment?: {
     provider?: string;
     txid?: string;
     paidAt?: string;
   };
   tracking?: string;
+  /**
+   * Cada mudança de status com a data. É daqui que sai o prazo de
+   * arrependimento — ele corre do recebimento, não da compra.
+   */
+  historico?: { status: OrderStatus; em: string }[];
+  /** Preenchido à mão por enquanto; vira automático com o emissor de NF-e. */
+  notaFiscal?: { numero?: string; chave?: string };
 };
+
+/** Quando o pedido foi marcado como entregue (ou retirado), se foi. */
+export function dataRecebimento(order: Order): Date | null {
+  const h = order.historico ?? [];
+  for (let i = h.length - 1; i >= 0; i--) {
+    if (h[i].status === "entregue") return new Date(h[i].em);
+  }
+  return null;
+}
+
+/**
+ * Prazo de arrependimento do pedido. `limite` é null enquanto a mercadoria
+ * não foi recebida — o prazo ainda nem começou a correr.
+ */
+export function prazoArrependimento(order: Order): { limite: Date; aberto: boolean } | null {
+  const recebido = dataRecebimento(order);
+  if (!recebido) return null;
+  const limite = new Date(recebido);
+  limite.setDate(limite.getDate() + PRAZO_ARREPENDIMENTO_DIAS);
+  return { limite, aberto: limite.getTime() >= Date.now() };
+}
+
+/** Chave de acesso da NF-e: 44 dígitos. Aceita com espaço ou ponto. */
+export function normalizarChaveNfe(v: string): string | null {
+  const so = v.replace(/\D/g, "");
+  return so.length === 44 ? so : null;
+}
 
 async function loadOrders(): Promise<Order[]> {
   try {
@@ -118,12 +149,14 @@ export async function createOrder(
   input: Omit<Order, "id" | "number" | "createdAt" | "status">,
 ): Promise<{ id?: string; error?: string }> {
   const list = await loadOrders();
+  const agora = new Date().toISOString();
   const order: Order = {
     ...input,
     id: crypto.randomUUID(),
     number: 1000 + list.length + 1,
-    createdAt: new Date().toISOString(),
+    createdAt: agora,
     status: "aguardando",
+    historico: [{ status: "aguardando", em: agora }],
   };
   list.push(order);
   const err = await saveOrders(list);
@@ -131,30 +164,60 @@ export async function createOrder(
   return { id: order.id };
 }
 
+/**
+ * Atualiza o pedido e aplica o que cada mudança de status implica.
+ *
+ * Todos os efeitos saem da TRANSIÇÃO, não do status final — assim salvar o
+ * mesmo pedido duas vezes (ou só corrigir o rastreio) não baixa estoque nem
+ * conta venda de novo. Quem chama é o painel hoje e o webhook do pagamento
+ * depois: os dois passam por aqui e ganham o mesmo comportamento.
+ */
 export async function updateOrder(
   id: string,
-  patch: Partial<Pick<Order, "status" | "tracking" | "payment">>,
+  patch: Partial<Pick<Order, "status" | "tracking" | "payment" | "notaFiscal">>,
 ): Promise<string | null> {
   const list = await loadOrders();
   const i = list.findIndex((o) => o.id === id);
   if (i < 0) return "Pedido não encontrado.";
+
   const antes = list[i].status;
-  list[i] = { ...list[i], ...patch };
+  const depois = patch.status ?? antes;
+  const mudou = depois !== antes;
+
+  list[i] = {
+    ...list[i],
+    ...patch,
+    historico: mudou
+      ? [...(list[i].historico ?? []), { status: depois, em: new Date().toISOString() }]
+      : list[i].historico,
+  };
   const erro = await saveOrders(list);
   if (erro) return erro;
+  if (!mudou) return null;
 
-  // A conversão vale quando o dinheiro entra, não quando o pedido é feito:
-  // com Pix manual os dois momentos são diferentes. Só na transição para
-  // "pago", para não contar de novo em edições posteriores.
-  if (antes !== "pago" && list[i].status === "pago") {
-    const p = list[i];
+  const p = list[i];
+  const movimentos = p.items.map((it) => ({ slug: it.slug, size: it.size, qty: it.qty }));
+  const efeito = efeitosDaTransicao(antes, depois);
+
+  if (efeito.contarVenda) {
+    // Com Pix manual, pedido feito e pedido pago são momentos diferentes; a
+    // conversão só conta no segundo.
     await registrarCompra({
       id: p.id,
       total: p.total ?? 0,
       email: p.customer?.email,
       telefone: p.customer?.phone,
-      itens: (p.items ?? []).map((it) => ({ slug: it.slug, qty: it.qty })),
+      itens: movimentos,
     });
   }
+  if (efeito.baixarEstoque) {
+    const e = await movimentarEstoque(movimentos, -1);
+    if (e) return `Pedido salvo, mas o estoque não foi baixado (${e}). Ajuste no painel.`;
+  }
+  if (efeito.devolverEstoque) {
+    const e = await movimentarEstoque(movimentos, 1);
+    if (e) return `Pedido salvo, mas o estoque não foi devolvido (${e}). Ajuste no painel.`;
+  }
+
   return null;
 }
