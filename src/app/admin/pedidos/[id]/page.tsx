@@ -27,6 +27,28 @@ const dataHora = (iso: string) =>
 const data = (d: Date) =>
   d.toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" });
 
+// Status e formas de pagamento do Mercado Pago, em português.
+const ROTULO_PAGAMENTO: Record<string, string> = {
+  approved: "Aprovado",
+  pending: "Pendente",
+  in_process: "Em análise",
+  authorized: "Autorizado",
+  rejected: "Recusado",
+  cancelled: "Cancelado",
+  refunded: "Estornado",
+  charged_back: "Contestado (chargeback)",
+  in_mediation: "Em disputa",
+};
+
+const ROTULO_METODO: Record<string, string> = {
+  pix: "Pix",
+  bank_transfer: "Pix",
+  credit_card: "Cartão de crédito",
+  debit_card: "Cartão de débito",
+  ticket: "Boleto",
+  account_money: "Saldo Mercado Pago",
+};
+
 const campo =
   "w-full rounded-[2px] border border-border bg-bg px-4 py-2.5 text-text outline-none focus:border-wine";
 
@@ -159,6 +181,62 @@ export default async function AdminPedido({
           </div>
         </div>
       </div>
+
+      {order.payment?.provider && (
+        <div className="mt-6 rounded-[2px] border border-border bg-surface p-5 text-sm">
+          <h2 className="mb-3 font-serif text-lg text-text">Pagamento</h2>
+          <dl className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-1.5 text-text-2">
+            <dt>Provedor</dt>
+            <dd className="text-text">
+              {order.payment.provider === "mercadopago" ? "Mercado Pago" : order.payment.provider}
+            </dd>
+            {order.payment.status && (
+              <>
+                <dt>Situação</dt>
+                <dd className="text-text">
+                  {ROTULO_PAGAMENTO[order.payment.status] ?? order.payment.status}
+                </dd>
+              </>
+            )}
+            {order.payment.metodo && (
+              <>
+                <dt>Forma</dt>
+                <dd className="text-text">
+                  {ROTULO_METODO[order.payment.metodo] ?? order.payment.metodo}
+                </dd>
+              </>
+            )}
+            {order.payment.txid && (
+              <>
+                <dt>Nº no Mercado Pago</dt>
+                <dd className="font-mono text-text">{order.payment.txid}</dd>
+              </>
+            )}
+            {order.payment.paidAt && (
+              <>
+                <dt>Aprovado em</dt>
+                <dd className="text-text">{dataHora(order.payment.paidAt)}</dd>
+              </>
+            )}
+          </dl>
+          {/* Estorno, chargeback e valor divergente não mudam o pedido sozinhos:
+              a mercadoria pode já ter saído, então é decisão de quem atende. */}
+          {order.payment.status &&
+            (["refunded", "charged_back", "in_mediation"].includes(order.payment.status) ||
+              order.payment.status.startsWith("divergente")) && (
+              <p className="mt-3 rounded-[2px] border border-wine bg-bg p-3 text-wine">
+                Atenção: este pagamento precisa de conferência antes de enviar ou
+                trocar a mercadoria.
+              </p>
+            )}
+          {order.payment.status === "approved" && order.status === "cancelado" && (
+            <p className="mt-3 rounded-[2px] border border-wine bg-bg p-3 text-wine">
+              O pagamento foi aprovado, mas o pedido está cancelado. Estorne pelo
+              Mercado Pago ou reabra o pedido.
+            </p>
+          )}
+        </div>
+      )}
 
       {order.historico && order.historico.length > 0 && (
         <div className="mt-6 rounded-[2px] border border-border bg-surface p-5 text-sm">

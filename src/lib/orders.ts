@@ -72,8 +72,16 @@ export type Order = {
   total: number | null;
   payment?: {
     provider?: string;
+    /** id do pagamento no provedor (no Mercado Pago, o payment id). */
     txid?: string;
     paidAt?: string;
+    /** Último status informado pelo provedor: approved, pending, refunded... */
+    status?: string;
+    /** Forma usada: pix, credit_card, ticket (boleto)... */
+    metodo?: string;
+    /** Link do Checkout Pro, para a cliente tentar de novo se desistiu. */
+    checkoutUrl?: string;
+    preferenciaId?: string;
   };
   tracking?: string;
   /**
@@ -187,6 +195,9 @@ export async function updateOrder(
   list[i] = {
     ...list[i],
     ...patch,
+    // Mescla em vez de trocar: o webhook grava o status do pagamento e não
+    // pode apagar o link de checkout que foi salvo na criação do pedido.
+    payment: patch.payment ? { ...list[i].payment, ...patch.payment } : list[i].payment,
     historico: mudou
       ? [...(list[i].historico ?? []), { status: depois, em: new Date().toISOString() }]
       : list[i].historico,

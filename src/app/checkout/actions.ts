@@ -7,10 +7,13 @@ import { pesoMiudo, ehVolumoso } from "@/lib/products";
 import { limiarDaUf } from "@/lib/freteGratis";
 import {
   createOrder,
+  getOrder,
+  updateOrder,
   DELIVERY_PRICE,
   type DeliveryMethod,
   type OrderItem,
 } from "@/lib/orders";
+import { criarPreferencia, mercadoPagoAtivo } from "@/lib/mercadoPago";
 
 type CartLine = { slug: string; size: number; qty: number };
 
@@ -120,5 +123,20 @@ export async function submitOrder(formData: FormData) {
   });
 
   if (error || !id) fail(error || "Não foi possível criar o pedido.");
+
+  // Com o Mercado Pago ligado, a cliente vai direto pagar. O pedido já existe
+  // antes disso: se a criação do pagamento falhar, ela cai na página do pedido
+  // e não perde nada — lá tem o botão para tentar de novo e o WhatsApp.
+  if (mercadoPagoAtivo() && total != null && total > 0) {
+    const pedido = await getOrder(id!);
+    const pref = pedido ? await criarPreferencia(pedido) : null;
+    if (pref && "url" in pref) {
+      await updateOrder(id!, {
+        payment: { provider: "mercadopago", checkoutUrl: pref.url, preferenciaId: pref.id },
+      });
+      redirect(pref.url);
+    }
+  }
+
   redirect(`/pedido/${id}`);
 }

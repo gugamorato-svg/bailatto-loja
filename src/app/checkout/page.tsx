@@ -11,6 +11,13 @@ import { limiarDaUf } from "@/lib/freteGratis";
 import { rotuloTamanho } from "@/lib/products";
 import { submitOrder } from "./actions";
 
+/**
+ * O checkout roda no navegador e não enxerga variável de servidor. A chave
+ * pública do Mercado Pago é feita para ser exposta, e só existe quando a
+ * integração está configurada — serve de sinal para o texto da tela.
+ */
+const MP_ATIVO = !!process.env.NEXT_PUBLIC_MP_PUBLIC_KEY;
+
 const inputCls =
   "w-full rounded-[2px] border border-border bg-surface px-4 py-2.5 text-text outline-none focus:border-wine";
 
@@ -469,11 +476,12 @@ export default function CheckoutPage({
             type="submit"
             className="mt-6 w-full rounded-[2px] bg-wine px-6 py-3.5 text-sm font-medium uppercase tracking-wide text-on-wine hover:bg-wine-2"
           >
-            Confirmar pedido
+            {MP_ATIVO ? "Ir para o pagamento" : "Confirmar pedido"}
           </button>
           <p className="mt-3 text-center text-xs text-text-2">
-            Na próxima tela você recebe o QR Code do Pix com o valor já
-            calculado. Pagou, é só mandar o comprovante no WhatsApp.
+            {MP_ATIVO
+              ? "Você paga no ambiente seguro do Mercado Pago — Pix, cartão em parcelas ou boleto — e volta para cá com o pedido confirmado."
+              : "Na próxima tela você recebe o QR Code do Pix com o valor já calculado. Pagou, é só mandar o comprovante no WhatsApp."}
           </p>
         </aside>
       </form>

@@ -14,6 +14,7 @@ import { ClearCartOnMount } from "@/components/ClearCartOnMount";
 import { PixPagamento } from "@/components/PixPagamento";
 import { gerarPixCopiaECola } from "@/lib/pix";
 import QRCode from "qrcode";
+import { mercadoPagoAtivo } from "@/lib/mercadoPago";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: "Pedido confirmado — BAILATTO" };
@@ -22,10 +23,18 @@ const WA = "5516993392022";
 
 export default async function PedidoPage({
   params,
+  searchParams,
 }: PageProps<"/pedido/[id]">) {
   const { id } = await params;
   const order = await getOrder(id);
   if (!order) notFound();
+
+  // O Mercado Pago devolve a cliente com ?status=... Isso NÃO confirma nada —
+  // quem confirma é o webhook, que pode chegar alguns segundos depois. Serve
+  // só para não mostrar "aguardando pagamento" para quem acabou de pagar.
+  const { status: voltaMP } = await searchParams;
+  const mpAtivo = mercadoPagoAtivo();
+  const linkPagamento = order.payment?.checkoutUrl;
 
   const end = order.delivery;
   const aguardando = order.status === "aguardando";
@@ -44,12 +53,15 @@ export default async function PedidoPage({
       `${linhas}\n\n` +
       `${DELIVERY_LABEL[order.delivery.method]}\n` +
       (order.total != null ? `Total: ${formatPrice(order.total)}\n` : "") +
-      (aguardando ? `\nGostaria de combinar o pagamento.` : ""),
+      (aguardando && !mpAtivo ? `\nGostaria de combinar o pagamento.` : ""),
   );
+  const botaoPagar = aguardando && !!linkPagamento && voltaMP !== "approved";
 
-  // Pix só faz sentido quando o total está fechado (frete definido e itens com preço).
+  // Pix manual só quando o Mercado Pago está desligado: com ele ligado, a
+  // confirmação é automática e o copia e cola manual viraria um segundo
+  // caminho de pagamento que ninguém confere.
   let pix: { codigo: string; qr: string } | null = null;
-  if (order.total != null && order.total > 0 && order.status === "aguardando") {
+  if (!mpAtivo && order.total != null && order.total > 0 && aguardando) {
     const codigo = gerarPixCopiaECola(order.total, `BAILATTO${order.number}`);
     pix = {
       codigo,
@@ -73,6 +85,25 @@ export default async function PedidoPage({
         </p>
       </div>
 
+      {aguardando && (voltaMP === "approved" || voltaMP === "pending") && (
+        <p className="mt-8 rounded-[2px] border border-border bg-surface p-4 text-center text-sm text-text-2">
+          {voltaMP === "approved"
+            ? "Pagamento recebido pelo Mercado Pago. A confirmação aparece aqui em instantes — pode atualizar a página."
+            : "Seu pagamento está em processamento. Se escolheu Pix ou boleto, ele é confirmado assim que for pago."}
+        </p>
+      )}
+
+      {botaoPagar && (
+        <a
+          href={linkPagamento}
+          className="mt-8 block rounded-[2px] bg-wine px-6 py-4 text-center text-sm font-medium uppercase tracking-wide text-on-wine hover:bg-wine-2"
+        >
+          {voltaMP === "failure" || voltaMP === "rejected"
+            ? "Tentar pagar de novo"
+            : "Pagar com Mercado Pago"}
+        </a>
+      )}
+
       {pix ? (
         <PixPagamento codigo={pix.codigo} qrCode={pix.qr} valor={order.total!} />
       ) : null}
@@ -82,16 +113,18 @@ export default async function PedidoPage({
         target="_blank"
         rel="noopener noreferrer"
         className={
-          pix
+          pix || botaoPagar
             ? "mt-4 block rounded-[2px] border border-wine px-6 py-3 text-center text-sm uppercase tracking-wide text-wine hover:bg-wine hover:text-on-wine"
             : "mt-8 block rounded-[2px] bg-wine px-6 py-4 text-center text-sm font-medium uppercase tracking-wide text-on-wine hover:bg-wine-2"
         }
       >
         {pix
           ? "Enviar comprovante no WhatsApp"
-          : aguardando
-            ? "Combinar pagamento no WhatsApp"
-            : "Falar sobre o pedido no WhatsApp"}
+          : botaoPagar
+            ? "Dúvidas? Fale no WhatsApp"
+            : aguardando && !mpAtivo
+              ? "Combinar pagamento no WhatsApp"
+              : "Falar sobre o pedido no WhatsApp"}
       </a>
 
       {/* A dúvida sobre devolução chega sempre como "ainda dá tempo?". Com a
