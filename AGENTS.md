@@ -69,8 +69,14 @@ npm run dev            # desenvolvimento
 npm run build          # build (rode antes de publicar)
 npm test               # Playwright contra a produção
 npm run lint
-npx vercel deploy --prod --yes
+git push                # publica: a Vercel monta e põe no ar o que chega em master
 ```
+
+**Publicar = enviar para `master`.** O repositório está conectado à Vercel e
+todo push em `master` vira deploy de produção; outros ramos viram prévia. O que
+não está no Git não vai para o site — foto nova em `public/` precisa ser
+commitada. `npx vercel deploy --prod --yes` continua funcionando como reserva,
+mas depende do login da CLI (que já caiu uma vez numa atualização).
 
 `npm test` roda contra https://bailatto.com.br. Para apontar para local:
 `BASE_URL=http://localhost:3000 npx playwright test`.
