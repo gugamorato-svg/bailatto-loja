@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProductBySlug, getAllProducts } from "@/lib/db";
@@ -12,6 +11,7 @@ import { FichaTecnica } from "@/components/FichaTecnica";
 import { VoceTambemVaiGostar } from "@/components/VoceTambemVaiGostar";
 import { LeveJunto } from "@/components/LeveJunto";
 import { VerProduto } from "@/components/VerProduto";
+import { ProductGallery } from "@/components/ProductGallery";
 import { SITE, enderecoCompleto } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
@@ -84,7 +84,9 @@ export default async function ProdutoPage({
     : null;
   const imagemAbsoluta = (imagem: string) =>
     /^https?:\/\//i.test(imagem) ? imagem : `${SITE.url}${imagem}`;
-  const imagemPrincipal = imagemAbsoluta(product.image);
+  const fotosProduto = [...new Set([product.image, ...(product.images ?? [])])].map(
+    imagemAbsoluta,
+  );
 
   // Dados estruturados: é assim que o Google mostra preço e disponibilidade na busca.
   const jsonLd = {
@@ -92,7 +94,7 @@ export default async function ProdutoPage({
     "@type": "Product",
     name: product.name,
     description: product.description,
-    image: [imagemPrincipal],
+    image: fotosProduto,
     category: categoryLabel(product.category),
     brand: { "@type": "Brand", name: "BAILATTO" },
     ...(product.price != null && {
@@ -114,7 +116,9 @@ export default async function ProdutoPage({
     <section className="mx-auto max-w-[1180px] px-4 py-10">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
       />
 
       <VerProduto slug={product.slug} name={product.name} price={product.price} />
@@ -124,16 +128,11 @@ export default async function ProdutoPage({
       </Link>
 
       <div className="mt-6 grid gap-10 md:grid-cols-2">
-        <div className="relative aspect-[4/5] overflow-hidden rounded-[2px] bg-white">
-          <Image
-            src={product.image}
-            alt={product.name}
-            fill
-            sizes="(max-width: 768px) 100vw, 560px"
-            className="object-contain"
-            preload
-          />
-        </div>
+        <ProductGallery
+          name={product.name}
+          image={product.image}
+          images={product.images}
+        />
 
         <div>
           <p className="text-xs uppercase tracking-[0.2em] text-rose">

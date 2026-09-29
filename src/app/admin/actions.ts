@@ -66,10 +66,11 @@ export async function saveProduct(formData: FormData) {
   }
 
   // Galeria: cada campo mantém a foto atual se não houver um novo arquivo.
-  const images = [1, 2].map((slot) =>
+  const gallerySlots = [1, 2, 3, 4];
+  const images = gallerySlots.map((slot) =>
     String(formData.get(`currentGalleryImage${slot}`) || ""),
   );
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < gallerySlots.length; i++) {
     const galleryFile = formData.get(`galleryImage${i + 1}`);
     if (galleryFile instanceof File && galleryFile.size > 0) {
       const up = await adminUploadImage(galleryFile);

@@ -3,6 +3,7 @@ import type { AdminProduct } from "@/lib/db";
 import { saveProduct } from "@/app/admin/actions";
 
 const ALL_SIZES = [33, 34, 35, 36, 37, 38, 39, 40];
+const GALLERY_SLOTS = 4;
 const inputCls =
   "w-full rounded-[2px] border border-border bg-surface px-4 py-2.5 text-text outline-none focus:border-wine";
 
@@ -27,8 +28,14 @@ export function ProductForm({ product }: { product?: AdminProduct }) {
     <form action={saveProduct} className="space-y-6">
       {product && <input type="hidden" name="id" value={product.id} />}
       <input type="hidden" name="currentImage" value={product?.image ?? ""} />
-      <input type="hidden" name="currentGalleryImage1" value={product?.images?.[0] ?? ""} />
-      <input type="hidden" name="currentGalleryImage2" value={product?.images?.[1] ?? ""} />
+      {Array.from({ length: GALLERY_SLOTS }, (_, index) => (
+        <input
+          key={index}
+          type="hidden"
+          name={`currentGalleryImage${index + 1}`}
+          value={product?.images?.[index] ?? ""}
+        />
+      ))}
 
       <Field label="Nome do produto">
         <input
@@ -40,9 +47,9 @@ export function ProductForm({ product }: { product?: AdminProduct }) {
         />
       </Field>
 
-      <Field label="Galeria — perfil e outro ângulo (opcional)">
+      <Field label="Galeria — fotos adicionais (opcional)">
         <div className="grid gap-5 sm:grid-cols-2">
-          {[0, 1].map((index) => (
+          {Array.from({ length: GALLERY_SLOTS }, (_, index) => (
             <div key={index} className="rounded-[2px] border border-border p-4">
               {product?.images?.[index] ? (
                 // eslint-disable-next-line @next/next/no-img-element
@@ -53,7 +60,7 @@ export function ProductForm({ product }: { product?: AdminProduct }) {
                 />
               ) : null}
               <p className="mb-2 text-xs uppercase tracking-wide text-text-2">
-                Foto {index + 2} — {index === 0 ? "perfil" : "traseira ou detalhe"}
+                Foto {index + 2}
               </p>
               <input
                 type="file"

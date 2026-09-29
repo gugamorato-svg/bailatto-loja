@@ -9,10 +9,11 @@ type ProductGalleryProps = {
   images?: string[];
 };
 
-const ANGULOS = ["foto principal", "perfil", "outro ângulo"];
+const descricaoFoto = (index: number) =>
+  index === 0 ? "foto principal" : `foto ${index + 1}`;
 
 export function ProductGallery({ name, image, images = [] }: ProductGalleryProps) {
-  const gallery = [...new Set([image, ...images].filter(Boolean))].slice(0, 3);
+  const gallery = [...new Set([image, ...images].filter(Boolean))];
   const [selected, setSelected] = useState(0);
   const current = gallery[selected] ?? gallery[0];
 
@@ -22,7 +23,7 @@ export function ProductGallery({ name, image, images = [] }: ProductGalleryProps
         <Image
           key={current}
           src={current}
-          alt={`${name} — ${ANGULOS[selected] ?? `foto ${selected + 1}`}`}
+          alt={`${name} — ${descricaoFoto(selected)}`}
           fill
           sizes="(max-width: 768px) 100vw, 560px"
           className="object-contain"
@@ -45,13 +46,13 @@ export function ProductGallery({ name, image, images = [] }: ProductGalleryProps
       </div>
 
       {gallery.length > 1 && (
-        <div className="mt-3 grid grid-cols-3 gap-3" aria-label={`Fotos de ${name}`}>
+        <div className="mt-3 grid grid-cols-4 gap-3 sm:grid-cols-5" aria-label={`Fotos de ${name}`}>
           {gallery.map((src, index) => (
             <button
               key={src}
               type="button"
               onClick={() => setSelected(index)}
-              aria-label={`Ver ${ANGULOS[index] ?? `foto ${index + 1}`} de ${name}`}
+              aria-label={`Ver ${descricaoFoto(index)} de ${name}`}
               aria-pressed={selected === index}
               className={`relative aspect-[4/5] overflow-hidden rounded-[2px] bg-white transition ${
                 selected === index
@@ -63,7 +64,7 @@ export function ProductGallery({ name, image, images = [] }: ProductGalleryProps
                 src={src}
                 alt=""
                 fill
-                sizes="(max-width: 768px) 30vw, 170px"
+                sizes="(max-width: 640px) 22vw, (max-width: 768px) 18vw, 100px"
                 className="object-contain"
               />
             </button>
