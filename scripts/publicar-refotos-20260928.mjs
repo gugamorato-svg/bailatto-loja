@@ -9,8 +9,8 @@ const CATALOG_PATH = "data/products.json";
 const MAPPING_PATH =
   "C:/Users/Gustavo/Desktop/Sapatos Bailatto/_fundo-neutro-deterministico-2026-09-28/mapeamento-produtos.json";
 const FINAL_DIR =
-  "C:/Users/Gustavo/Desktop/Sapatos Bailatto/_fundo-neutro-deterministico-2026-09-28/fotos-finais";
-const GALLERY_PREFIX = "galeria/20260928";
+  "C:/Users/Gustavo/Desktop/Sapatos Bailatto/_fundo-neutro-deterministico-2026-09-28/fotos-finais-offwhite";
+const GALLERY_PREFIX = "galeria/20260929-offwhite";
 const BUCKET = "bailatto";
 const EXPECTED_WIDTH = 1200;
 const EXPECTED_HEIGHT = 1500;
