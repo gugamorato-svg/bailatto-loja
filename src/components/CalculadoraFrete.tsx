@@ -46,7 +46,7 @@ export function CalculadoraFrete() {
   }
 
   return (
-    <div className="mt-8 rounded-[2px] border border-border bg-surface p-5">
+    <div className="mt-8 rounded-xs border border-border bg-surface p-5">
       <p className="text-sm text-text">
         <strong>Retirada grátis na loja</strong>{" "}
         <span className="text-text-2">— Centro, São Carlos</span>
@@ -66,12 +66,12 @@ export function CalculadoraFrete() {
             placeholder="Seu CEP"
             value={cep}
             onChange={(e) => setCep(e.target.value)}
-            className="w-40 rounded-[2px] border border-border bg-bg px-3 py-2 text-text outline-none focus:border-wine"
+            className="campo w-40"
           />
           <button
             type="submit"
             disabled={calculando}
-            className="rounded-[2px] border border-wine px-4 py-2 text-sm text-wine transition-colors hover:bg-wine hover:text-on-wine disabled:opacity-60"
+            className="btn btn-contorno min-h-[2.75rem] px-5 text-[0.7rem]"
           >
             {calculando ? "Calculando…" : "Calcular"}
           </button>

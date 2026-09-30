@@ -7,6 +7,10 @@ import { SITE } from "@/lib/site";
  * Botão fixo de WhatsApp. Fica fora do painel e das telas de fechamento —
  * no checkout ele competiria com o botão de concluir a compra, que é
  * exatamente o vazamento de funil que a auditoria apontou na sacola.
+ *
+ * Na página do produto ele dividia o rodapé com a barra fixa de compra e
+ * cobria o "Adicionar" no celular. A barra marca `data-barra-compra` no body
+ * e o botão sobe — a regra está no globals.css.
  */
 const ROTAS_SEM_BOTAO = ["/admin", "/checkout", "/carrinho"];
 
@@ -24,7 +28,7 @@ export function WhatsAppFlutuante() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Falar com a BAILATTO no WhatsApp"
-      className="group fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-3 shadow-lg shadow-black/20 transition-transform hover:scale-105 sm:bottom-6 sm:right-6"
+      className="zap-flutuante fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-3 shadow-lg shadow-black/20 sm:bottom-6 sm:right-6"
     >
       <svg
         viewBox="0 0 24 24"

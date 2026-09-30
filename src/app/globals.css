@@ -9,7 +9,9 @@
   --surface-2: #F4F0EA;
   --border: #ECE7E0;
   --text: #1A1613;
-  --text-2: #8C8279;
+  /* Era #8C8279: 3,6:1 sobre o fundo, abaixo do mínimo de 4,5:1 para texto.
+     Quase toda descrição do site usa esta cor. */
+  --text-2: #79706A;
   --rose: #C79BA6;
   --rose-2: #B98A97;
   --on-rose: #1A1613;
@@ -22,6 +24,9 @@
   --ph-b: #E8E0D6;
   --shadow: rgba(26, 22, 19, 0.10);
   --shadow-2: rgba(26, 22, 19, 0.18);
+  /* Cor do anel de foco. As faixas escuras trocam este valor (.faixa-escura),
+     porque vinho sobre quase-preto some. */
+  --anel: var(--wine);
 }
 
 /* Tema escuro (acompanha o sistema) */
@@ -48,6 +53,18 @@
   }
 }
 
+/* ==================== Movimento ====================
+   As curvas prontas do CSS são fracas demais para parecerem intencionais.
+   Entrada e saída usam ease-out: começa rápido, responde na hora. Nunca
+   ease-in em interface — atrasa justo o instante em que a cliente olha. */
+:root {
+  --saida: cubic-bezier(0.23, 1, 0.32, 1);
+  --entra-sai: cubic-bezier(0.77, 0, 0.175, 1);
+  --t-toque: 140ms;   /* resposta ao toque/clique */
+  --t-ui: 200ms;      /* cor, borda, opacidade */
+  --t-painel: 380ms;  /* barra de compra, bottom-sheet */
+}
+
 /* Mapeia as variáveis para tokens do Tailwind (bg-bg, text-text, bg-wine, etc.) */
 @theme inline {
   --color-bg: var(--bg);
@@ -67,20 +84,44 @@
 
   --font-serif: var(--font-bodoni);
   --font-sans: var(--font-jost);
+
+  --ease-saida: var(--saida);
+  --ease-entra-sai: var(--entra-sai);
 }
 
 html {
   scroll-behavior: smooth;
+  /* A âncora não pode parar embaixo do cabeçalho fixo. */
+  scroll-padding-top: 6rem;
+  /* Barra de rolagem no tom da marca, em vez do cinza do sistema. */
+  scrollbar-color: var(--border) transparent;
 }
 
 body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-jost), ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+  /* Sem isto o Chrome do Android pinta um retângulo cinza a cada toque. */
+  -webkit-tap-highlight-color: transparent;
 }
 
 h1, h2, h3, h4, .font-serif {
   font-family: var(--font-bodoni), Georgia, "Times New Roman", serif;
+}
+
+/* Bodoni em corpo grande pede espaçamento mais fechado; e título de duas
+   linhas não pode deixar uma palavra órfã na última. */
+h1, h2 {
+  letter-spacing: -0.014em;
+  text-wrap: balance;
+}
+
+h3, h4 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 ::selection {
@@ -88,7 +129,261 @@ h1, h2, h3, h4, .font-serif {
   color: var(--on-rose);
 }
 
+/* O cursor de texto também é parte do desenho. */
+input,
+textarea,
+select {
+  caret-color: var(--wine);
+}
+
+/* Quem navega pelo teclado precisa ver onde está: vários campos usam
+   outline-none e marcam o foco só na borda, que quase não aparece. */
+:focus-visible {
+  outline: 2px solid var(--anel);
+  outline-offset: 2px;
+}
+
+.faixa-escura {
+  --anel: var(--band-text);
+}
+
+/* Botão flutuante do WhatsApp: no celular ele dividia o rodapé com a barra
+   fixa de compra e cobria o "Adicionar". A barra avisa pelo body. */
+.zap-flutuante {
+  transition:
+    transform var(--t-painel) var(--saida),
+    filter var(--t-ui) var(--saida);
+}
+
+.zap-flutuante:active {
+  transform: scale(0.95);
+}
+
+body[data-barra-compra="1"] .zap-flutuante {
+  transform: translateY(-4.75rem);
+}
+
+body[data-barra-compra="1"] .zap-flutuante:active {
+  transform: translateY(-4.75rem) scale(0.95);
+}
+
+@media (min-width: 768px) {
+  body[data-barra-compra="1"] .zap-flutuante {
+    transform: none;
+  }
+  body[data-barra-compra="1"] .zap-flutuante:active {
+    transform: scale(0.95);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .zap-flutuante:hover {
+    filter: brightness(1.06);
+  }
+}
+
 /* Placeholder de imagem (enquanto carrega / sem foto) */
 .ph-gradient {
   background: linear-gradient(135deg, var(--ph-a), var(--ph-b));
+}
+
+@layer components {
+  /* ---- Botões ----
+     Havia cinco implementações do mesmo botão, cada uma com altura, padding e
+     tracking diferentes. Aqui fica uma só; as utilitárias do Tailwind continuam
+     ajustando largura e margem por cima. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    min-height: 3rem;
+    padding-inline: 1.75rem;
+    border-radius: 2px;
+    font-size: 0.72rem;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    transition:
+      background-color var(--t-ui) var(--saida),
+      border-color var(--t-ui) var(--saida),
+      color var(--t-ui) var(--saida),
+      opacity var(--t-ui) var(--saida),
+      transform var(--t-toque) var(--saida);
+  }
+
+  /* O toque precisa ser confirmado na hora — é o que faz a interface parecer
+     viva em vez de travada. */
+  .btn:active {
+    transform: scale(0.97);
+  }
+
+  .btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  .btn:disabled:active {
+    transform: none;
+  }
+
+  .btn-principal {
+    background: var(--wine);
+    color: var(--on-wine);
+  }
+
+  .btn-contorno {
+    border: 1px solid var(--wine);
+    color: var(--wine);
+  }
+
+  .btn-claro {
+    background: var(--band-text);
+    color: var(--band);
+  }
+
+  .btn-fantasma {
+    border: 1px solid color-mix(in srgb, currentColor 40%, transparent);
+    color: inherit;
+  }
+
+  /* ---- Fichas de filtro ---- */
+  .ficha {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.25rem;
+    padding-inline: 0.95rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--text-2);
+    font-size: 0.78rem;
+    white-space: nowrap;
+    transition:
+      background-color var(--t-ui) var(--saida),
+      border-color var(--t-ui) var(--saida),
+      color var(--t-ui) var(--saida),
+      transform var(--t-toque) var(--saida);
+  }
+
+  .ficha:active {
+    transform: scale(0.97);
+  }
+
+  .ficha[aria-pressed="true"],
+  .ficha[data-ativa="true"] {
+    border-color: var(--wine);
+    background: var(--wine);
+    color: var(--on-wine);
+  }
+
+  /* ---- Campos ---- */
+  .campo {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: var(--bg);
+    padding: 0.625rem 0.75rem;
+    color: var(--text);
+    transition: border-color var(--t-ui) var(--saida);
+  }
+
+  .campo:focus {
+    border-color: var(--wine);
+    outline: none;
+  }
+
+  .campo:focus-visible {
+    outline: 2px solid var(--anel);
+    outline-offset: 2px;
+  }
+}
+
+/* Hover é do mouse. No celular ele gruda depois do toque e a foto fica
+   ampliada até a cliente tocar em outro lugar. */
+@media (hover: hover) and (pointer: fine) {
+  .btn-principal:hover {
+    background: var(--wine-2);
+  }
+
+  .btn-contorno:hover {
+    background: var(--wine);
+    color: var(--on-wine);
+  }
+
+  .btn-claro:hover {
+    background: #FFFFFF;
+  }
+
+  .btn-fantasma:hover {
+    background: color-mix(in srgb, currentColor 12%, transparent);
+  }
+
+  .ficha:hover {
+    border-color: var(--wine);
+    color: var(--wine);
+  }
+
+  .ficha[aria-pressed="true"]:hover,
+  .ficha[data-ativa="true"]:hover {
+    color: var(--on-wine);
+  }
+
+  .campo:hover {
+    border-color: color-mix(in srgb, var(--wine) 35%, var(--border));
+  }
+
+  .zoom-foto {
+    transition: transform 600ms var(--saida);
+  }
+
+  .group:hover .zoom-foto {
+    transform: scale(1.04);
+  }
+}
+
+/* Movimento pode causar enjoo. Reduzir não é desligar: cor e opacidade
+   continuam explicando o que mudou; o que sai é o deslocamento. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Tudo que desliza passa a trocar de lugar na hora; a cor e a opacidade
+     que acompanham a troca continuam com transição. */
+  [class*="translate-"],
+  .zap-flutuante {
+    transition-property: opacity, background-color, border-color, color !important;
+  }
+
+  #menu-celular {
+    transition: none;
+  }
+
+  .btn:active,
+  .ficha:active,
+  .zap-flutuante:active,
+  .group:hover .zoom-foto {
+    transform: none;
+  }
+
+  body[data-barra-compra="1"] .zap-flutuante,
+  body[data-barra-compra="1"] .zap-flutuante:active {
+    transform: translateY(-4.75rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) and (min-width: 768px) {
+  body[data-barra-compra="1"] .zap-flutuante,
+  body[data-barra-compra="1"] .zap-flutuante:active {
+    transform: none;
+  }
 }

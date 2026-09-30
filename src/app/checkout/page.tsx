@@ -19,7 +19,7 @@ import { submitOrder } from "./actions";
 const MP_ATIVO = !!process.env.NEXT_PUBLIC_MP_PUBLIC_KEY;
 
 const inputCls =
-  "w-full rounded-[2px] border border-border bg-surface px-4 py-2.5 text-text outline-none focus:border-wine";
+  "w-full rounded-xs border border-border bg-surface px-4 py-2.5 text-text outline-none focus:border-wine";
 
 type Metodo = "retirada" | "entrega_local" | "correios";
 
@@ -156,7 +156,7 @@ export default function CheckoutPage({
         </p>
         <Link
           href="/produtos"
-          className="mt-8 inline-block rounded-[2px] bg-wine px-8 py-3.5 text-sm font-medium uppercase tracking-wide text-on-wine hover:bg-wine-2"
+          className="btn btn-principal mt-8"
         >
           Ver coleção
         </Link>
@@ -172,7 +172,7 @@ export default function CheckoutPage({
       <h1 className="mt-4 font-serif text-3xl text-text">Finalizar compra</h1>
 
       {erro && (
-        <p className="mt-4 rounded-[2px] border border-wine/40 bg-surface p-3 text-sm text-wine">
+        <p className="mt-4 rounded-xs border border-wine/40 bg-surface p-3 text-sm text-wine">
           {erro}
         </p>
       )}
@@ -244,7 +244,7 @@ export default function CheckoutPage({
                 <label
                   key={valor}
                   className={
-                    "flex cursor-pointer gap-3 rounded-[2px] border p-4 transition-colors " +
+                    "flex cursor-pointer gap-3 rounded-xs border p-4 transition-colors " +
                     (metodo === valor ? "border-wine bg-surface" : "border-border")
                   }
                 >
@@ -269,7 +269,7 @@ export default function CheckoutPage({
                 href="https://www.google.com/maps/search/?api=1&query=BAILATTO+Cal%C3%A7ados+Rua+Geminiano+Costa+416+S%C3%A3o+Carlos"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 flex gap-4 rounded-[2px] border border-border bg-surface p-3 transition-colors hover:border-wine"
+                className="mt-4 flex gap-4 rounded-xs border border-border bg-surface p-3 transition-colors hover:border-wine"
               >
                 {/* Ver a loja bem na hora de entregar os dados é o antídoto do
                     "será que isso existe mesmo?". */}
@@ -277,7 +277,7 @@ export default function CheckoutPage({
                 <img
                   src="/loja.jpg"
                   alt="Fachada da loja BAILATTO"
-                  className="h-20 w-28 shrink-0 rounded-[2px] object-cover"
+                  className="h-20 w-28 shrink-0 rounded-xs object-cover"
                 />
                 <span className="text-sm">
                   <span className="block text-text">Retire na nossa loja</span>
@@ -399,7 +399,7 @@ export default function CheckoutPage({
                     <label
                       key={o.id}
                       className={
-                        "flex cursor-pointer items-center justify-between gap-3 rounded-[2px] border p-3 transition-colors " +
+                        "flex cursor-pointer items-center justify-between gap-3 rounded-xs border p-3 transition-colors " +
                         (servico === o.id ? "border-wine bg-surface" : "border-border")
                       }
                     >
@@ -429,12 +429,12 @@ export default function CheckoutPage({
           </div>
         </div>
 
-        <aside className="h-fit rounded-[2px] border border-border bg-surface p-6">
+        <aside className="h-fit rounded-xs border border-border bg-surface p-6">
           <h2 className="font-serif text-xl text-text">Seu pedido</h2>
           <ul className="mt-4 space-y-3">
             {items.map((i) => (
               <li key={`${i.slug}-${i.size}`} className="flex gap-3">
-                <div className="relative h-16 w-12 shrink-0 overflow-hidden rounded-[2px] bg-surface-2">
+                <div className="relative h-16 w-12 shrink-0 overflow-hidden rounded-xs bg-surface-2">
                   <Image src={i.image} alt="" fill sizes="48px" className="object-cover" />
                 </div>
                 <div className="flex-1 text-sm">
@@ -474,7 +474,7 @@ export default function CheckoutPage({
 
           <button
             type="submit"
-            className="mt-6 w-full rounded-[2px] bg-wine px-6 py-3.5 text-sm font-medium uppercase tracking-wide text-on-wine hover:bg-wine-2"
+            className="btn btn-principal mt-6 w-full"
           >
             {MP_ATIVO ? "Ir para o pagamento" : "Confirmar pedido"}
           </button>

@@ -6,9 +6,13 @@ import { Rastreamento } from "@/components/Rastreamento";
 import { Chrome } from "@/components/Chrome";
 import { SITE } from "@/lib/site";
 
+// O itálico precisa ser pedido: sem ele o navegador inclina o romano por
+// software (falso itálico). Metade dos títulos do site tem uma palavra em
+// itálico — é o gesto da marca, e ele estava sendo desenhado errado.
 const bodoni = Bodoni_Moda({
   variable: "--font-bodoni",
   subsets: ["latin"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 

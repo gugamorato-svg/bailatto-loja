@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useCart } from "./CartProvider";
 import { categories } from "@/lib/products";
+import { IconeFechar, IconeMenu } from "./icones";
 
 const NAV = [
   { href: "/", label: "Início" },
@@ -26,17 +27,19 @@ export function Header() {
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            aria-label="Abrir menu"
-            className="flex h-9 w-9 items-center justify-center text-text md:hidden"
+            aria-label={open ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={open}
+            aria-controls="menu-celular"
+            className="-ml-2 flex h-11 w-11 items-center justify-center text-text transition-transform duration-150 ease-[var(--ease-saida)] active:scale-90 md:hidden"
           >
-            <span className="text-xl">☰</span>
+            {open ? <IconeFechar tamanho={22} /> : <IconeMenu tamanho={22} />}
           </button>
           <nav className="hidden items-center gap-7 md:flex">
             {NAV.map((n) => (
               <Link
                 key={n.href}
                 href={n.href}
-                className="text-[0.72rem] uppercase tracking-[0.16em] text-text/75 transition-colors hover:text-wine"
+                className="text-[0.72rem] uppercase tracking-[0.16em] text-text/75 transition-colors duration-200 hover:text-wine"
               >
                 {n.label}
               </Link>
@@ -57,13 +60,13 @@ export function Header() {
             href={INSTAGRAM}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden text-[0.72rem] uppercase tracking-[0.16em] text-text/75 transition-colors hover:text-wine md:inline"
+            className="hidden text-[0.72rem] uppercase tracking-[0.16em] text-text/75 transition-colors duration-200 hover:text-wine md:inline"
           >
             Instagram
           </a>
           <Link
             href="/carrinho"
-            className="relative flex items-center gap-2 text-[0.72rem] uppercase tracking-[0.16em] text-text/75 transition-colors hover:text-wine"
+            className="relative flex items-center gap-2 text-[0.72rem] uppercase tracking-[0.16em] text-text/75 transition-colors duration-200 hover:text-wine"
           >
             <span>Sacola</span>
             {count > 0 && (
@@ -79,11 +82,11 @@ export function Header() {
           num produto e não descobre que existem 10 categorias escondidas no
           menu. É o mesmo padrão de chips que ela já usa na Shein. */}
       <div className="border-t border-border md:hidden">
-        <div className="flex gap-2 overflow-x-auto px-4 py-2.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="flex snap-x gap-2 overflow-x-auto scroll-px-4 px-4 py-2.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <Link
             href="/produtos"
             onClick={() => setOpen(false)}
-            className="shrink-0 whitespace-nowrap rounded-full border border-border px-3.5 py-1.5 text-xs uppercase tracking-wide text-text-2"
+            className="ficha shrink-0 snap-start text-xs uppercase tracking-wide"
           >
             Tudo
           </Link>
@@ -92,7 +95,7 @@ export function Header() {
               key={c.slug}
               href={`/produtos?categoria=${c.slug}`}
               onClick={() => setOpen(false)}
-              className="shrink-0 whitespace-nowrap rounded-full border border-border px-3.5 py-1.5 text-xs uppercase tracking-wide text-text-2"
+              className="ficha shrink-0 snap-start text-xs uppercase tracking-wide"
             >
               {c.label}
             </Link>
@@ -100,14 +103,21 @@ export function Header() {
         </div>
       </div>
 
-      {open && (
-        <nav className="border-t border-border bg-surface md:hidden">
+      {/* Fica montado e abre por transição de altura: desmontar corta a saída
+          pela metade, e o menu aparecia e sumia num estalo. */}
+      <div
+        id="menu-celular"
+        inert={!open}
+        data-aberto={open}
+        className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-[var(--ease-saida)] data-[aberto=true]:grid-rows-[1fr] md:hidden"
+      >
+        <nav className="overflow-hidden border-t border-border bg-surface">
           {NAV.map((n) => (
             <Link
               key={n.href}
               href={n.href}
               onClick={() => setOpen(false)}
-              className="block px-4 py-3 text-sm uppercase tracking-wide text-text-2 hover:bg-surface-2"
+              className="block px-4 py-3 text-sm uppercase tracking-wide text-text-2 transition-colors duration-200 hover:bg-surface-2 hover:text-text"
             >
               {n.label}
             </Link>
@@ -116,12 +126,13 @@ export function Header() {
             href={INSTAGRAM}
             target="_blank"
             rel="noopener noreferrer"
-            className="block px-4 py-3 text-sm uppercase tracking-wide text-text-2 hover:bg-surface-2"
+            onClick={() => setOpen(false)}
+            className="block px-4 py-3 text-sm uppercase tracking-wide text-text-2 transition-colors duration-200 hover:bg-surface-2 hover:text-text"
           >
             Instagram
           </a>
         </nav>
-      )}
+      </div>
     </header>
   );
 }

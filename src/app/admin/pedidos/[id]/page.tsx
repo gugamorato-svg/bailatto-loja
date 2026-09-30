@@ -50,7 +50,7 @@ const ROTULO_METODO: Record<string, string> = {
 };
 
 const campo =
-  "w-full rounded-[2px] border border-border bg-bg px-4 py-2.5 text-text outline-none focus:border-wine";
+  "w-full rounded-xs border border-border bg-bg px-4 py-2.5 text-text outline-none focus:border-wine";
 
 export default async function AdminPedido({
   params,
@@ -80,12 +80,12 @@ export default async function AdminPedido({
       </div>
 
       {sp?.ok && (
-        <p className="mt-4 rounded-[2px] border border-wine/40 bg-surface p-3 text-sm text-wine">
+        <p className="mt-4 rounded-xs border border-wine/40 bg-surface p-3 text-sm text-wine">
           Pedido atualizado ✓
         </p>
       )}
       {typeof sp?.erro === "string" && (
-        <p className="mt-4 rounded-[2px] border border-wine bg-surface p-3 text-sm text-wine">
+        <p className="mt-4 rounded-xs border border-wine bg-surface p-3 text-sm text-wine">
           {sp.erro}
         </p>
       )}
@@ -93,7 +93,7 @@ export default async function AdminPedido({
       {/* Prazo de arrependimento: é a pergunta que chega quando a cliente quer
           devolver. Com a data na tela, não precisa fazer conta. */}
       {prazo && (
-        <p className="mt-4 rounded-[2px] border border-border bg-surface p-3 text-sm text-text-2">
+        <p className="mt-4 rounded-xs border border-border bg-surface p-3 text-sm text-text-2">
           {prazo.aberto ? (
             <>
               Dentro do prazo de arrependimento — a cliente pode desistir até{" "}
@@ -111,7 +111,7 @@ export default async function AdminPedido({
       )}
 
       <div className="mt-8 grid gap-6 sm:grid-cols-2">
-        <div className="rounded-[2px] border border-border bg-surface p-5 text-sm">
+        <div className="rounded-xs border border-border bg-surface p-5 text-sm">
           <h2 className="mb-3 font-serif text-lg text-text">Cliente</h2>
           <p className="text-text">{order.customer.name}</p>
           <p className="text-text-2">
@@ -123,7 +123,7 @@ export default async function AdminPedido({
           {order.customer.cpf && <p className="text-text-2">CPF: {order.customer.cpf}</p>}
         </div>
 
-        <div className="rounded-[2px] border border-border bg-surface p-5 text-sm">
+        <div className="rounded-xs border border-border bg-surface p-5 text-sm">
           <h2 className="mb-3 font-serif text-lg text-text">Entrega</h2>
           <p className="text-text">
             {DELIVERY_LABEL[order.delivery.method]}
@@ -148,12 +148,12 @@ export default async function AdminPedido({
         </div>
       </div>
 
-      <div className="mt-6 rounded-[2px] border border-border bg-surface p-5">
+      <div className="mt-6 rounded-xs border border-border bg-surface p-5">
         <h2 className="mb-4 font-serif text-lg text-text">Itens</h2>
         <ul className="space-y-3">
           {order.items.map((i) => (
             <li key={`${i.slug}-${i.size}`} className="flex gap-3">
-              <div className="relative h-16 w-12 shrink-0 overflow-hidden rounded-[2px] bg-surface-2">
+              <div className="relative h-16 w-12 shrink-0 overflow-hidden rounded-xs bg-surface-2">
                 <Image src={i.image} alt="" fill sizes="48px" className="object-cover" />
               </div>
               <div className="flex-1 text-sm">
@@ -183,7 +183,7 @@ export default async function AdminPedido({
       </div>
 
       {order.payment?.provider && (
-        <div className="mt-6 rounded-[2px] border border-border bg-surface p-5 text-sm">
+        <div className="mt-6 rounded-xs border border-border bg-surface p-5 text-sm">
           <h2 className="mb-3 font-serif text-lg text-text">Pagamento</h2>
           <dl className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-1.5 text-text-2">
             <dt>Provedor</dt>
@@ -224,13 +224,13 @@ export default async function AdminPedido({
           {order.payment.status &&
             (["refunded", "charged_back", "in_mediation"].includes(order.payment.status) ||
               order.payment.status.startsWith("divergente")) && (
-              <p className="mt-3 rounded-[2px] border border-wine bg-bg p-3 text-wine">
+              <p className="mt-3 rounded-xs border border-wine bg-bg p-3 text-wine">
                 Atenção: este pagamento precisa de conferência antes de enviar ou
                 trocar a mercadoria.
               </p>
             )}
           {order.payment.status === "approved" && order.status === "cancelado" && (
-            <p className="mt-3 rounded-[2px] border border-wine bg-bg p-3 text-wine">
+            <p className="mt-3 rounded-xs border border-wine bg-bg p-3 text-wine">
               O pagamento foi aprovado, mas o pedido está cancelado. Estorne pelo
               Mercado Pago ou reabra o pedido.
             </p>
@@ -239,7 +239,7 @@ export default async function AdminPedido({
       )}
 
       {order.historico && order.historico.length > 0 && (
-        <div className="mt-6 rounded-[2px] border border-border bg-surface p-5 text-sm">
+        <div className="mt-6 rounded-xs border border-border bg-surface p-5 text-sm">
           <h2 className="mb-3 font-serif text-lg text-text">Histórico</h2>
           <ol className="space-y-1.5">
             {order.historico.map((h, n) => (
@@ -254,7 +254,7 @@ export default async function AdminPedido({
 
       <form
         action={updateOrderAction}
-        className="mt-6 rounded-[2px] border border-border bg-surface p-5"
+        className="mt-6 rounded-xs border border-border bg-surface p-5"
       >
         <input type="hidden" name="id" value={order.id} />
         <h2 className="mb-4 font-serif text-lg text-text">Atualizar pedido</h2>
@@ -308,7 +308,7 @@ export default async function AdminPedido({
 
         <button
           type="submit"
-          className="mt-5 rounded-[2px] bg-wine px-8 py-3 text-sm font-medium uppercase tracking-wide text-on-wine hover:bg-wine-2"
+          className="btn btn-principal mt-5"
         >
           Salvar
         </button>

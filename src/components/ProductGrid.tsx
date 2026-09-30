@@ -70,20 +70,16 @@ export function ProductGrid({
   return (
     <div>
       {/* Numeração primeiro: é o filtro que muda o que a cliente consegue comprar. */}
-      <div className="mb-6 rounded-[2px] border border-border bg-surface p-4">
+      <div className="mb-6 rounded-xs border border-border bg-surface p-4">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-sm font-medium text-text">Sua numeração:</span>
+          <span className="mr-1 text-sm font-medium text-text">Sua numeração:</span>
           {numeracoesPresentes.map((n) => (
             <button
               key={n}
               type="button"
+              aria-pressed={numeracao === n}
               onClick={() => escolherNumeracao(numeracao === n ? null : n)}
-              className={
-                "h-9 w-9 rounded-full border text-sm transition-colors " +
-                (numeracao === n
-                  ? "border-wine bg-wine text-on-wine"
-                  : "border-border text-text-2 hover:border-wine hover:text-wine")
-              }
+              className="ficha h-12 w-12 px-0 text-sm"
             >
               {n}
             </button>
@@ -125,7 +121,7 @@ export function ProductGrid({
           <select
             value={ordem}
             onChange={(e) => setOrdem(e.target.value as Ordem)}
-            className="rounded-[2px] border border-border bg-surface px-3 py-1.5 text-text outline-none focus:border-wine"
+            className="campo w-auto py-1.5 text-sm"
           >
             <option value="relevancia">Destaques</option>
             <option value="menor">Menor preço</option>
@@ -139,7 +135,7 @@ export function ProductGrid({
       </p>
 
       {visiveis.length === 0 ? (
-        <div className="rounded-[2px] border border-border bg-surface p-10 text-center">
+        <div className="rounded-xs border border-border bg-surface p-10 text-center">
           <p className="text-text">
             Não temos nada no {numeracao} nessa categoria agora.
           </p>
@@ -172,12 +168,8 @@ function Chip({
     <button
       type="button"
       onClick={onClick}
-      className={
-        "rounded-full border px-4 py-1.5 text-sm transition-colors " +
-        (ativo
-          ? "border-wine bg-wine text-on-wine"
-          : "border-border text-text-2 hover:border-wine hover:text-wine")
-      }
+      aria-pressed={ativo}
+      className="ficha"
     >
       {children}
     </button>

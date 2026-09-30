@@ -31,7 +31,7 @@ export default async function RevisarPage({
         </p>
         <Link
           href="/admin/importar"
-          className="mt-6 inline-block rounded-[2px] bg-wine px-6 py-3 text-sm uppercase tracking-wide text-on-wine hover:bg-wine-2"
+          className="btn btn-principal mt-6"
         >
           Importar do Phibo
         </Link>
@@ -61,12 +61,12 @@ export default async function RevisarPage({
       </p>
 
       {sp?.erro && (
-        <p className="mt-4 rounded-[2px] border border-wine/40 bg-surface p-3 text-sm text-wine">
+        <p className="mt-4 rounded-xs border border-wine/40 bg-surface p-3 text-sm text-wine">
           {sp.erro}
         </p>
       )}
 
-      <div className="mt-4 rounded-[2px] border border-border bg-surface p-4 text-sm text-text-2">
+      <div className="mt-4 rounded-xs border border-border bg-surface p-4 text-sm text-text-2">
         As sugestões são um palpite baseado no nome — os códigos do Phibo são
         abreviados, então <strong className="text-text">confira antes de
         confirmar</strong>. Deixe em “Não importar” o que não corresponder a
@@ -74,7 +74,7 @@ export default async function RevisarPage({
       </div>
 
       <form action={aplicarImportacao} className="mt-6">
-        <div className="overflow-x-auto rounded-[2px] border border-border">
+        <div className="overflow-x-auto rounded-xs border border-border">
           <table className="w-full text-sm">
             <thead className="bg-surface text-left text-text-2">
               <tr>
@@ -125,7 +125,7 @@ export default async function RevisarPage({
                       <select
                         name={`destino_${item.key}`}
                         defaultValue={inicial}
-                        className="w-full min-w-56 rounded-[2px] border border-border bg-bg px-3 py-2 text-text outline-none focus:border-wine"
+                        className="w-full min-w-56 rounded-xs border border-border bg-bg px-3 py-2 text-text outline-none focus:border-wine"
                       >
                         <option value="">— Não importar —</option>
                         {opcoes.map((o) => (
@@ -145,7 +145,7 @@ export default async function RevisarPage({
         <div className="mt-6 flex flex-wrap items-center gap-4">
           <button
             type="submit"
-            className="rounded-[2px] bg-wine px-8 py-3 text-sm font-medium uppercase tracking-wide text-on-wine hover:bg-wine-2"
+            className="btn btn-principal"
           >
             Aplicar preços e estoque
           </button>

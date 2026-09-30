@@ -89,7 +89,7 @@ export default function TrocasPage() {
         {PERGUNTAS.map(([pergunta, resposta]) => (
           <details
             key={pergunta}
-            className="rounded-[2px] border border-border bg-surface"
+            className="rounded-xs border border-border bg-surface"
           >
             <summary className="cursor-pointer list-none px-5 py-4 text-sm font-medium text-text">
               {pergunta} <span className="float-right text-text-2">＋</span>

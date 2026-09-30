@@ -5,7 +5,7 @@ import { saveProduct } from "@/app/admin/actions";
 const ALL_SIZES = [33, 34, 35, 36, 37, 38, 39, 40];
 const GALLERY_SLOTS = 4;
 const inputCls =
-  "w-full rounded-[2px] border border-border bg-surface px-4 py-2.5 text-text outline-none focus:border-wine";
+  "w-full rounded-xs border border-border bg-surface px-4 py-2.5 text-text outline-none focus:border-wine";
 
 function moneyToInput(n: number | null | undefined): string {
   if (n == null) return "";
@@ -50,13 +50,13 @@ export function ProductForm({ product }: { product?: AdminProduct }) {
       <Field label="Galeria — fotos adicionais (opcional)">
         <div className="grid gap-5 sm:grid-cols-2">
           {Array.from({ length: GALLERY_SLOTS }, (_, index) => (
-            <div key={index} className="rounded-[2px] border border-border p-4">
+            <div key={index} className="rounded-xs border border-border p-4">
               {product?.images?.[index] ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={product.images[index]}
                   alt=""
-                  className="mb-3 aspect-[4/5] h-32 rounded-[2px] bg-white object-contain"
+                  className="mb-3 aspect-[4/5] h-32 rounded-xs bg-white object-contain"
                 />
               ) : null}
               <p className="mb-2 text-xs uppercase tracking-wide text-text-2">
@@ -66,7 +66,7 @@ export function ProductForm({ product }: { product?: AdminProduct }) {
                 type="file"
                 name={`galleryImage${index + 1}`}
                 accept="image/*"
-                className="block w-full text-sm text-text-2 file:mr-3 file:rounded-[2px] file:border-0 file:bg-wine file:px-4 file:py-2 file:text-on-wine"
+                className="block w-full text-sm text-text-2 file:mr-3 file:rounded-xs file:border-0 file:bg-wine file:px-4 file:py-2 file:text-on-wine"
               />
             </div>
           ))}
@@ -141,14 +141,14 @@ export function ProductForm({ product }: { product?: AdminProduct }) {
           <img
             src={product.image}
             alt=""
-            className="mb-3 h-32 w-24 rounded-[2px] object-cover"
+            className="mb-3 h-32 w-24 rounded-xs object-cover"
           />
         ) : null}
         <input
           type="file"
           name="image"
           accept="image/*"
-          className="block text-sm text-text-2 file:mr-3 file:rounded-[2px] file:border-0 file:bg-wine file:px-4 file:py-2 file:text-on-wine"
+          className="block text-sm text-text-2 file:mr-3 file:rounded-xs file:border-0 file:bg-wine file:px-4 file:py-2 file:text-on-wine"
         />
         <p className="mt-1 text-xs text-text-2">
           {product ? "Deixe vazio para manter a foto atual." : "Escolha uma foto do produto."}
@@ -169,13 +169,13 @@ export function ProductForm({ product }: { product?: AdminProduct }) {
       <div className="flex gap-3 pt-2">
         <button
           type="submit"
-          className="rounded-[2px] bg-wine px-8 py-3 text-sm font-medium uppercase tracking-wide text-on-wine hover:bg-wine-2"
+          className="btn btn-principal"
         >
           Salvar
         </button>
         <a
           href="/admin"
-          className="rounded-[2px] border border-border px-8 py-3 text-sm text-text-2 hover:border-wine hover:text-wine"
+          className="rounded-xs border border-border px-8 py-3 text-sm text-text-2 hover:border-wine hover:text-wine"
         >
           Cancelar
         </a>

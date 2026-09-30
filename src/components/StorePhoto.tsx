@@ -6,7 +6,7 @@ export function StorePhoto({ src, alt }: { src: string; alt: string }) {
   const [ok, setOk] = useState(true);
 
   return (
-    <div className="relative aspect-[16/10] overflow-hidden rounded-[2px] ph-gradient">
+    <div className="relative aspect-[16/10] overflow-hidden rounded-xs ph-gradient">
       {ok ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img

@@ -23,7 +23,7 @@ export default function CarrinhoPage() {
         </p>
         <Link
           href="/produtos"
-          className="mt-8 inline-block rounded-[2px] bg-wine px-8 py-3.5 text-sm font-medium uppercase tracking-wide text-on-wine hover:bg-wine-2"
+          className="btn btn-principal mt-8"
         >
           Ver coleção
         </Link>
@@ -65,7 +65,7 @@ export default function CarrinhoPage() {
         <ul className="divide-y divide-border lg:col-span-2">
           {items.map((i) => (
             <li key={`${i.slug}-${i.size}`} className="flex gap-4 py-5">
-              <div className="relative h-28 w-24 shrink-0 overflow-hidden rounded-[2px] bg-surface-2">
+              <div className="relative h-28 w-24 shrink-0 overflow-hidden rounded-xs bg-surface-2">
                 <Image
                   src={i.image}
                   alt={i.name}
@@ -79,7 +79,7 @@ export default function CarrinhoPage() {
                 <p className="text-sm text-text-2">{rotuloTamanho(i.size)}</p>
                 <p className="text-sm text-wine">{formatPrice(i.price)}</p>
                 <div className="mt-auto flex items-center gap-3">
-                  <div className="flex items-center rounded-[2px] border border-border">
+                  <div className="flex items-center rounded-xs border border-border">
                     {/* 44px é o mínimo confortável para o polegar no celular. */}
                     <button
                       onClick={() => setQty(i.slug, i.size, i.qty - 1)}
@@ -109,7 +109,7 @@ export default function CarrinhoPage() {
           ))}
         </ul>
 
-        <div className="h-fit rounded-[2px] border border-border bg-surface p-6">
+        <div className="h-fit rounded-xs border border-border bg-surface p-6">
           <h2 className="font-serif text-xl text-text">Resumo</h2>
           <div className="mt-4 flex justify-between text-sm text-text-2">
             <span>Itens</span>
@@ -160,7 +160,7 @@ export default function CarrinhoPage() {
 
           <Link
             href="/checkout"
-            className="mt-6 block rounded-[2px] bg-wine px-6 py-3.5 text-center text-sm font-medium uppercase tracking-wide text-on-wine hover:bg-wine-2"
+            className="btn btn-principal mt-6 w-full"
           >
             Finalizar compra
           </Link>

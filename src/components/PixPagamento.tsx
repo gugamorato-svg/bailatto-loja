@@ -28,7 +28,7 @@ export function PixPagamento({
   }
 
   return (
-    <div className="mt-8 rounded-[2px] border border-wine/30 bg-surface p-6">
+    <div className="mt-8 rounded-xs border border-wine/30 bg-surface p-6">
       <h2 className="font-serif text-xl text-text">Pague agora com Pix</h2>
       <p className="mt-1 text-sm text-text-2">
         Valor: <strong className="text-wine">{formatPrice(valor)}</strong>
@@ -41,7 +41,7 @@ export function PixPagamento({
           alt="QR Code para pagamento via Pix"
           width={200}
           height={200}
-          className="rounded-[2px] bg-white p-2"
+          className="rounded-xs bg-white p-2"
         />
 
         <div className="w-full flex-1">
@@ -56,13 +56,13 @@ export function PixPagamento({
             value={codigo}
             rows={3}
             onFocus={(e) => e.currentTarget.select()}
-            className="mt-3 w-full resize-none rounded-[2px] border border-border bg-bg p-3 font-mono text-xs text-text-2"
+            className="mt-3 w-full resize-none rounded-xs border border-border bg-bg p-3 font-mono text-xs text-text-2"
           />
 
           <button
             type="button"
             onClick={copiar}
-            className="mt-3 w-full rounded-[2px] bg-wine px-6 py-3 text-sm font-medium uppercase tracking-wide text-on-wine transition-colors hover:bg-wine-2"
+            className="btn btn-principal mt-3 w-full"
           >
             {copiado ? "Código copiado ✓" : "Copiar código Pix"}
           </button>

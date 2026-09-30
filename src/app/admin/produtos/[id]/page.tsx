@@ -29,7 +29,7 @@ export default async function EditarProduto({
       </div>
 
       {sp?.erro && (
-        <p className="mt-4 rounded-[2px] border border-wine/40 bg-surface p-3 text-sm text-wine">
+        <p className="mt-4 rounded-xs border border-wine/40 bg-surface p-3 text-sm text-wine">
           {sp.erro}
         </p>
       )}

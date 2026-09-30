@@ -3,7 +3,7 @@ import { SITE } from "@/lib/site";
 
 export function Footer() {
   return (
-    <footer className="mt-20 border-t border-border bg-band text-band-text">
+    <footer className="faixa-escura mt-20 border-t border-border bg-band text-band-text">
       <div className="mx-auto grid max-w-[1180px] gap-10 px-4 py-14 sm:grid-cols-2 lg:grid-cols-3">
         <div>
           <p className="font-serif text-2xl tracking-[0.25em]">BAILATTO</p>
@@ -82,7 +82,6 @@ export function Footer() {
               <br />
               {SITE.horario.sabado}
             </li>
-            <li>★ 5,0 no Google</li>
           </ul>
         </div>
       </div>

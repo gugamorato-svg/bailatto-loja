@@ -45,7 +45,7 @@ export default function SobrePage() {
         <StorePhoto src="/loja.jpg" alt="Fachada da loja BAILATTO em São Carlos" />
       </div>
 
-      <div className="mt-10 rounded-[2px] border border-border bg-surface p-6">
+      <div className="mt-10 rounded-xs border border-border bg-surface p-6">
         <h2 className="font-serif text-xl text-text">Venha nos visitar</h2>
         <p className="mt-3 text-text-2">
           {enderecoCompleto}
@@ -63,7 +63,7 @@ export default function SobrePage() {
             href={`https://wa.me/${SITE.whatsapp}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-[2px] bg-wine px-6 py-3 text-sm font-medium uppercase tracking-wide text-on-wine hover:bg-wine-2"
+            className="btn btn-principal"
           >
             Chamar no WhatsApp
           </a>
@@ -71,7 +71,7 @@ export default function SobrePage() {
             href="https://www.google.com/maps/search/?api=1&query=BAILATTO+Cal%C3%A7ados+Rua+Geminiano+Costa+416+S%C3%A3o+Carlos"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-[2px] border border-wine px-6 py-3 text-sm uppercase tracking-wide text-wine hover:bg-wine hover:text-on-wine"
+            className="btn btn-contorno"
           >
             Como chegar
           </a>

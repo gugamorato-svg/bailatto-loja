@@ -22,12 +22,12 @@ export default async function LoginPage({
           placeholder="Senha do painel"
           required
           autoFocus
-          className="w-full rounded-[2px] border border-border bg-surface px-4 py-3 text-text outline-none focus:border-wine"
+          className="w-full rounded-xs border border-border bg-surface px-4 py-3 text-text outline-none focus:border-wine"
         />
         {erro && <p className="text-sm text-wine">Senha incorreta. Tente de novo.</p>}
         <button
           type="submit"
-          className="w-full rounded-[2px] bg-wine px-6 py-3 text-sm font-medium uppercase tracking-wide text-on-wine transition-colors hover:bg-wine-2"
+          className="btn btn-principal w-full"
         >
           Entrar
         </button>

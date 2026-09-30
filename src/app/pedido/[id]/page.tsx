@@ -86,7 +86,7 @@ export default async function PedidoPage({
       </div>
 
       {aguardando && (voltaMP === "approved" || voltaMP === "pending") && (
-        <p className="mt-8 rounded-[2px] border border-border bg-surface p-4 text-center text-sm text-text-2">
+        <p className="mt-8 rounded-xs border border-border bg-surface p-4 text-center text-sm text-text-2">
           {voltaMP === "approved"
             ? "Pagamento recebido pelo Mercado Pago. A confirmação aparece aqui em instantes — pode atualizar a página."
             : "Seu pagamento está em processamento. Se escolheu Pix ou boleto, ele é confirmado assim que for pago."}
@@ -96,7 +96,7 @@ export default async function PedidoPage({
       {botaoPagar && (
         <a
           href={linkPagamento}
-          className="mt-8 block rounded-[2px] bg-wine px-6 py-4 text-center text-sm font-medium uppercase tracking-wide text-on-wine hover:bg-wine-2"
+          className="btn btn-principal mt-8 w-full"
         >
           {voltaMP === "failure" || voltaMP === "rejected"
             ? "Tentar pagar de novo"
@@ -114,8 +114,8 @@ export default async function PedidoPage({
         rel="noopener noreferrer"
         className={
           pix || botaoPagar
-            ? "mt-4 block rounded-[2px] border border-wine px-6 py-3 text-center text-sm uppercase tracking-wide text-wine hover:bg-wine hover:text-on-wine"
-            : "mt-8 block rounded-[2px] bg-wine px-6 py-4 text-center text-sm font-medium uppercase tracking-wide text-on-wine hover:bg-wine-2"
+            ? "btn btn-contorno mt-4 w-full"
+            : "btn btn-principal mt-8 w-full"
         }
       >
         {pix
@@ -130,7 +130,7 @@ export default async function PedidoPage({
       {/* A dúvida sobre devolução chega sempre como "ainda dá tempo?". Com a
           data na tela, a cliente não precisa perguntar nem fazer conta. */}
       {(pago || order.notaFiscal?.numero) && (
-        <div className="mt-8 rounded-[2px] border border-border bg-surface p-5 text-sm text-text-2">
+        <div className="mt-8 rounded-xs border border-border bg-surface p-5 text-sm text-text-2">
           {pago && (
             <>
               <p className="font-medium text-text">Troca e devolução</p>
@@ -174,7 +174,7 @@ export default async function PedidoPage({
         </div>
       )}
 
-      <div className="mt-10 rounded-[2px] border border-border bg-surface p-6">
+      <div className="mt-10 rounded-xs border border-border bg-surface p-6">
         <div className="flex items-center justify-between">
           <h2 className="font-serif text-xl text-text">Resumo</h2>
           <span className="rounded-full border border-border px-3 py-1 text-xs text-text-2">
@@ -185,7 +185,7 @@ export default async function PedidoPage({
         <ul className="mt-5 space-y-3">
           {order.items.map((i) => (
             <li key={`${i.slug}-${i.size}`} className="flex gap-3">
-              <div className="relative h-16 w-12 shrink-0 overflow-hidden rounded-[2px] bg-surface-2">
+              <div className="relative h-16 w-12 shrink-0 overflow-hidden rounded-xs bg-surface-2">
                 <Image src={i.image} alt="" fill sizes="48px" className="object-cover" />
               </div>
               <div className="flex-1 text-sm">
@@ -242,7 +242,7 @@ export default async function PedidoPage({
               <img
                 src="/loja.jpg"
                 alt="Fachada da loja BAILATTO"
-                className="h-20 w-28 shrink-0 rounded-[2px] object-cover"
+                className="h-20 w-28 shrink-0 rounded-xs object-cover"
               />
               <span>
                 Rua Geminiano Costa, 416 — Centro, São Carlos-SP

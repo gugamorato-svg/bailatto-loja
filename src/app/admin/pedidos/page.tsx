@@ -54,7 +54,7 @@ export default async function AdminPedidos() {
         )}
       </p>
 
-      <div className="mt-4 overflow-x-auto rounded-[2px] border border-border">
+      <div className="mt-4 overflow-x-auto rounded-xs border border-border">
         <table className="w-full text-sm">
           <thead className="bg-surface text-left text-text-2">
             <tr>

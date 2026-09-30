@@ -1,3 +1,4 @@
+import { IconeMais } from "./icones";
 import { SITE } from "@/lib/site";
 
 /** Medidas em cm que correspondem a cada numeração brasileira. */
@@ -37,9 +38,13 @@ export function GuiaNumeracao({
   const disponiveis = new Set(numeracoes);
 
   return (
-    <details className="mt-6 rounded-[2px] border border-border bg-surface">
-      <summary className="cursor-pointer list-none px-5 py-4 text-sm font-medium text-text">
-        Qual é a minha numeração? <span className="float-right text-text-2">＋</span>
+    <details className="group mt-6 rounded-xs border border-border bg-surface">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-sm font-medium text-text">
+        Qual é a minha numeração?
+        <IconeMais
+          tamanho={18}
+          className="shrink-0 text-text-2 transition-transform duration-200 ease-[var(--ease-saida)] group-open:rotate-45"
+        />
       </summary>
 
       <div className="border-t border-border px-5 py-4 text-sm text-text-2">

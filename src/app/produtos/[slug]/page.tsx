@@ -12,6 +12,12 @@ import { VoceTambemVaiGostar } from "@/components/VoceTambemVaiGostar";
 import { LeveJunto } from "@/components/LeveJunto";
 import { VerProduto } from "@/components/VerProduto";
 import { ProductGallery } from "@/components/ProductGallery";
+import {
+  IconeConversa,
+  IconeLoja,
+  IconeSetaVolta,
+  IconeTroca,
+} from "@/components/icones";
 import { SITE, enderecoCompleto } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
@@ -65,9 +71,23 @@ export async function generateMetadata({
 }
 
 const garantias = (tamanhoUnico?: boolean) => [
-  ["🏪", "Loja física em São Carlos", enderecoCompleto],
-  ["↩️", "7 dias para troca", "direito de arrependimento garantido por lei"],
-  ["💬", "Atendimento pessoal", tamanhoUnico ? "tire suas dúvidas no WhatsApp" : "tire dúvidas de numeração no WhatsApp"],
+  {
+    Icone: IconeLoja,
+    titulo: "Loja física em São Carlos",
+    detalhe: enderecoCompleto,
+  },
+  {
+    Icone: IconeTroca,
+    titulo: "7 dias para troca",
+    detalhe: "direito de arrependimento garantido por lei",
+  },
+  {
+    Icone: IconeConversa,
+    titulo: "Atendimento pessoal",
+    detalhe: tamanhoUnico
+      ? "tire suas dúvidas no WhatsApp"
+      : "tire dúvidas de numeração no WhatsApp",
+  },
 ];
 
 export default async function ProdutoPage({
@@ -123,9 +143,25 @@ export default async function ProdutoPage({
 
       <VerProduto slug={product.slug} name={product.name} price={product.price} />
 
-      <Link href="/produtos" className="text-sm text-text-2 hover:text-wine">
-        ← Voltar para a coleção
-      </Link>
+      {/* Era uma seta de teclado ("← Voltar") e, logo acima do título, a
+          categoria escrita em rosa — 2,3:1 de contraste, ilegível. Virou uma
+          trilha: diz onde a cliente está e leva de volta à categoria certa. */}
+      <nav aria-label="Trilha de navegação" className="flex items-center gap-2 text-sm">
+        <Link
+          href="/produtos"
+          className="inline-flex items-center gap-2 text-text-2 transition-colors duration-200 hover:text-wine"
+        >
+          <IconeSetaVolta tamanho={16} />
+          Coleção
+        </Link>
+        <span aria-hidden className="text-border">/</span>
+        <Link
+          href={`/produtos?categoria=${product.category}`}
+          className="text-text-2 transition-colors duration-200 hover:text-wine"
+        >
+          {categoryLabel(product.category)}
+        </Link>
+      </nav>
 
       <div className="mt-6 grid gap-10 md:grid-cols-2">
         <ProductGallery
@@ -135,10 +171,7 @@ export default async function ProdutoPage({
         />
 
         <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-rose">
-            {categoryLabel(product.category)}
-          </p>
-          <h1 className="mt-2 font-serif text-3xl leading-tight text-text sm:text-4xl">
+          <h1 className="font-serif text-3xl leading-tight text-text sm:text-4xl">
             {product.name}
           </h1>
           <p className="mt-4 text-2xl text-wine">{formatPrice(product.price)}</p>
@@ -161,13 +194,13 @@ export default async function ProdutoPage({
 
           <CalculadoraFrete />
 
-          <ul className="mt-8 space-y-3 border-t border-border pt-6 text-sm">
-            {garantias(product.tamanhoUnico).map(([icone, titulo, detalhe]) => (
-              <li key={titulo} className="flex gap-3">
-                <span aria-hidden>{icone}</span>
+          <ul className="mt-8 space-y-3.5 border-t border-border pt-6 text-sm">
+            {garantias(product.tamanhoUnico).map((g) => (
+              <li key={g.titulo} className="flex gap-3">
+                <g.Icone tamanho={18} className="mt-0.5 shrink-0 text-wine" />
                 <span>
-                  <span className="block text-text">{titulo}</span>
-                  <span className="block text-text-2">{detalhe}</span>
+                  <span className="block text-text">{g.titulo}</span>
+                  <span className="block text-text-2">{g.detalhe}</span>
                 </span>
               </li>
             ))}

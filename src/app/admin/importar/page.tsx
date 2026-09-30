@@ -24,12 +24,12 @@ export default async function ImportarPage({
       </p>
 
       {sp?.erro && (
-        <p className="mt-6 rounded-[2px] border border-wine/40 bg-surface p-3 text-sm text-wine">
+        <p className="mt-6 rounded-xs border border-wine/40 bg-surface p-3 text-sm text-wine">
           {sp.erro}
         </p>
       )}
 
-      <div className="mt-8 rounded-[2px] border border-border bg-surface p-6">
+      <div className="mt-8 rounded-xs border border-border bg-surface p-6">
         <h2 className="font-serif text-lg text-text">Como exportar</h2>
         <ol className="mt-3 list-decimal space-y-1.5 pl-5 text-sm text-text-2">
           <li>
@@ -55,12 +55,12 @@ export default async function ImportarPage({
             name="planilha"
             accept=".xlsx,.xls,.csv"
             required
-            className="block w-full text-sm text-text-2 file:mr-3 file:rounded-[2px] file:border-0 file:bg-wine file:px-4 file:py-2 file:text-on-wine"
+            className="block w-full text-sm text-text-2 file:mr-3 file:rounded-xs file:border-0 file:bg-wine file:px-4 file:py-2 file:text-on-wine"
           />
         </label>
         <button
           type="submit"
-          className="mt-6 rounded-[2px] bg-wine px-8 py-3 text-sm font-medium uppercase tracking-wide text-on-wine hover:bg-wine-2"
+          className="btn btn-principal mt-6"
         >
           Ler planilha
         </button>

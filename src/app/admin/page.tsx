@@ -42,24 +42,24 @@ export default async function AdminHome({ searchParams }: PageProps<"/admin">) {
       </div>
 
       {!configured && (
-        <div className="mt-6 rounded-[2px] border border-wine/40 bg-surface p-4 text-sm text-text-2">
+        <div className="mt-6 rounded-xs border border-wine/40 bg-surface p-4 text-sm text-text-2">
           ⚠️ Banco de dados ainda não conectado. Assim que as chaves do Supabase
           forem configuradas, seus produtos aparecerão aqui.
         </div>
       )}
 
       {sp?.ok && (
-        <p className="mt-6 rounded-[2px] border border-wine/40 bg-surface p-3 text-sm text-wine">
+        <p className="mt-6 rounded-xs border border-wine/40 bg-surface p-3 text-sm text-wine">
           Produto salvo! ✓
         </p>
       )}
       {sp?.importados && (
-        <p className="mt-6 rounded-[2px] border border-wine/40 bg-surface p-3 text-sm text-wine">
+        <p className="mt-6 rounded-xs border border-wine/40 bg-surface p-3 text-sm text-wine">
           Importação concluída: {sp.importados} produto(s) atualizado(s) com preço e estoque do Phibo ✓
         </p>
       )}
       {sp?.deleted && (
-        <p className="mt-6 rounded-[2px] border border-border bg-surface p-3 text-sm text-text-2">
+        <p className="mt-6 rounded-xs border border-border bg-surface p-3 text-sm text-text-2">
           Produto excluído.
         </p>
       )}
@@ -68,13 +68,13 @@ export default async function AdminHome({ searchParams }: PageProps<"/admin">) {
         <p className="text-text-2">{products.length} produto(s)</p>
         <Link
           href="/admin/produtos/novo"
-          className="rounded-[2px] bg-wine px-5 py-2.5 text-sm font-medium uppercase tracking-wide text-on-wine hover:bg-wine-2"
+          className="btn btn-principal"
         >
           + Adicionar produto
         </Link>
       </div>
 
-      <div className="mt-4 overflow-x-auto rounded-[2px] border border-border">
+      <div className="mt-4 overflow-x-auto rounded-xs border border-border">
         <table className="w-full text-sm">
           <thead className="bg-surface text-left text-text-2">
             <tr>
@@ -93,9 +93,9 @@ export default async function AdminHome({ searchParams }: PageProps<"/admin">) {
                 <td className="p-3">
                   {p.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={p.image} alt="" className="h-14 w-11 rounded-[2px] object-cover" />
+                    <img src={p.image} alt="" className="h-14 w-11 rounded-xs object-cover" />
                   ) : (
-                    <div className="h-14 w-11 rounded-[2px] ph-gradient" />
+                    <div className="h-14 w-11 rounded-xs ph-gradient" />
                   )}
                 </td>
                 <td className="p-3 text-text">{p.name}</td>
