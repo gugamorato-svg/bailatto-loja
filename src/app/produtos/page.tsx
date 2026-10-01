@@ -37,7 +37,7 @@ export default async function ProdutosPage({
     : products.length;
 
   return (
-    <section className="mx-auto max-w-[1180px] px-4 py-14">
+    <section className="mx-auto w-full max-w-[1920px] px-2 py-14 sm:px-4 lg:px-6">
       <div className="mb-10 text-center">
         <h1 className="font-serif text-4xl text-text">{t.h1}</h1>
         <p className="mt-2 text-text-2">

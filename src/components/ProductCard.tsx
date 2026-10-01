@@ -26,7 +26,7 @@ export function ProductCard({ product }: { product: Product }) {
           src={product.image}
           alt={product.name}
           fill
-          sizes="(max-width: 768px) 50vw, (max-width: 1180px) 33vw, 280px"
+          sizes="(max-width: 767px) 50vw, (max-width: 1023px) 33vw, (max-width: 1920px) 25vw, 462px"
           className="zoom-foto object-contain"
         />
         {ultimasPecas && (

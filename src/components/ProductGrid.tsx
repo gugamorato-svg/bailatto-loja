@@ -145,7 +145,7 @@ export function ProductGrid({
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-x-2 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
           {visiveis.map((p) => (
             <ProductCard key={p.slug} product={p} />
           ))}
